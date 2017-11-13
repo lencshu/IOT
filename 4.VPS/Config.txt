@@ -1,0 +1,66 @@
+﻿sudo passwd root
+
+
+adduser liang
+usermod -a -G sudo liang
+
+apt-get update
+apt-get upgrade
+apt-get install sudo
+apt-get install -y nano
+
+apt install python-pip
+
+pip install virtualenv
+
+pip install --upgrade pip
+
+virtualenv env_fanna
+
+
+
+virtualenv /root/env_fanna/scripts/activate
+
+pip install django
+python
+import django
+django.get_version()
+
+
+
+----------------no such table
+python manage.py migrate --run-syncdb
+
+
+-----------------bbr
+
+wget kernel.ubuntu.com/~kernel-ppa/mainline/v4.11.3/linux-headers-4.11.3-041103_4.11.3-041103.201705251233_all.deb 
+
+wget kernel.ubuntu.com/~kernel-ppa/mainline/v4.11.3/linux-headers-4.11.3-041103-generic_4.11.3-041103.201705251233_amd64.deb
+
+wget kernel.ubuntu.com/~kernel-ppa/mainline/v4.11.3/linux-image-4.11.3-041103-generic_4.11.3-041103.201705251233_amd64.deb
+
+
+sudo dpkg -i linux-headers-4.11*.deb linux-image-4.11*.deb
+
+
+
+
+# update kernel
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10-rc1/linux-image-4.10.0-041000rc1-generic_4.10.0-041000rc1.201612252031_amd64.deb
+dpkg -i linux-image-4.10.0*.deb
+
+update-grub
+reboot
+
+# check kernel
+uname -a
+
+# enable bbr
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+sysctl -p
+
+# check bbr
+sysctl net.ipv4.tcp_available_congestion_control
+lsmod | grep bbr
