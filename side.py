@@ -21,8 +21,8 @@ keyword="outline: 1300px solid #fff;"
 post = html.find(keyword)
 if post != -1:
     html = html[:post+len(keyword)]+"float:right;padding-left:10px;width:60%;"+html[post+len(keyword):]
-	html = html.replace('///C://Users/lencs/Desktop/8.智能硬件/git.IOT/', '')
-    html = html.replace('C:\\Users\\lencs\\Desktop\\8.智能硬件\\git.IOT\\', '')
+	#html = html.replace('///C://Users/lencs/Desktop/8.智能硬件/git.IOT/', '')
+    #html = html.replace('C:\\Users\\lencs\\Desktop\\8.智能硬件\\git.IOT\\', '')
     file = open('index.html', 'w')
     file.write(html)
 file.close( )
