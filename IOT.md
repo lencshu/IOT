@@ -1723,7 +1723,15 @@ fmt.Printf("Hello World\n")
 go run hello.go
 ```
 
+- Vps
 
+~~~python
+sudo apt-get install -y golang-go
+export GOROOT=$HOME/go
+# export PATH=$GOROOT/bin:$PATHU
+sudo mkdir Applications/go
+export PATH="/usr/bin:$PATH"
+~~~
 
 ### 3.3.2 下载狗洞客户端并配置
 
@@ -1731,15 +1739,16 @@ go run hello.go
 
 - 安装依赖
 
-  ```css
-  go get github.com/go-sql-driver/mysql
-  go get github.com/klauspost/reedsolomon
-  go get github.com/cznic/zappy
-  git clone https://github.com/vzex/dog-tunnel.git
-  go get github.com/go-sql-driver/mysql
-  make
-  mv dtunnel /usr/bin/dtunnel
-  ```
+```css
+sudo apt-get install -y git
+go get github.com/go-sql-driver/mysql
+go get github.com/klauspost/reedsolomon
+go get github.com/cznic/zappy
+git clone https://github.com/vzex/dog-tunnel.git
+go get github.com/go-sql-driver/mysql
+make
+mv dtunnel /usr/bin/dtunnel
+```
 
   说明：
 
