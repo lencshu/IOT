@@ -7,12 +7,12 @@ Détails valables: https://lencshu.github.io/IOT/
 ---
 voici le structure du projet.
 
-![](docs/Structure.png)
+![](Medias/Structure.png)
 
 Le photo des modules intégrés
 
-![](docs/All.jpg)
+![](Medias/All.jpg)
 
 Le drone
 
-![](docs/Drone.jpg)
+![](Medias/Drone.jpg)
