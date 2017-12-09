@@ -134,7 +134,7 @@ if post != -1:
     html = html.replace(htmlReplaceParentDir, '')
 #delete sensitive infos
     html=re.sub(r'%mdp%.*%/mdp%', 'X*X*X*X*X*X',html)
-    html=re.sub(r'<span class="o">%</span><span class="n">mdp</span><span class="o">%</span>.*<span class="o">%/</span><span class="n">mdp</span><span class="o">%</span>', 'X*X*X*X*X*X',html)
+    html=re.sub(r'<span class=".*">%</span><span class=".*">mdp</span><span class=".*">%</span>.*<span class=".*">%/</span><span class=".*">mdp</span><span class=".*">%</span>', 'X*X*X*X*X*X',html)
 #Lazy loading image
     html = html.replace('img alt=\"\" src', 'img class=\"lazyload\" alt=\"\" data-src')
 #Lazy loading audio
