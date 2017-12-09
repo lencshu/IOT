@@ -117,39 +117,39 @@ cond(no)->sub1(right)->op1
 
 !!! Note "自动修改步骤"
 
-	① pip install beautifulsoup4
-	② os.getcwd()
-	③ 代码如下
-	~~~python
-	# -*- coding: utf-8 -*- 
-	from bs4 import BeautifulSoup
-	import re
-	import os
+  ① pip install beautifulsoup4
+  ② os.getcwd()
+  ③ 代码如下
+  ~~~python
+  # -*- coding: utf-8 -*- 
+  from bs4 import BeautifulSoup
+  import re
+  import os
 
-	if os.path.exists("index.html") :
-		os.remove("index.html")
-	html = open('in.html',"r+")
+  if os.path.exists("index.html") :
+    os.remove("index.html")
+  html = open('in.html',"r+")
 
-	soup = BeautifulSoup(html, "html5lib")
-	#Rename
-	divto = soup.find("div", class_="to")
-	divtoc = soup.find("div", class_="toc")
-	print divto
-	if divto!=None or divto!="": 
-	    divto.append(divtoc)
-	divto.div['class'] = 'tod'
-	html = soup.prettify("utf-8")
+  soup = BeautifulSoup(html, "html5lib")
+  #Rename
+  divto = soup.find("div", class_="to")
+  divtoc = soup.find("div", class_="toc")
+  print divto
+  if divto!=None or divto!="": 
+      divto.append(divtoc)
+  divto.div['class'] = 'tod'
+  html = soup.prettify("utf-8")
 
-	keyword="outline: 1300px solid #fff;"
-	post = html.find(keyword)
-	if post != -1:
-	    html = html[:post+len(keyword)]+"float:right;padding-left:10px;width:60%;"+html[post+len(keyword):]
-	    file = open('index.html', 'w')
-	    file.write(html)
-	file.close( )
-	os.remove("in.html")
+  keyword="outline: 1300px solid #fff;"
+  post = html.find(keyword)
+  if post != -1:
+      html = html[:post+len(keyword)]+"float:right;padding-left:10px;width:60%;"+html[post+len(keyword):]
+      file = open('index.html', 'w')
+      file.write(html)
+  file.close( )
+  os.remove("in.html")
 
-	~~~
+  ~~~
 
 ## 0.2 利其器之Sublime
 
@@ -157,59 +157,59 @@ cond(no)->sub1(right)->op1
 
 ~~~html
 <snippet>
-	<content><![CDATA[
+  <content><![CDATA[
 |${1:this}|${2}| 
 | ------------- |:---------------:| 
 |${3}|${4}| 
 |${5}|${6}|
 ]]></content>
-	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	 <tabTrigger>mt</tabTrigger> 
-	<!-- Optional: Set a scope to limit where the snippet will trigger -->
-	<!-- <scope>source.python</scope> -->
-	 <description>Markdown-table</description>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+   <tabTrigger>mt</tabTrigger> 
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+   <description>Markdown-table</description>
 </snippet>
 
 <snippet>
-	<content><![CDATA[
+  <content><![CDATA[
 !!! ${1:hint}${2:Attention}${3:Caution}${4:Danger}${5:Question}${6:Note}${7:Unknown} "${8}"
     ${9:content}
 ]]></content>
-	 <tabTrigger>mb</tabTrigger> 
-	 <description>Markdown-hint</description>
+   <tabTrigger>mb</tabTrigger> 
+   <description>Markdown-hint</description>
 </snippet>
 
 <snippet>
-	<content><![CDATA[
+  <content><![CDATA[
 - [${1:X}] ${2:Attention}
- 	* [${3:X}] ${4:Note}
-    	+ [${5:X}] ${6:Note}
+  * [${3:X}] ${4:Note}
+      + [${5:X}] ${6:Note}
 ]]></content>
-	 <tabTrigger>mal</tabTrigger> 
-	 <description>Markdownlist</description>
+   <tabTrigger>mal</tabTrigger> 
+   <description>Markdownlist</description>
 </snippet>
 
 <snippet>
-	<content><![CDATA[
+  <content><![CDATA[
 波浪符号${2:python}
 ${1:Code here}
 波浪符号
 ]]></content>
-	 <tabTrigger>mc</tabTrigger> 
-	 <description>MarkdownCodes</description>
+   <tabTrigger>mc</tabTrigger> 
+   <description>MarkdownCodes</description>
 </snippet>
 
 
 <snippet>
-	<content><![CDATA[
+  <content><![CDATA[
 $$${1:Formular here}^{${2:upper}}$$
 ]]></content>
-	 <tabTrigger>mf</tabTrigger> 
-	 <description>MarkdownFormular</description>
+   <tabTrigger>mf</tabTrigger> 
+   <description>MarkdownFormular</description>
 </snippet>
 
 <snippet>
-	<content><![CDATA[
+  <content><![CDATA[
 ${51:指数} ^{$1} _{$3}
 ${54:偏微分} \partial f_{\mbox{$4}}
 ${55:分数} \frac{$5}{$6}
@@ -227,8 +227,8 @@ ${55:上花} \overbrace{$15}^{$16}
 \in
 \mathbb{R} 
 ]]></content>
-	 <tabTrigger>mu</tabTrigger> 
-	 <description>MarkdownFormular</description>
+   <tabTrigger>mu</tabTrigger> 
+   <description>MarkdownFormular</description>
 </snippet>
 ~~~
 
@@ -728,7 +728,7 @@ void loop() {
 }
 ~~~
 
-### 1.1.10 电位器实现油门
+### 1.1.10 滑动变阻器实现油门
 模拟信号读取
 
 ~~~c
@@ -744,20 +744,25 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-	  // read the input on analog pin 0:
-	sensorValue = analogRead(readPin);
-	  // print out the value you read:
-	if (sensorValue !=  0)
-	{
-	 if (sensorValue < predata-1 || sensorValue > predata+1)
-	  {
-	  Serial.println(sensorValue);
-	  predata = sensorValue;
-	  }
-	}
+    // read the input on analog pin 0:
+  sensorValue = analogRead(readPin);
+    // print out the value you read:
+  if (sensorValue !=  0)
+  {
+   if (sensorValue < predata-1 || sensorValue > predata+1)
+    {
+    Serial.println(sensorValue);
+    predata = sensorValue;
+    }
+  }
   
 }
 ~~~
+
+!!! hint ""
+  - 接模拟量输入口
+  - 读取的是电压数值，数据取值范围是从0-1024
+
 
 ***
 
@@ -1369,7 +1374,7 @@ void control()
 {
     if (irrecv.decode(&results))
     {
-	    ir=transIR(); 
+      ir=transIR(); 
     }
     else ir=0;
     joyStick(detSw(),detX(),detY(),power(), ir);
@@ -1418,6 +1423,7 @@ sudo apt-get update && sudo apt-get upgrade && sudo apt-get dist-upgrade
 
 sudo passwd pi
 
+@Pi
 ~~~
 
 ### 3.1.1 WIFI
@@ -1429,21 +1435,23 @@ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 ```cs
 network=
 {
-	ssid="XXX"
-	psk="XXXXXXXXXXX"
+  ssid=<MDP>"Vi"</MDP>
+  psk=<MDP>"jiubugaosunimima"</MDP>
 }
 ```
 
+
+
 sudo nano /etc/dhcpcd.conf
 
-	interface eth0
-	static ip_address=192.168.1.222/24
-	static routers=192.168.1.1
-	static domain_name_servers=192.168.1.1
-	interface wlan0
-	static ip_address=192.168.1.111/24
-	static routers=192.168.1.1
-	static domain_name_servers=192.168.1.1
+  interface eth0
+  static ip_address=192.168.1.222/24
+  static routers=192.168.1.1
+  static domain_name_servers=192.168.1.1
+  interface wlan0
+  static ip_address=192.168.1.111/24
+  static routers=192.168.1.1
+  static domain_name_servers=192.168.1.1
 
 
 sudo raspi-config
@@ -1464,20 +1472,20 @@ sudo apt-get -y install rsync dosfstools parted kpartx exfat-fuse
 usbmount=/mnt
 mkdir -p $usbmount
 if [ -z $1 ]; then
-	echo "no argument, assume the mount device is /dev/sda1 ? Y/N"
-	read key
-	if [ "$key" = "y" -o "$key" = "Y" ]; then
-		sudo mount -o uid=1000 /dev/sda1 $usbmount
-	else
-		echo "$0 [backup dest device name], e.g. $0 /dev/sda1"
-		exit 0
-	fi
+  echo "no argument, assume the mount device is /dev/sda1 ? Y/N"
+  read key
+  if [ "$key" = "y" -o "$key" = "Y" ]; then
+    sudo mount -o uid=1000 /dev/sda1 $usbmount
+  else
+    echo "$0 [backup dest device name], e.g. $0 /dev/sda1"
+    exit 0
+  fi
 else
-	sudo mount -o uid=1000 $1 $usbmount
+  sudo mount -o uid=1000 $1 $usbmount
 fi
 if [ -z "`grep $usbmount /etc/mtab`" ]; then
-	echo "mount fail, exit now"
-	exit 0
+  echo "mount fail, exit now"
+  exit 0
 fi
 img=$usbmount/rpi-`date +%Y%m%d-%H%M`.img
 #img=$usbmount/rpi.img
@@ -1516,33 +1524,33 @@ echo "...Boot partition done"
 sudo mount -t ext4 ${device}p2 $mountr
 if [ -f /etc/dphys-swapfile ]; then
         SWAPFILE=`cat /etc/dphys-swapfile | grep ^CONF_SWAPFILE | cut -f 2 -d=`
-	if [ "$SWAPFILE" = "" ]; then
-		SWAPFILE=/var/swap
-	fi
-	EXCLUDE_SWAPFILE="--exclude $SWAPFILE"
+  if [ "$SWAPFILE" = "" ]; then
+    SWAPFILE=/var/swap
+  fi
+  EXCLUDE_SWAPFILE="--exclude $SWAPFILE"
 fi
 sudo rsync --force -rltWDEgop --delete --stats --progress \
-	$EXCLUDE_SWAPFILE \
-	--exclude '.gvfs' \
-	--exclude '/dev' \
+  $EXCLUDE_SWAPFILE \
+  --exclude '.gvfs' \
+  --exclude '/dev' \
         --exclude '/media' \
-	--exclude '/mnt' \
-	--exclude '/proc' \
+  --exclude '/mnt' \
+  --exclude '/proc' \
         --exclude '/run' \
-	--exclude '/sys' \
-	--exclude '/tmp' \
+  --exclude '/sys' \
+  --exclude '/tmp' \
         --exclude 'lost\+found' \
-	--exclude '$usbmount' \
-	// $mountr
+  --exclude '$usbmount' \
+  // $mountr
 # special dirs
 for i in dev media mnt proc run sys boot; do
-	if [ ! -d $mountr/$i ]; then
-		sudo mkdir $mountr/$i
-	fi
+  if [ ! -d $mountr/$i ]; then
+    sudo mkdir $mountr/$i
+  fi
 done
 if [ ! -d $mountr/tmp ]; then
-	sudo mkdir $mountr/tmp
-	sudo chmod a+w $mountr/tmp
+  sudo mkdir $mountr/tmp
+  sudo chmod a+w $mountr/tmp
 fi
 #sudo rm -f $mountr/etc/udev/rules.d/70-persistent-net.rules
 sync
@@ -1577,15 +1585,16 @@ echo "==== All done. You can un-plug the backup device"
 
 在树莓派上安装VNC Server：
 
-	sudo apt-get install tightvncserver
+  sudo apt-get install tightvncserver
 启动树莓派VNC Server
-	sudo tightvncserver :1 -geometry 1600x900
-	tightvncserver -kill :1   //终止控制台
+  sudo tightvncserver :1 -geometry 1600x900
+  tightvncserver -kill :1   //终止控制台
 
-XXXXX
+<mdp>169088</mdp>
+
 重置密码
 
-	sudo tightvncpasswd
+  sudo tightvncpasswd
 
 自动启动
 
@@ -1638,7 +1647,7 @@ sudo update-rc.d tightvncserver defaults
 
 ~~~sh
 192.168.1.111:1
-XXXX
+<mdp>169088</mdp>
 ~~~
 
 ### 3.1.4清理垃圾
@@ -1649,10 +1658,10 @@ sudo apt-get autoremove
 
 ### 3.1.5 开机运行
 
-	nano /etc/rc.local
+  nano /etc/rc.local
 在最后一行 exit 0 之上加入
 
-	su txt.sh start
+  su txt.sh start
 
 ### 3.1.6 温度监控
 创建新sh文档
@@ -1691,7 +1700,7 @@ sudo apt-get -y install ttf-wqy-zenhei
 
 安装arduino IDE
 
-	sudo apt-get update && sudo apt-get install arduino
+  sudo apt-get update && sudo apt-get install arduino
 
 
 ## 3.3 远程SSH登录树莓派
@@ -1723,7 +1732,7 @@ fmt.Printf("Hello World\n")
 go run hello.go
 ```
 
-- Vps
+- VPS
 
 ~~~python
 sudo apt-get install -y golang-go
@@ -1733,22 +1742,22 @@ sudo mkdir Applications/go
 export PATH="/usr/bin:$PATH"
 ~~~
 
+
 ### 3.3.2 下载狗洞客户端并配置
 
 共同的配置
 
 - 安装依赖
 
-```css
-sudo apt-get install -y git
-go get github.com/go-sql-driver/mysql
-go get github.com/klauspost/reedsolomon
-go get github.com/cznic/zappy
-git clone https://github.com/vzex/dog-tunnel.git
-go get github.com/go-sql-driver/mysql
-make
-mv dtunnel /usr/bin/dtunnel
-```
+  ```css
+  go get github.com/go-sql-driver/mysql
+  go get github.com/klauspost/reedsolomon
+  go get github.com/cznic/zappy
+  git clone https://github.com/vzex/dog-tunnel.git
+  go get github.com/go-sql-driver/mysql
+  make
+  mv dtunnel /usr/bin/dtunnel
+  ```
 
   说明：
 
@@ -1849,9 +1858,9 @@ sudo tar -C ~/dogtunnel/dt -xzf dtunnel_linux_arm_0.80.tgz
 ```
 cd dt
 chmod +x ./dtunnel
-./dtunnel -reg lencshu -local :22 -clientkey XXXX
+./dtunnel -reg <mdp>lencshu</mdp> -local :22 -clientkey <mdp>16908888</mdp>
 #任意目录可执行命令
-/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :22 -clientkey XXXX
+/home/pi/dogtunnel/dt/dtunnel -reg <mdp>lencshu</mdp> -local :22 -clientkey <mdp>16908888</mdp>
 ```
 
 #### 3.3.2.2 VPS
@@ -1871,9 +1880,9 @@ sudo tar -C /home/liang/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
 ```
 cd dt
 chmod +x ./dtunnel
-./dtunnel -link lencshu -local :8888 -clientkey XXXX
+./dtunnel -link <mdp>lencshu</mdp> -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp>
 #任意目录可执行
-/home/liang/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey XXXX
+/home/liang/dogtunnel/dt/dtunnel -link <mdp>lencshu</mdp> -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp>
 ```
 
 
@@ -1886,11 +1895,11 @@ chmod +x ./dtunnel
 
 ```python
 #服务端 Raspbian
-sudo nohup /home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :22 -clientkey XXXX -v 2>& 1 1 > /var/log/dtunnel.log &
+sudo nohup /home/pi/dogtunnel/dt/dtunnel -reg <mdp>lencshu</mdp> -local :<mdp>22</mdp> -clientkey <mdp>16908888</mdp> -v 2>& 1 1 > /var/log/dtunnel.log &
 #客户端 66
-sudo nohup /root/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey XXXX -v 2>& 1 1 > /var/log/dtunnel.log &
+sudo nohup /root/dogtunnel/dt/dtunnel -link <mdp>lencshu</mdp> -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp> -v 2>& 1 1 > /var/log/dtunnel.log &
 # 日志文件目录权限问题
-nohup /home/pi/dogtunnel/dt/dtunnel -reg xxx -local :22 -clientkey XXXXXXXX -v 2>& 1 1 > /home/pi/log/dogtunnel.log &
+nohup /home/pi/dogtunnel/dt/dtunnel -reg xxx -local :<mdp>22</mdp> -clientkey <mdp>888888</mdp> -v 2>& 1 1 > /home/pi/log/dogtunnel.log &
 ```
 
 后重启
@@ -1925,9 +1934,9 @@ case "$1" in
     echo "Starting DogTunnel"
     # run application you want to start
     #服务端
-    #/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :22 -clientkey XXXX
+    #/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :<mdp>22</mdp> -clientkey <mdp>16908888</mdp>
     #客户端
-    /home/liang/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey XXXX
+    /root/dogtunnel/dt/dtunnel -link lencshu -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp>
     ;;
   stop)
     echo "Stopping DogTunnel"
@@ -1991,16 +2000,16 @@ ps –ef|grep 进程名
 netstat -anp|grep pid
 sudo lsof -i :80
 
-	nginx   520     root    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
-	nginx   520     root    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
-	nginx   521 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
-	nginx   521 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
-	nginx   522 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
-	nginx   522 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
-	nginx   523 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
-	nginx   523 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
-	nginx   524 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
-	nginx   524 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
+  nginx   520     root    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
+  nginx   520     root    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
+  nginx   521 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
+  nginx   521 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
+  nginx   522 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
+  nginx   522 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
+  nginx   523 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
+  nginx   523 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
+  nginx   524 www-data    6u  IPv4  11792      0t0  TCP *:http (LISTEN)
+  nginx   524 www-data    7u  IPv6  11793      0t0  TCP *:http (LISTEN)
 
 
 
@@ -2206,7 +2215,7 @@ sudo iptables -A INPUT -i wlan0 -p udp -m udp --dport 631 -j ACCEPT
 ~~~
 
 电脑连接
-http://XXXXXXXX/printers/Vi.Canon
+http://192.168.1.111:631/printers/Vi.Canon
 
 
 注册为谷歌print
@@ -2321,53 +2330,53 @@ sudo systemctl status saned.socket
 
 安装python
 
-	sudo aptitude install python-dev
+  sudo aptitude install python-dev
 
 安装python的GPIO模块
 
-	sudo apt-get install python-dev python-rpi.gpio
+  sudo apt-get install python-dev python-rpi.gpio
 
 安装serial用于串口通信及USB通信
 
-	sudo apt-get install python-serial
+  sudo apt-get install python-serial
 
 在树莓派安装串口调试工具
 
-	sudo apt-get install minicom
+  sudo apt-get install minicom
 配置minicom：
 
-	sudo minicom -s
+  sudo minicom -s
 启动出现配置菜单选 **serial port setup** 进入串口配置
 输入A 配置串口驱动为
 
-	/dev/ttyAMA0
+  /dev/ttyAMA0
 输入E 配置速率为
 
-	9600 8N1
+  9600 8N1
 输入F 将 Hardware Flow Control 设为 NO
 回车 退出
 
 由于我们使用minicom作为超级终端控制路由器等设备, 而不是控制modem, 所以需要修改 **Modem and dialing**
 
-	将以下设置为空
-	A. Init string,
-	B. Reset string,
-	k. Hang-up string.
+  将以下设置为空
+  A. Init string,
+  B. Reset string,
+  k. Hang-up string.
 设置完成后选择Save setup as dfl将当前设置保存为默认设置
 
-	Exit from minicon
+  Exit from minicon
 命令minicom是进入串口超级终端画面，而minicom -s为配置minicom。说明/dev/ttyAMA0 对应为串口0 为你连接开发板的端口
 接下来测一下环境是否都OK：
 
-	sudo nano test.py
+  sudo nano test.py
 输入内容为：
 
-	import serial
-	import RPi.GPIO
+  import serial
+  import RPi.GPIO
 
 Ctrl +X 保存退出执行
 
-	python test.py
+  python test.py
 没有报错，说明正确安装python-serial等。
 
 插上arduino与树莓派USB口：
@@ -2881,7 +2890,7 @@ for addr, name in nearby_devices:
 ~~~python
 import bluetooth
 
-target_name = "XXXXXXXX"
+target_name = "X4"
 target_address = None
 
 nearby_devices = bluetooth.discover_devices()
@@ -2924,9 +2933,9 @@ power on
 agent on
 #The Bluetooth agent is what manages the Bluetooth 'pairing code'. It can either respond to a 'pairing code' coming in, or can send one out.
 scan on
-pair XXXX
-trust XXXX
-#connect XXXX
+pair <mdp>00:14:02:12:29:83</mdp>
+trust <mdp>00:14:02:12:29:83</mdp>
+#connect <mdp>00:14:02:12:29:83</mdp>
 ~~~
 
 Then connect to the device with terminal via:
@@ -2941,7 +2950,7 @@ sudo hciconfig hci0 up   #启动hci设备
 sudo hciconfig hci0 down #关闭hci设备
 #命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器
 
-sudo rfcomm connect 0 XXXX 1
+sudo rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1
 
 sudo rfcomm watch hci0
 
@@ -2950,7 +2959,7 @@ sudo rfcomm watch hci0
 hcidump
 ~~~
 
- Connected /dev/rfcomm0 to XXXX on channel 1
+ Connected /dev/rfcomm0 to <mdp>00:14:02:12:29:83</mdp> on channel 1
 
 
 If that doesn't work you can also try adding pi to the lp group
@@ -2964,7 +2973,7 @@ sudo nano /etc/bluetooth/rfcomm.conf
 
 rfcomm0 {
     bind no;
-    device XXXX;
+    device <mdp>00:14:02:12:29:83</mdp>;
     channel 1;
     comment “Connection to Bluetooth serial module”;
 }
@@ -2973,7 +2982,7 @@ The "bind no" is important, otherwise it will try to autmatically bind, which pr
 
 sudo rfcomm connect 0
 
-sudo rfcomm connect rfcomm0 XXXX
+sudo rfcomm connect rfcomm0 <mdp>00:14:02:12:29:83</mdp>
 
 ~~~python
 wget https://sourceforge.net/p/pyserial/code/HEAD/tree/trunk/pyserial/serial/tools/miniterm.py
@@ -2989,7 +2998,7 @@ sudo service bluetooth restart
 
 ~~~python
 sudo hciconfig hci0 up
-sudo rfcomm connect 0 XXXX 1
+sudo rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1
 ~~~
 
 ## 6.3 Python运行外部shell命令
@@ -3062,7 +3071,7 @@ from subprocess import Popen, PIPE
 
 sudo_password = 'My_pass'
 command_open = 'sudo hciconfig hci0 up'.split()
-command_connect = 'rfcomm connect 0 XXXX 1'.split()
+command_connect = 'rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1'.split()
 
 p = Popen(['sudo', '-S'] + command_open, stdin=PIPE, stderr=PIPE,universal_newlines=True)
 sudo_prompt = p.communicate(sudo_password + '\n')
@@ -3087,47 +3096,47 @@ import subprocess
 from subprocess import Popen, PIPE
 import time,os
 
-target_name = "XXXX"
+target_name = "X4"
 killcount=0
-target_address = 'XXXX'
-sudo_password = 'XXXXXXXX'
+target_address = '<mdp>00:14:02:12:29:83</mdp>'
+sudo_password = '<mdp>169088@L</mdp>'
 command_open = 'sudo hciconfig hci0 up'.split()
-command_connect = 'nohup rfcomm connect 0 XXXX 1 > /home/pi/log/rfcomm_XXXX.log 2>&1 &'.split()
+command_connect = 'nohup rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1 > /home/pi/log/rfcomm_x4.log 2>&1 &'.split()
 
 
 def detect_drone():
-	nearby_devices = bluetooth.discover_devices(lookup_names = False,flush_cache = True, duration = 10)
-	for bdaddr in nearby_devices:
-		if bdaddr== target_address:
-			return 1
-			break
-	return 0
+  nearby_devices = bluetooth.discover_devices(lookup_names = False,flush_cache = True, duration = 10)
+  for bdaddr in nearby_devices:
+    if bdaddr== target_address:
+      return 1
+      break
+  return 0
 
 def status_blue():
-	stdoutdata = subprocess.check_output(["hcitool","con"])
-	if "XXXX" in stdoutdata.split():
-		print("Bluetooth device is connected")
-		return 1
-	else:
-		return 0
+  stdoutdata = subprocess.check_output(["hcitool","con"])
+  if "<mdp>00:14:02:12:29:83</mdp>" in stdoutdata.split():
+    print("Bluetooth device is connected")
+    return 1
+  else:
+    return 0
 
 Bluetooth = Popen(['sudo', '-S'] + command_open, stdin=PIPE, stderr=PIPE,universal_newlines=True)
 sudo_prompt = Bluetooth.communicate(sudo_password + '\n')
 
 while 1:
-	if status_blue():
-		time.sleep(3)
-	elif detect_drone():
-			print ("Found target bluetooth device with name:", target_name)
-			print ("Starting rfcomm")
-			Bluetooth = Popen(['sudo', '-S'] + command_open, stdin=PIPE, stderr=PIPE,universal_newlines=True)
-			sudo_prompt = Bluetooth.communicate(sudo_password + '\n')
-			os.system("sudo killall rfcomm")
-			time.sleep(2)
-			Drone_bluetooth = Popen(['sudo'] + command_connect, stdin=PIPE, stderr=PIPE,universal_newlines=True)
-			time.sleep(3)
-	else:
-			print ("No target bluetooth device nearby")
+  if status_blue():
+    time.sleep(3)
+  elif detect_drone():
+      print ("Found target bluetooth device with name:", target_name)
+      print ("Starting rfcomm")
+      Bluetooth = Popen(['sudo', '-S'] + command_open, stdin=PIPE, stderr=PIPE,universal_newlines=True)
+      sudo_prompt = Bluetooth.communicate(sudo_password + '\n')
+      os.system("sudo killall rfcomm")
+      time.sleep(2)
+      Drone_bluetooth = Popen(['sudo'] + command_connect, stdin=PIPE, stderr=PIPE,universal_newlines=True)
+      time.sleep(3)
+  else:
+      print ("No target bluetooth device nearby")
 ~~~
 
 We now look for nearby devices using `bluetooth.discover_devices`. I’m adding a few parameters as well. `lookup_names` is set to True so we can get the devices names instead of the just their addresses, and `flush_cache` is also set to True to make sure we always look for fresh information. Finally we set `duration` to 20, meaning we look for devices for up to 20 seconds. This is a bit excessive, but useful when testing.
@@ -3321,7 +3330,7 @@ if __name__ == "__main__":
     board = MultiWii("/dev/rfcomm0")
     try:
         while True:
-        	#example of 8 RC channels to be send
+          #example of 8 RC channels to be send
             data = [1500,1550,1600,1560,1000,1040,1000,1000]
             
             # Old function 
@@ -3337,24 +3346,24 @@ if __name__ == "__main__":
 
 
 !!! hint "RC alias"
-	|No|Name|Range|
-	| ------------- |:---------------:| :---------------:|
-	|0|ROLL|1020~2000|
-	|1|PITCH|1020~2000|
-	|2|YAW|1020~2000|
-	|3|THROTTLE|1000~2000|
-	|4|AUX1|flight mode selection|
-	|5|AUX2|tuning and calibration|
-	|6|AUX3|overwrite CAM pitch (AUX1-AUX4) disable manual input and free the AUX channel|
-	|7|AUX4||
+  |No|Name|Range|
+  | ------------- |:---------------:| :---------------:|
+  |0|ROLL|1020~2000|
+  |1|PITCH|1020~2000|
+  |2|YAW|1020~2000|
+  |3|THROTTLE|1000~2000|
+  |4|AUX1|flight mode selection|
+  |5|AUX2|tuning and calibration|
+  |6|AUX3|overwrite CAM pitch (AUX1-AUX4) disable manual input and free the AUX channel|
+  |7|AUX4||
 
 测得解锁数据代码
 
 !!! attention "解锁 日本手"
-	|最小|居中|最大|
-	| ------------- |:---------------:| :---------------:| 
-	|throttle|pitch前进|yaw|
-	|油门|roll翻滚|右自旋|
+  |最小|居中|最大|
+  | ------------- |:---------------:| :---------------:| 
+  |throttle|pitch前进|yaw|
+  |油门|roll翻滚|右自旋|
 
 
 数值 `[1500,1500,2000,1020]`
@@ -3555,11 +3564,11 @@ apt-get install -y nano
 添加账户
 
 ```css
-adduser XXXX
-
-usermod -a -G sudo XXXX
+adduser liang
+<mdp>@L</mdp>
+usermod -a -G sudo liang
 sudo passwd root
-
+<mdp>@Ro</mdp>
 ```
 
 配置SSH
@@ -3616,11 +3625,11 @@ sudo nano /etc/shadowsocks.json
 
 ```css
 {
-"server":"XXXX",
-"server_port":XXXX,
+"server":"<mdp>66.122.222.250</mdp>",
+"server_port":<mdp>28888</mdp>,
 "local_address": "127.0.0.1",
 "local_port":1080,
-"password":"XXXX",
+"password":"<mdp>16908888</mdp>",
 "timeout":300,
 "method":"aes-256-cfb"
 }
@@ -3726,7 +3735,7 @@ ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
 ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 ```
 
-#### 8.4.2.2 Create a Configuration Snippet with Strong Encryption Settings
+#### 7.4.2.2 Create a Configuration Snippet with Strong Encryption Settings
 
 Set Nginx up with a strong SSL cipher suite and enable some advanced features that will help keep our server secure.The parameters we will set can be reused in future Nginx configurations, so we will give the file a generic name:
 
@@ -3760,7 +3769,7 @@ add_header X-Content-Type-Options nosniff;
 ssl_dhparam /etc/ssl/certs/dhparam.pem;
 ```
 
-#### 8.4.2.3 Adjust the Nginx Configuration to Use SSL
+#### 7.4.2.3 Adjust the Nginx Configuration to Use SSL
 
 Now that we have our snippets, we can adjust our Nginx configuration to enable SSL.
 
@@ -3782,7 +3791,7 @@ we need to start a new server block directly below to contain the remaining conf
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
-    server_name XXXX;
+    server_name gliang.eu;
     return 301 https://$server_name$request_uri;
 }
 

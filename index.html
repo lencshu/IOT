@@ -1396,7 +1396,7 @@ For Level Colors
          </li>
          <li>
           <a href="#1110">
-           1.1.10 电位器实现油门
+           1.1.10 滑动变阻器实现油门
           </a>
          </li>
         </ul>
@@ -1832,13 +1832,13 @@ For Level Colors
           </a>
           <ul>
            <li>
-            <a href="#8422-create-a-configuration-snippet-with-strong-encryption-settings">
-             8.4.2.2 Create a Configuration Snippet with Strong Encryption Settings
+            <a href="#7422-create-a-configuration-snippet-with-strong-encryption-settings">
+             7.4.2.2 Create a Configuration Snippet with Strong Encryption Settings
             </a>
            </li>
            <li>
-            <a href="#8423-adjust-the-nginx-configuration-to-use-ssl">
-             8.4.2.3 Adjust the Nginx Configuration to Use SSL
+            <a href="#7423-adjust-the-nginx-configuration-to-use-ssl">
+             7.4.2.3 Adjust the Nginx Configuration to Use SSL
             </a>
            </li>
            <li>
@@ -2280,21 +2280,22 @@ cond(no)-&gt;sub1(right)-&gt;op1
     <p class="admonition-title">
      自动修改步骤
     </p>
-    <p>
-     ① pip install beautifulsoup4
-     <br/>
-     ② os.getcwd()
-     <br/>
-     ③ 代码如下
-     <br/>
-     <div class="codehilite">
-      <pre><span class="c1"># -*- coding: utf-8 -*- </span>
+   </div>
+   <p>
+    ① pip install beautifulsoup4
+    <br/>
+    ② os.getcwd()
+    <br/>
+    ③ 代码如下
+    <br/>
+    <div class="codehilite">
+     <pre><span class="c1"># -*- coding: utf-8 -*- </span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span> <span class="p">:</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">"index.html"</span><span class="p">)</span>
 <span class="n">html</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'in.html'</span><span class="p">,</span><span class="s">"r+"</span><span class="p">)</span>
 
 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s">"html5lib"</span><span class="p">)</span>
@@ -2316,9 +2317,8 @@ cond(no)-&gt;sub1(right)-&gt;op1
 <span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">(</span> <span class="p">)</span>
 <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">"in.html"</span><span class="p">)</span>
 </pre>
-     </div>
-    </p>
-   </div>
+    </div>
+   </p>
    <h2 id="02-sublime">
     <a aria-hidden="true" class="headeranchor-link" href="#02-sublime" name="user-content-02-sublime">
      <span class="headeranchor">
@@ -2335,59 +2335,59 @@ cond(no)-&gt;sub1(right)-&gt;op1
    </h3>
    <div class="codehilite">
     <pre><span class="p">&lt;</span><span class="nt">snippet</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
+  <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
 <span class="cp">|${1:this}|${2}| </span>
 <span class="cp">| ------------- |:---------------:| </span>
 <span class="cp">|${3}|${4}| </span>
 <span class="cp">|${5}|${6}|</span>
 <span class="cp">]]&gt;</span><span class="p">&lt;/</span><span class="nt">content</span><span class="p">&gt;</span>
-    <span class="c">&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;</span>
-     <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mt<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
-    <span class="c">&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;</span>
-    <span class="c">&lt;!-- &lt;scope&gt;source.python&lt;/scope&gt; --&gt;</span>
-     <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>Markdown-table<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
+  <span class="c">&lt;!-- Optional: Set a tabTrigger to define how to trigger the snippet --&gt;</span>
+   <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mt<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
+  <span class="c">&lt;!-- Optional: Set a scope to limit where the snippet will trigger --&gt;</span>
+  <span class="c">&lt;!-- &lt;scope&gt;source.python&lt;/scope&gt; --&gt;</span>
+   <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>Markdown-table<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">snippet</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">snippet</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
+  <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
 <span class="cp">!!! ${1:hint}${2:Attention}${3:Caution}${4:Danger}${5:Question}${6:Note}${7:Unknown} "${8}"</span>
 <span class="cp">    ${9:content}</span>
 <span class="cp">]]&gt;</span><span class="p">&lt;/</span><span class="nt">content</span><span class="p">&gt;</span>
-     <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mb<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
-     <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>Markdown-hint<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mb<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
+   <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>Markdown-hint<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">snippet</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">snippet</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
+  <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
 <span class="cp">- [${1:X}] ${2:Attention}</span>
-<span class="cp">    * [${3:X}] ${4:Note}</span>
-<span class="cp">        + [${5:X}] ${6:Note}</span>
+<span class="cp">  * [${3:X}] ${4:Note}</span>
+<span class="cp">      + [${5:X}] ${6:Note}</span>
 <span class="cp">]]&gt;</span><span class="p">&lt;/</span><span class="nt">content</span><span class="p">&gt;</span>
-     <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mal<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
-     <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>Markdownlist<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mal<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
+   <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>Markdownlist<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">snippet</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">snippet</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
+  <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
 <span class="cp">波浪符号${2:python}</span>
 <span class="cp">${1:Code here}</span>
 <span class="cp">波浪符号</span>
 <span class="cp">]]&gt;</span><span class="p">&lt;/</span><span class="nt">content</span><span class="p">&gt;</span>
-     <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mc<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
-     <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>MarkdownCodes<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mc<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
+   <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>MarkdownCodes<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">snippet</span><span class="p">&gt;</span>
 
 
 <span class="p">&lt;</span><span class="nt">snippet</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
+  <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
 <span class="cp">$$${1:Formular here}^{${2:upper}}$$</span>
 <span class="cp">]]&gt;</span><span class="p">&lt;/</span><span class="nt">content</span><span class="p">&gt;</span>
-     <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mf<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
-     <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>MarkdownFormular<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mf<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
+   <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>MarkdownFormular<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">snippet</span><span class="p">&gt;</span>
 
 <span class="p">&lt;</span><span class="nt">snippet</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
+  <span class="p">&lt;</span><span class="nt">content</span><span class="p">&gt;</span><span class="cp">&lt;![CDATA[</span>
 <span class="cp">${51:指数} ^{$1} _{$3}</span>
 <span class="cp">${54:偏微分} \partial f_{\mbox{$4}}</span>
 <span class="cp">${55:分数} \frac{$5}{$6}</span>
@@ -2405,8 +2405,8 @@ cond(no)-&gt;sub1(right)-&gt;op1
 <span class="cp">\in</span>
 <span class="cp">\mathbb{R} </span>
 <span class="cp">]]&gt;</span><span class="p">&lt;/</span><span class="nt">content</span><span class="p">&gt;</span>
-     <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mu<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
-     <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>MarkdownFormular<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
+   <span class="p">&lt;</span><span class="nt">tabTrigger</span><span class="p">&gt;</span>mu<span class="p">&lt;/</span><span class="nt">tabTrigger</span><span class="p">&gt;</span> 
+   <span class="p">&lt;</span><span class="nt">description</span><span class="p">&gt;</span>MarkdownFormular<span class="p">&lt;/</span><span class="nt">description</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">snippet</span><span class="p">&gt;</span>
 </pre>
    </div>
@@ -2974,7 +2974,7 @@ cond(no)-&gt;sub1(right)-&gt;op1
      <span class="headeranchor">
      </span>
     </a>
-    1.1.10 电位器实现油门
+    1.1.10 滑动变阻器实现油门
    </h3>
    <p>
     模拟信号读取
@@ -2992,21 +2992,31 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 <span class="c1">// the loop routine runs over and over again forever:</span>
 <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// read the input on analog pin 0:</span>
-    <span class="n">sensorValue</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">readPin</span><span class="p">);</span>
-      <span class="c1">// print out the value you read:</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">sensorValue</span> <span class="o">!=</span>  <span class="mi">0</span><span class="p">)</span>
+    <span class="c1">// read the input on analog pin 0:</span>
+  <span class="n">sensorValue</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">readPin</span><span class="p">);</span>
+    <span class="c1">// print out the value you read:</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">sensorValue</span> <span class="o">!=</span>  <span class="mi">0</span><span class="p">)</span>
+  <span class="p">{</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">sensorValue</span> <span class="o">&lt;</span> <span class="n">predata</span><span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">sensorValue</span> <span class="o">&gt;</span> <span class="n">predata</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
     <span class="p">{</span>
-     <span class="k">if</span> <span class="p">(</span><span class="n">sensorValue</span> <span class="o">&lt;</span> <span class="n">predata</span><span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">sensorValue</span> <span class="o">&gt;</span> <span class="n">predata</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-      <span class="p">{</span>
-      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">sensorValue</span><span class="p">);</span>
-      <span class="n">predata</span> <span class="o">=</span> <span class="n">sensorValue</span><span class="p">;</span>
-      <span class="p">}</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">sensorValue</span><span class="p">);</span>
+    <span class="n">predata</span> <span class="o">=</span> <span class="n">sensorValue</span><span class="p">;</span>
     <span class="p">}</span>
+  <span class="p">}</span>
 
 <span class="p">}</span>
 </pre>
    </div>
+   <div class="admonition hint">
+   </div>
+   <ul>
+    <li>
+     接模拟量输入口
+    </li>
+    <li>
+     读取的是电压数值，数据取值范围是从0-1024
+    </li>
+   </ul>
    <hr/>
    <h1 id="2-arduino">
     <a aria-hidden="true" class="headeranchor-link" href="#2-arduino" name="user-content-2-arduino">
@@ -3673,7 +3683,7 @@ cond(no)-&gt;sub1(right)-&gt;op1
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">irrecv</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">results</span><span class="p">))</span>
     <span class="p">{</span>
-        <span class="n">ir</span><span class="o">=</span><span class="n">transIR</span><span class="p">();</span> 
+      <span class="n">ir</span><span class="o">=</span><span class="n">transIR</span><span class="p">();</span> 
     <span class="p">}</span>
     <span class="k">else</span> <span class="n">ir</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
     <span class="n">joyStick</span><span class="p">(</span><span class="n">detSw</span><span class="p">(),</span><span class="n">detX</span><span class="p">(),</span><span class="n">detY</span><span class="p">(),</span><span class="n">power</span><span class="p">(),</span> <span class="n">ir</span><span class="p">);</span>
@@ -3730,6 +3740,8 @@ cond(no)-&gt;sub1(right)-&gt;op1
     <pre>sudo apt-get update <span class="o">&amp;&amp;</span> sudo apt-get upgrade <span class="o">&amp;&amp;</span> sudo apt-get dist-upgrade
 
 sudo passwd pi
+
+@Pi
 </pre>
    </div>
    <h3 id="311-wifi">
@@ -3748,25 +3760,31 @@ sudo passwd pi
    <div class="codehilite">
     <pre>network=
 {
-    ssid="XXX"
-    psk="XXXXXXXXXXX"
+  ssid=<span class="nt">&lt;MDP&gt;</span>"Vi"<span class="nt">&lt;/MDP&gt;</span>
+  psk=<span class="nt">&lt;MDP&gt;</span>"jiubugaosunimima"<span class="nt">&lt;/MDP&gt;</span>
 }
 </pre>
    </div>
    <p>
     sudo nano /etc/dhcpcd.conf
    </p>
-   <div class="codehilite">
-    <pre>interface eth0
-static ip_address=192.168.1.222/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.1.1
-interface wlan0
-static ip_address=192.168.1.111/24
-static routers=192.168.1.1
-static domain_name_servers=192.168.1.1
-</pre>
-   </div>
+   <p>
+    interface eth0
+    <br/>
+    static ip_address=192.168.1.222/24
+    <br/>
+    static routers=192.168.1.1
+    <br/>
+    static domain_name_servers=192.168.1.1
+    <br/>
+    interface wlan0
+    <br/>
+    static ip_address=192.168.1.111/24
+    <br/>
+    static routers=192.168.1.1
+    <br/>
+    static domain_name_servers=192.168.1.1
+   </p>
    <p>
     sudo raspi-config
    </p>
@@ -3795,20 +3813,20 @@ sudo apt-get -y install rsync dosfstools parted kpartx exfat-fuse
 <span class="nv">usbmount</span><span class="o">=</span>/mnt
 mkdir -p <span class="nv">$usbmount</span>
 <span class="k">if</span> <span class="o">[</span> -z <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">"no argument, assume the mount device is /dev/sda1 ? Y/N"</span>
-    <span class="nb">read </span>key
-    <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$key</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"y"</span> -o <span class="s2">"</span><span class="nv">$key</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"Y"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        sudo mount -o <span class="nv">uid</span><span class="o">=</span><span class="m">1000</span> /dev/sda1 <span class="nv">$usbmount</span>
-    <span class="k">else</span>
-        <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$0</span><span class="s2"> [backup dest device name], e.g. </span><span class="nv">$0</span><span class="s2"> /dev/sda1"</span>
-        <span class="nb">exit </span>0
-    <span class="k">fi</span>
+  <span class="nb">echo</span> <span class="s2">"no argument, assume the mount device is /dev/sda1 ? Y/N"</span>
+  <span class="nb">read </span>key
+  <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$key</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"y"</span> -o <span class="s2">"</span><span class="nv">$key</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">"Y"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    sudo mount -o <span class="nv">uid</span><span class="o">=</span><span class="m">1000</span> /dev/sda1 <span class="nv">$usbmount</span>
+  <span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$0</span><span class="s2"> [backup dest device name], e.g. </span><span class="nv">$0</span><span class="s2"> /dev/sda1"</span>
+    <span class="nb">exit </span>0
+  <span class="k">fi</span>
 <span class="k">else</span>
-    sudo mount -o <span class="nv">uid</span><span class="o">=</span><span class="m">1000</span> <span class="nv">$1</span> <span class="nv">$usbmount</span>
+  sudo mount -o <span class="nv">uid</span><span class="o">=</span><span class="m">1000</span> <span class="nv">$1</span> <span class="nv">$usbmount</span>
 <span class="k">fi</span>
 <span class="k">if</span> <span class="o">[</span> -z <span class="s2">"`grep </span><span class="nv">$usbmount</span><span class="s2"> /etc/mtab`"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">echo</span> <span class="s2">"mount fail, exit now"</span>
-    <span class="nb">exit </span>0
+  <span class="nb">echo</span> <span class="s2">"mount fail, exit now"</span>
+  <span class="nb">exit </span>0
 <span class="k">fi</span>
 <span class="nv">img</span><span class="o">=</span><span class="nv">$usbmount</span>/rpi-<span class="sb">`</span>date +%Y%m%d-%H%M<span class="sb">`</span>.img
 <span class="c1">#img=$usbmount/rpi.img</span>
@@ -3847,33 +3865,33 @@ sync
 sudo mount -t ext4 <span class="si">${</span><span class="nv">device</span><span class="si">}</span>p2 <span class="nv">$mountr</span>
 <span class="k">if</span> <span class="o">[</span> -f /etc/dphys-swapfile <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
         <span class="nv">SWAPFILE</span><span class="o">=</span><span class="sb">`</span>cat /etc/dphys-swapfile <span class="p">|</span> grep ^CONF_SWAPFILE <span class="p">|</span> cut -f <span class="m">2</span> -d<span class="o">=</span><span class="sb">`</span>
-    <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$SWAPFILE</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nv">SWAPFILE</span><span class="o">=</span>/var/swap
-    <span class="k">fi</span>
-    <span class="nv">EXCLUDE_SWAPFILE</span><span class="o">=</span><span class="s2">"--exclude </span><span class="nv">$SWAPFILE</span><span class="s2">"</span>
+  <span class="k">if</span> <span class="o">[</span> <span class="s2">"</span><span class="nv">$SWAPFILE</span><span class="s2">"</span> <span class="o">=</span> <span class="s2">""</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nv">SWAPFILE</span><span class="o">=</span>/var/swap
+  <span class="k">fi</span>
+  <span class="nv">EXCLUDE_SWAPFILE</span><span class="o">=</span><span class="s2">"--exclude </span><span class="nv">$SWAPFILE</span><span class="s2">"</span>
 <span class="k">fi</span>
 sudo rsync --force -rltWDEgop --delete --stats --progress <span class="se">\</span>
-    <span class="nv">$EXCLUDE_SWAPFILE</span> <span class="se">\</span>
-    --exclude <span class="s1">'.gvfs'</span> <span class="se">\</span>
-    --exclude <span class="s1">'/dev'</span> <span class="se">\</span>
+  <span class="nv">$EXCLUDE_SWAPFILE</span> <span class="se">\</span>
+  --exclude <span class="s1">'.gvfs'</span> <span class="se">\</span>
+  --exclude <span class="s1">'/dev'</span> <span class="se">\</span>
         --exclude <span class="s1">'/media'</span> <span class="se">\</span>
-    --exclude <span class="s1">'/mnt'</span> <span class="se">\</span>
-    --exclude <span class="s1">'/proc'</span> <span class="se">\</span>
+  --exclude <span class="s1">'/mnt'</span> <span class="se">\</span>
+  --exclude <span class="s1">'/proc'</span> <span class="se">\</span>
         --exclude <span class="s1">'/run'</span> <span class="se">\</span>
-    --exclude <span class="s1">'/sys'</span> <span class="se">\</span>
-    --exclude <span class="s1">'/tmp'</span> <span class="se">\</span>
+  --exclude <span class="s1">'/sys'</span> <span class="se">\</span>
+  --exclude <span class="s1">'/tmp'</span> <span class="se">\</span>
         --exclude <span class="s1">'lost\+found'</span> <span class="se">\</span>
-    --exclude <span class="s1">'$usbmount'</span> <span class="se">\</span>
-    // <span class="nv">$mountr</span>
+  --exclude <span class="s1">'$usbmount'</span> <span class="se">\</span>
+  // <span class="nv">$mountr</span>
 <span class="c1"># special dirs</span>
 <span class="k">for</span> i in dev media mnt proc run sys boot<span class="p">;</span> <span class="k">do</span>
-    <span class="k">if</span> <span class="o">[</span> ! -d <span class="nv">$mountr</span>/<span class="nv">$i</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        sudo mkdir <span class="nv">$mountr</span>/<span class="nv">$i</span>
-    <span class="k">fi</span>
+  <span class="k">if</span> <span class="o">[</span> ! -d <span class="nv">$mountr</span>/<span class="nv">$i</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    sudo mkdir <span class="nv">$mountr</span>/<span class="nv">$i</span>
+  <span class="k">fi</span>
 <span class="k">done</span>
 <span class="k">if</span> <span class="o">[</span> ! -d <span class="nv">$mountr</span>/tmp <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    sudo mkdir <span class="nv">$mountr</span>/tmp
-    sudo chmod a+w <span class="nv">$mountr</span>/tmp
+  sudo mkdir <span class="nv">$mountr</span>/tmp
+  sudo chmod a+w <span class="nv">$mountr</span>/tmp
 <span class="k">fi</span>
 <span class="c1">#sudo rm -f $mountr/etc/udev/rules.d/70-persistent-net.rules</span>
 sync
@@ -3914,11 +3932,9 @@ rm -rf <span class="nv">$mountb</span> <span class="nv">$mountr</span>
    <p>
     在树莓派上安装VNC Server：
    </p>
-   <div class="codehilite">
-    <pre>sudo apt-get install tightvncserver
-</pre>
-   </div>
    <p>
+    sudo apt-get install tightvncserver
+    <br/>
     启动树莓派VNC Server
     <br/>
     sudo tightvncserver :1 -geometry 1600x900
@@ -3926,14 +3942,16 @@ rm -rf <span class="nv">$mountb</span> <span class="nv">$mountr</span>
     tightvncserver -kill :1   //终止控制台
    </p>
    <p>
-    XXXXX
-    <br/>
+    <mdp>
+     169088
+    </mdp>
+   </p>
+   <p>
     重置密码
    </p>
-   <div class="codehilite">
-    <pre>sudo tightvncpasswd
-</pre>
-   </div>
+   <p>
+    sudo tightvncpasswd
+   </p>
    <p>
     自动启动
    </p>
@@ -3992,7 +4010,7 @@ rm -rf <span class="nv">$mountb</span> <span class="nv">$mountr</span>
    </p>
    <div class="codehilite">
     <pre>192.168.1.111:1
-XXXX
+&lt;mdp&gt;169088&lt;/mdp&gt;
 </pre>
    </div>
    <h3 id="314">
@@ -4016,17 +4034,14 @@ XXXX
     </a>
     3.1.5 开机运行
    </h3>
-   <div class="codehilite">
-    <pre>nano /etc/rc.local
-</pre>
-   </div>
    <p>
+    nano /etc/rc.local
+    <br/>
     在最后一行 exit 0 之上加入
    </p>
-   <div class="codehilite">
-    <pre>su txt.sh start
-</pre>
-   </div>
+   <p>
+    su txt.sh start
+   </p>
    <h3 id="316">
     <a aria-hidden="true" class="headeranchor-link" href="#316" name="user-content-316">
      <span class="headeranchor">
@@ -4093,10 +4108,9 @@ CPU =&gt; 30'C
    <p>
     安装arduino IDE
    </p>
-   <div class="codehilite">
-    <pre>sudo apt-get update &amp;&amp; sudo apt-get install arduino
-</pre>
-   </div>
+   <p>
+    sudo apt-get update &amp;&amp; sudo apt-get install arduino
+   </p>
    <h2 id="33-ssh">
     <a aria-hidden="true" class="headeranchor-link" href="#33-ssh" name="user-content-33-ssh">
      <span class="headeranchor">
@@ -4141,7 +4155,7 @@ sudo tar -C /usr/local -xzf go1.9.linux-armv6l.tar.gz
    </div>
    <ul>
     <li>
-     Vps
+     VPS
     </li>
    </ul>
    <div class="codehilite">
@@ -4168,8 +4182,7 @@ sudo tar -C /usr/local -xzf go1.9.linux-armv6l.tar.gz
     </li>
    </ul>
    <div class="codehilite">
-    <pre><span class="nt">sudo</span> <span class="nt">apt-get</span> <span class="nt">install</span> <span class="nt">-y</span> <span class="nt">git</span>
-<span class="nt">go</span> <span class="nt">get</span> <span class="nt">github</span><span class="nc">.com</span><span class="o">/</span><span class="nt">go-sql-driver</span><span class="o">/</span><span class="nt">mysql</span>
+    <pre><span class="nt">go</span> <span class="nt">get</span> <span class="nt">github</span><span class="nc">.com</span><span class="o">/</span><span class="nt">go-sql-driver</span><span class="o">/</span><span class="nt">mysql</span>
 <span class="nt">go</span> <span class="nt">get</span> <span class="nt">github</span><span class="nc">.com</span><span class="o">/</span><span class="nt">klauspost</span><span class="o">/</span><span class="nt">reedsolomon</span>
 <span class="nt">go</span> <span class="nt">get</span> <span class="nt">github</span><span class="nc">.com</span><span class="o">/</span><span class="nt">cznic</span><span class="o">/</span><span class="nt">zappy</span>
 <span class="nt">git</span> <span class="nt">clone</span> <span class="nt">https</span><span class="o">://</span><span class="nt">github</span><span class="nc">.com</span><span class="o">/</span><span class="nt">vzex</span><span class="o">/</span><span class="nt">dog-tunnel</span><span class="nc">.git</span>
@@ -4310,9 +4323,9 @@ sudo tar -C ~/dogtunnel/dt -xzf dtunnel_linux_arm_0.80.tgz
    <div class="codehilite">
     <pre>cd dt
 chmod +x ./dtunnel
-./dtunnel -reg lencshu -local :22 -clientkey XXXX
+./dtunnel -reg <span class="nt">&lt;mdp&gt;</span>lencshu<span class="nt">&lt;/mdp&gt;</span> -local :22 -clientkey <span class="nt">&lt;mdp&gt;</span>16908888<span class="nt">&lt;/mdp&gt;</span>
 #任意目录可执行命令
-/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :22 -clientkey XXXX
+/home/pi/dogtunnel/dt/dtunnel -reg <span class="nt">&lt;mdp&gt;</span>lencshu<span class="nt">&lt;/mdp&gt;</span> -local :22 -clientkey <span class="nt">&lt;mdp&gt;</span>16908888<span class="nt">&lt;/mdp&gt;</span>
 </pre>
    </div>
    <h4 id="3322-vps">
@@ -4339,9 +4352,9 @@ sudo tar -C /home/liang/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
    <div class="codehilite">
     <pre>cd dt
 chmod +x ./dtunnel
-./dtunnel -link lencshu -local :8888 -clientkey XXXX
+./dtunnel -link <span class="nt">&lt;mdp&gt;</span>lencshu<span class="nt">&lt;/mdp&gt;</span> -local :<span class="nt">&lt;mdp&gt;</span>8888<span class="nt">&lt;/mdp&gt;</span> -clientkey <span class="nt">&lt;mdp&gt;</span>16908888<span class="nt">&lt;/mdp&gt;</span>
 #任意目录可执行
-/home/liang/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey XXXX
+/home/liang/dogtunnel/dt/dtunnel -link <span class="nt">&lt;mdp&gt;</span>lencshu<span class="nt">&lt;/mdp&gt;</span> -local :<span class="nt">&lt;mdp&gt;</span>8888<span class="nt">&lt;/mdp&gt;</span> -clientkey <span class="nt">&lt;mdp&gt;</span>16908888<span class="nt">&lt;/mdp&gt;</span>
 </pre>
    </div>
    <h3 id="333">
@@ -4365,11 +4378,11 @@ chmod +x ./dtunnel
    </p>
    <div class="codehilite">
     <pre><span class="c1">#服务端 Raspbian</span>
-<span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="n">lencshu</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="mi">22</span> <span class="o">-</span><span class="n">clientkey</span> <span class="n">XXXX</span> <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
+<span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="n">lencshu</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">22</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">clientkey</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">16908888</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
 <span class="c1">#客户端 66</span>
-<span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">link</span> <span class="n">lencshu</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="mi">8888</span> <span class="o">-</span><span class="n">clientkey</span> <span class="n">XXXX</span> <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
+<span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">link</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="n">lencshu</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">8888</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">clientkey</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">16908888</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
 <span class="c1"># 日志文件目录权限问题</span>
-<span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="n">xxx</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="mi">22</span> <span class="o">-</span><span class="n">clientkey</span> <span class="n">XXXXXXXX</span> <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
+<span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="n">xxx</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">22</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">clientkey</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">888888</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
 </pre>
    </div>
    <p>
@@ -4417,9 +4430,9 @@ chmod +x ./dtunnel
     <span class="n">echo</span> <span class="s">"Starting DogTunnel"</span>
     <span class="c1"># run application you want to start</span>
     <span class="c1">#服务端</span>
-    <span class="c1">#/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :22 -clientkey XXXX</span>
+    <span class="c1">#/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :&lt;mdp&gt;22&lt;/mdp&gt; -clientkey &lt;mdp&gt;16908888&lt;/mdp&gt;</span>
     <span class="c1">#客户端</span>
-    <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">liang</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">link</span> <span class="n">lencshu</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="mi">8888</span> <span class="o">-</span><span class="n">clientkey</span> <span class="n">XXXX</span>
+    <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">link</span> <span class="n">lencshu</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">8888</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">clientkey</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mi">16908888</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span>
     <span class="p">;;</span>
   <span class="n">stop</span><span class="p">)</span>
     <span class="n">echo</span> <span class="s">"Stopping DogTunnel"</span>
@@ -4497,16 +4510,16 @@ sudo service proftpd reload
 netstat -anp<span class="p">|</span>grep pid
 sudo lsof -i :80
 
-    nginx   <span class="m">520</span>     root    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">520</span>     root    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">521</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">521</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">522</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">522</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">523</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">523</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">524</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
-    nginx   <span class="m">524</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">520</span>     root    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">520</span>     root    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">521</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">521</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">522</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">522</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">523</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">523</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">524</span> www-data    6u  IPv4  <span class="m">11792</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
+  nginx   <span class="m">524</span> www-data    7u  IPv6  <span class="m">11793</span>      0t0  TCP *:http <span class="o">(</span>LISTEN<span class="o">)</span>
 
 
 
@@ -4784,7 +4797,9 @@ sudo usermod -a -G lpadmin pi
    <p>
     电脑连接
     <br/>
-    http://XXXXXXXX/printers/Vi.Canon
+    <a href="http://192.168.1.111:631/printers/Vi.Canon">
+     http://192.168.1.111:631/printers/Vi.Canon
+    </a>
    </p>
    <p>
     注册为谷歌print
@@ -4934,39 +4949,32 @@ sudo systemctl restart cloudprintd
    <p>
     安装python
    </p>
-   <div class="codehilite">
-    <pre>sudo aptitude install python-dev
-</pre>
-   </div>
+   <p>
+    sudo aptitude install python-dev
+   </p>
    <p>
     安装python的GPIO模块
    </p>
-   <div class="codehilite">
-    <pre>sudo apt-get install python-dev python-rpi.gpio
-</pre>
-   </div>
+   <p>
+    sudo apt-get install python-dev python-rpi.gpio
+   </p>
    <p>
     安装serial用于串口通信及USB通信
    </p>
-   <div class="codehilite">
-    <pre>sudo apt-get install python-serial
-</pre>
-   </div>
+   <p>
+    sudo apt-get install python-serial
+   </p>
    <p>
     在树莓派安装串口调试工具
    </p>
-   <div class="codehilite">
-    <pre>sudo apt-get install minicom
-</pre>
-   </div>
    <p>
+    sudo apt-get install minicom
+    <br/>
     配置minicom：
    </p>
-   <div class="codehilite">
-    <pre>sudo minicom -s
-</pre>
-   </div>
    <p>
+    sudo minicom -s
+    <br/>
     启动出现配置菜单选
     <strong>
      serial port setup
@@ -4975,18 +4983,14 @@ sudo systemctl restart cloudprintd
     <br/>
     输入A 配置串口驱动为
    </p>
-   <div class="codehilite">
-    <pre>/dev/ttyAMA0
-</pre>
-   </div>
    <p>
+    /dev/ttyAMA0
+    <br/>
     输入E 配置速率为
    </p>
-   <div class="codehilite">
-    <pre>9600 8N1
-</pre>
-   </div>
    <p>
+    9600 8N1
+    <br/>
     输入F 将 Hardware Flow Control 设为 NO
     <br/>
     回车 退出
@@ -4997,45 +5001,40 @@ sudo systemctl restart cloudprintd
      Modem and dialing
     </strong>
    </p>
-   <div class="codehilite">
-    <pre>将以下设置为空
-A. Init string,
-B. Reset string,
-k. Hang-up string.
-</pre>
-   </div>
    <p>
+    将以下设置为空
+    <br/>
+    A. Init string,
+    <br/>
+    B. Reset string,
+    <br/>
+    k. Hang-up string.
+    <br/>
     设置完成后选择Save setup as dfl将当前设置保存为默认设置
    </p>
-   <div class="codehilite">
-    <pre>Exit from minicon
-</pre>
-   </div>
    <p>
+    Exit from minicon
+    <br/>
     命令minicom是进入串口超级终端画面，而minicom -s为配置minicom。说明/dev/ttyAMA0 对应为串口0 为你连接开发板的端口
     <br/>
     接下来测一下环境是否都OK：
    </p>
-   <div class="codehilite">
-    <pre>sudo nano test.py
-</pre>
-   </div>
    <p>
+    sudo nano test.py
+    <br/>
     输入内容为：
    </p>
-   <div class="codehilite">
-    <pre><span class="kn">import</span> <span class="nn">serial</span>
-<span class="kn">import</span> <span class="nn">RPi.GPIO</span>
-</pre>
-   </div>
+   <p>
+    import serial
+    <br/>
+    import RPi.GPIO
+   </p>
    <p>
     Ctrl +X 保存退出执行
    </p>
-   <div class="codehilite">
-    <pre>python test.py
-</pre>
-   </div>
    <p>
+    python test.py
+    <br/>
     没有报错，说明正确安装python-serial等。
    </p>
    <p>
@@ -5643,7 +5642,7 @@ k. Hang-up string.
    <div class="codehilite">
     <pre><span class="kn">import</span> <span class="nn">bluetooth</span>
 
-<span class="n">target_name</span> <span class="o">=</span> <span class="s">"XXXXXXXX"</span>
+<span class="n">target_name</span> <span class="o">=</span> <span class="s">"X4"</span>
 <span class="n">target_address</span> <span class="o">=</span> <span class="bp">None</span>
 
 <span class="n">nearby_devices</span> <span class="o">=</span> <span class="n">bluetooth</span><span class="o">.</span><span class="n">discover_devices</span><span class="p">()</span>
@@ -5695,9 +5694,9 @@ k. Hang-up string.
 <span class="n">agent</span> <span class="n">on</span>
 <span class="c1">#The Bluetooth agent is what manages the Bluetooth 'pairing code'. It can either respond to a 'pairing code' coming in, or can send one out.</span>
 <span class="n">scan</span> <span class="n">on</span>
-<span class="n">pair</span> <span class="n">XXXX</span>
-<span class="n">trust</span> <span class="n">XXXX</span>
-<span class="c1">#connect XXXX</span>
+<span class="n">pair</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mo">00</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">83</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span>
+<span class="n">trust</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mo">00</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">83</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span>
+<span class="c1">#connect &lt;mdp&gt;00:14:02:12:29:83&lt;/mdp&gt;</span>
 </pre>
    </div>
    <p>
@@ -5713,7 +5712,7 @@ k. Hang-up string.
 <span class="n">sudo</span> <span class="n">hciconfig</span> <span class="n">hci0</span> <span class="n">down</span> <span class="c1">#关闭hci设备</span>
 <span class="c1">#命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器</span>
 
-<span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">connect</span> <span class="mi">0</span> <span class="n">XXXX</span> <span class="mi">1</span>
+<span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">connect</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mo">00</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">83</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="mi">1</span>
 
 <span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">watch</span> <span class="n">hci0</span>
 
@@ -5723,7 +5722,11 @@ k. Hang-up string.
 </pre>
    </div>
    <p>
-    Connected /dev/rfcomm0 to XXXX on channel 1
+    Connected /dev/rfcomm0 to
+    <mdp>
+     00:14:02:12:29:83
+    </mdp>
+    on channel 1
    </p>
    <p>
     If that doesn’t work you can also try adding pi to the lp group
@@ -5738,7 +5741,7 @@ k. Hang-up string.
 
 <span class="n">rfcomm0</span> <span class="p">{</span>
     <span class="n">bind</span> <span class="n">no</span><span class="p">;</span>
-    <span class="n">device</span> <span class="n">XXXX</span><span class="p">;</span>
+    <span class="n">device</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mo">00</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">83</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span><span class="p">;</span>
     <span class="n">channel</span> <span class="mi">1</span><span class="p">;</span>
     <span class="n">comment</span> <span class="err">“</span><span class="n">Connection</span> <span class="n">to</span> <span class="n">Bluetooth</span> <span class="n">serial</span> <span class="n">module</span><span class="err">”</span><span class="p">;</span>
 <span class="p">}</span>
@@ -5751,7 +5754,10 @@ k. Hang-up string.
     sudo rfcomm connect 0
    </p>
    <p>
-    sudo rfcomm connect rfcomm0 XXXX
+    sudo rfcomm connect rfcomm0
+    <mdp>
+     00:14:02:12:29:83
+    </mdp>
    </p>
    <div class="codehilite">
     <pre><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">sourceforge</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">p</span><span class="o">/</span><span class="n">pyserial</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">HEAD</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">trunk</span><span class="o">/</span><span class="n">pyserial</span><span class="o">/</span><span class="n">serial</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">miniterm</span><span class="o">.</span><span class="n">py</span>
@@ -5769,7 +5775,7 @@ k. Hang-up string.
    </h3>
    <div class="codehilite">
     <pre><span class="n">sudo</span> <span class="n">hciconfig</span> <span class="n">hci0</span> <span class="n">up</span>
-<span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">connect</span> <span class="mi">0</span> <span class="n">XXXX</span> <span class="mi">1</span>
+<span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">connect</span> <span class="mi">0</span> <span class="o">&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="mo">00</span><span class="p">:</span><span class="mi">14</span><span class="p">:</span><span class="mo">02</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span><span class="mi">83</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;</span> <span class="mi">1</span>
 </pre>
    </div>
    <h2 id="63-pythonshell">
@@ -5863,7 +5869,7 @@ k. Hang-up string.
 
 <span class="n">sudo_password</span> <span class="o">=</span> <span class="s">'My_pass'</span>
 <span class="n">command_open</span> <span class="o">=</span> <span class="s">'sudo hciconfig hci0 up'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="n">command_connect</span> <span class="o">=</span> <span class="s">'rfcomm connect 0 XXXX 1'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">command_connect</span> <span class="o">=</span> <span class="s">'rfcomm connect 0 &lt;mdp&gt;00:14:02:12:29:83&lt;/mdp&gt; 1'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s">'sudo'</span><span class="p">,</span> <span class="s">'-S'</span><span class="p">]</span> <span class="o">+</span> <span class="n">command_open</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">sudo_prompt</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">sudo_password</span> <span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
@@ -5893,47 +5899,47 @@ k. Hang-up string.
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">Popen</span><span class="p">,</span> <span class="n">PIPE</span>
 <span class="kn">import</span> <span class="nn">time</span><span class="o">,</span><span class="nn">os</span>
 
-<span class="n">target_name</span> <span class="o">=</span> <span class="s">"XXXX"</span>
+<span class="n">target_name</span> <span class="o">=</span> <span class="s">"X4"</span>
 <span class="n">killcount</span><span class="o">=</span><span class="mi">0</span>
-<span class="n">target_address</span> <span class="o">=</span> <span class="s">'XXXX'</span>
-<span class="n">sudo_password</span> <span class="o">=</span> <span class="s">'XXXXXXXX'</span>
+<span class="n">target_address</span> <span class="o">=</span> <span class="s">'&lt;mdp&gt;00:14:02:12:29:83&lt;/mdp&gt;'</span>
+<span class="n">sudo_password</span> <span class="o">=</span> <span class="s">'&lt;mdp&gt;169088@L&lt;/mdp&gt;'</span>
 <span class="n">command_open</span> <span class="o">=</span> <span class="s">'sudo hciconfig hci0 up'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="n">command_connect</span> <span class="o">=</span> <span class="s">'nohup rfcomm connect 0 XXXX 1 &gt; /home/pi/log/rfcomm_XXXX.log 2&gt;&amp;1 &amp;'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">command_connect</span> <span class="o">=</span> <span class="s">'nohup rfcomm connect 0 &lt;mdp&gt;00:14:02:12:29:83&lt;/mdp&gt; 1 &gt; /home/pi/log/rfcomm_x4.log 2&gt;&amp;1 &amp;'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
 
 
 <span class="k">def</span> <span class="nf">detect_drone</span><span class="p">():</span>
-    <span class="n">nearby_devices</span> <span class="o">=</span> <span class="n">bluetooth</span><span class="o">.</span><span class="n">discover_devices</span><span class="p">(</span><span class="n">lookup_names</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span><span class="n">flush_cache</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">bdaddr</span> <span class="ow">in</span> <span class="n">nearby_devices</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">bdaddr</span><span class="o">==</span> <span class="n">target_address</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">1</span>
-            <span class="k">break</span>
-    <span class="k">return</span> <span class="mi">0</span>
+  <span class="n">nearby_devices</span> <span class="o">=</span> <span class="n">bluetooth</span><span class="o">.</span><span class="n">discover_devices</span><span class="p">(</span><span class="n">lookup_names</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span><span class="n">flush_cache</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span> <span class="n">duration</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">bdaddr</span> <span class="ow">in</span> <span class="n">nearby_devices</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">bdaddr</span><span class="o">==</span> <span class="n">target_address</span><span class="p">:</span>
+      <span class="k">return</span> <span class="mi">1</span>
+      <span class="k">break</span>
+  <span class="k">return</span> <span class="mi">0</span>
 
 <span class="k">def</span> <span class="nf">status_blue</span><span class="p">():</span>
-    <span class="n">stdoutdata</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s">"hcitool"</span><span class="p">,</span><span class="s">"con"</span><span class="p">])</span>
-    <span class="k">if</span> <span class="s">"XXXX"</span> <span class="ow">in</span> <span class="n">stdoutdata</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"Bluetooth device is connected"</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
+  <span class="n">stdoutdata</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s">"hcitool"</span><span class="p">,</span><span class="s">"con"</span><span class="p">])</span>
+  <span class="k">if</span> <span class="s">"&lt;mdp&gt;00:14:02:12:29:83&lt;/mdp&gt;"</span> <span class="ow">in</span> <span class="n">stdoutdata</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Bluetooth device is connected"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">0</span>
 
 <span class="n">Bluetooth</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s">'sudo'</span><span class="p">,</span> <span class="s">'-S'</span><span class="p">]</span> <span class="o">+</span> <span class="n">command_open</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">sudo_prompt</span> <span class="o">=</span> <span class="n">Bluetooth</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">sudo_password</span> <span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
 
 <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">status_blue</span><span class="p">():</span>
-        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">detect_drone</span><span class="p">():</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s">"Found target bluetooth device with name:"</span><span class="p">,</span> <span class="n">target_name</span><span class="p">)</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s">"Starting rfcomm"</span><span class="p">)</span>
-            <span class="n">Bluetooth</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s">'sudo'</span><span class="p">,</span> <span class="s">'-S'</span><span class="p">]</span> <span class="o">+</span> <span class="n">command_open</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-            <span class="n">sudo_prompt</span> <span class="o">=</span> <span class="n">Bluetooth</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">sudo_password</span> <span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">"sudo killall rfcomm"</span><span class="p">)</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">Drone_bluetooth</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s">'sudo'</span><span class="p">]</span> <span class="o">+</span> <span class="n">command_connect</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-            <span class="k">print</span> <span class="p">(</span><span class="s">"No target bluetooth device nearby"</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">status_blue</span><span class="p">():</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">detect_drone</span><span class="p">():</span>
+      <span class="k">print</span> <span class="p">(</span><span class="s">"Found target bluetooth device with name:"</span><span class="p">,</span> <span class="n">target_name</span><span class="p">)</span>
+      <span class="k">print</span> <span class="p">(</span><span class="s">"Starting rfcomm"</span><span class="p">)</span>
+      <span class="n">Bluetooth</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s">'sudo'</span><span class="p">,</span> <span class="s">'-S'</span><span class="p">]</span> <span class="o">+</span> <span class="n">command_open</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+      <span class="n">sudo_prompt</span> <span class="o">=</span> <span class="n">Bluetooth</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">sudo_password</span> <span class="o">+</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s">"sudo killall rfcomm"</span><span class="p">)</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+      <span class="n">Drone_bluetooth</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">([</span><span class="s">'sudo'</span><span class="p">]</span> <span class="o">+</span> <span class="n">command_connect</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">universal_newlines</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+      <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+      <span class="k">print</span> <span class="p">(</span><span class="s">"No target bluetooth device nearby"</span><span class="p">)</span>
 </pre>
    </div>
    <p>
@@ -6187,7 +6193,7 @@ python setup.py install
     <span class="n">board</span> <span class="o">=</span> <span class="n">MultiWii</span><span class="p">(</span><span class="s">"/dev/rfcomm0"</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="c1">#example of 8 RC channels to be send</span>
+          <span class="c1">#example of 8 RC channels to be send</span>
             <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1500</span><span class="p">,</span><span class="mi">1550</span><span class="p">,</span><span class="mi">1600</span><span class="p">,</span><span class="mi">1560</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1040</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">]</span>
 
             <span class="c1"># Old function </span>
@@ -6205,111 +6211,111 @@ python setup.py install
     <p class="admonition-title">
      RC alias
     </p>
-    <table>
-     <thead>
-      <tr>
-       <th>
-        No
-       </th>
-       <th align="center">
-        Name
-       </th>
-       <th align="right">
-        Range
-       </th>
-      </tr>
-     </thead>
-     <tbody>
-      <tr>
-       <td>
-        0
-       </td>
-       <td align="center">
-        ROLL
-       </td>
-       <td align="right">
-        1020~2000
-       </td>
-      </tr>
-      <tr>
-       <td>
-        1
-       </td>
-       <td align="center">
-        PITCH
-       </td>
-       <td align="right">
-        1020~2000
-       </td>
-      </tr>
-      <tr>
-       <td>
-        2
-       </td>
-       <td align="center">
-        YAW
-       </td>
-       <td align="right">
-        1020~2000
-       </td>
-      </tr>
-      <tr>
-       <td>
-        3
-       </td>
-       <td align="center">
-        THROTTLE
-       </td>
-       <td align="right">
-        1000~2000
-       </td>
-      </tr>
-      <tr>
-       <td>
-        4
-       </td>
-       <td align="center">
-        AUX1
-       </td>
-       <td align="right">
-        flight mode selection
-       </td>
-      </tr>
-      <tr>
-       <td>
-        5
-       </td>
-       <td align="center">
-        AUX2
-       </td>
-       <td align="right">
-        tuning and calibration
-       </td>
-      </tr>
-      <tr>
-       <td>
-        6
-       </td>
-       <td align="center">
-        AUX3
-       </td>
-       <td align="right">
-        overwrite CAM pitch (AUX1-AUX4) disable manual input and free the AUX channel
-       </td>
-      </tr>
-      <tr>
-       <td>
-        7
-       </td>
-       <td align="center">
-        AUX4
-       </td>
-       <td align="right">
-       </td>
-      </tr>
-     </tbody>
-    </table>
    </div>
+   <table>
+    <thead>
+     <tr>
+      <th>
+       No
+      </th>
+      <th align="center">
+       Name
+      </th>
+      <th align="right">
+       Range
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>
+       0
+      </td>
+      <td align="center">
+       ROLL
+      </td>
+      <td align="right">
+       1020~2000
+      </td>
+     </tr>
+     <tr>
+      <td>
+       1
+      </td>
+      <td align="center">
+       PITCH
+      </td>
+      <td align="right">
+       1020~2000
+      </td>
+     </tr>
+     <tr>
+      <td>
+       2
+      </td>
+      <td align="center">
+       YAW
+      </td>
+      <td align="right">
+       1020~2000
+      </td>
+     </tr>
+     <tr>
+      <td>
+       3
+      </td>
+      <td align="center">
+       THROTTLE
+      </td>
+      <td align="right">
+       1000~2000
+      </td>
+     </tr>
+     <tr>
+      <td>
+       4
+      </td>
+      <td align="center">
+       AUX1
+      </td>
+      <td align="right">
+       flight mode selection
+      </td>
+     </tr>
+     <tr>
+      <td>
+       5
+      </td>
+      <td align="center">
+       AUX2
+      </td>
+      <td align="right">
+       tuning and calibration
+      </td>
+     </tr>
+     <tr>
+      <td>
+       6
+      </td>
+      <td align="center">
+       AUX3
+      </td>
+      <td align="right">
+       overwrite CAM pitch (AUX1-AUX4) disable manual input and free the AUX channel
+      </td>
+     </tr>
+     <tr>
+      <td>
+       7
+      </td>
+      <td align="center">
+       AUX4
+      </td>
+      <td align="right">
+      </td>
+     </tr>
+    </tbody>
+   </table>
    <p>
     测得解锁数据代码
    </p>
@@ -6317,46 +6323,46 @@ python setup.py install
     <p class="admonition-title">
      解锁 日本手
     </p>
-    <table>
-     <thead>
-      <tr>
-       <th>
-        最小
-       </th>
-       <th align="center">
-        居中
-       </th>
-       <th align="right">
-        最大
-       </th>
-      </tr>
-     </thead>
-     <tbody>
-      <tr>
-       <td>
-        throttle
-       </td>
-       <td align="center">
-        pitch前进
-       </td>
-       <td align="right">
-        yaw
-       </td>
-      </tr>
-      <tr>
-       <td>
-        油门
-       </td>
-       <td align="center">
-        roll翻滚
-       </td>
-       <td align="right">
-        右自旋
-       </td>
-      </tr>
-     </tbody>
-    </table>
    </div>
+   <table>
+    <thead>
+     <tr>
+      <th>
+       最小
+      </th>
+      <th align="center">
+       居中
+      </th>
+      <th align="right">
+       最大
+      </th>
+     </tr>
+    </thead>
+    <tbody>
+     <tr>
+      <td>
+       throttle
+      </td>
+      <td align="center">
+       pitch前进
+      </td>
+      <td align="right">
+       yaw
+      </td>
+     </tr>
+     <tr>
+      <td>
+       油门
+      </td>
+      <td align="center">
+       roll翻滚
+      </td>
+      <td align="right">
+       右自旋
+      </td>
+     </tr>
+    </tbody>
+   </table>
    <p>
     数值
     <code>
@@ -6587,10 +6593,11 @@ python setup.py bdist_wheel --qmake<span class="o">=</span>/usr/bin/qmake-qt4
     添加账户
    </p>
    <div class="codehilite">
-    <pre><span class="nt">adduser</span> <span class="nt">XXXX</span>
-
-<span class="nt">usermod</span> <span class="nt">-a</span> <span class="nt">-G</span> <span class="nt">sudo</span> <span class="nt">XXXX</span>
+    <pre><span class="nt">adduser</span> <span class="nt">liang</span>
+<span class="o">&lt;</span><span class="nt">mdp</span><span class="o">&gt;</span><span class="k">@L</span><span class="o">&lt;/</span><span class="nt">mdp</span><span class="o">&gt;</span>
+<span class="nt">usermod</span> <span class="nt">-a</span> <span class="nt">-G</span> <span class="nt">sudo</span> <span class="nt">liang</span>
 <span class="nt">sudo</span> <span class="nt">passwd</span> <span class="nt">root</span>
+<span class="o">&lt;</span><span class="nt">mdp</span><span class="o">&gt;</span><span class="k">@Ro</span><span class="o">&lt;/</span><span class="nt">mdp</span><span class="o">&gt;</span>
 </pre>
    </div>
    <p>
@@ -6656,11 +6663,11 @@ sudo update-rc.d sslh defaults
    </div>
    <div class="codehilite">
     <pre><span class="p">{</span>
-<span class="s2">"server"</span><span class="o">:</span><span class="s2">"XXXX"</span><span class="o">,</span>
-<span class="s2">"server_port"</span><span class="o">:</span><span class="n">XXXX</span><span class="o">,</span>
+<span class="s2">"server"</span><span class="o">:</span><span class="s2">"&lt;mdp&gt;66.122.222.250&lt;/mdp&gt;"</span><span class="o">,</span>
+<span class="s2">"server_port"</span><span class="o">:&lt;</span><span class="n">mdp</span><span class="o">&gt;</span><span class="m">28888</span><span class="o">&lt;/</span><span class="n">mdp</span><span class="o">&gt;,</span>
 <span class="s2">"local_address"</span><span class="o">:</span> <span class="s2">"127.0.0.1"</span><span class="o">,</span>
 <span class="s2">"local_port"</span><span class="o">:</span><span class="m">1080</span><span class="o">,</span>
-<span class="s2">"password"</span><span class="o">:</span><span class="s2">"XXXX"</span><span class="o">,</span>
+<span class="s2">"password"</span><span class="o">:</span><span class="s2">"&lt;mdp&gt;16908888&lt;/mdp&gt;"</span><span class="o">,</span>
 <span class="s2">"timeout"</span><span class="o">:</span><span class="m">300</span><span class="o">,</span>
 <span class="s2">"method"</span><span class="o">:</span><span class="s2">"aes-256-cfb"</span>
 <span class="p">}</span>
@@ -6826,12 +6833,12 @@ sudo useradd ssuser
 ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 </pre>
    </div>
-   <h4 id="8422-create-a-configuration-snippet-with-strong-encryption-settings">
-    <a aria-hidden="true" class="headeranchor-link" href="#8422-create-a-configuration-snippet-with-strong-encryption-settings" name="user-content-8422-create-a-configuration-snippet-with-strong-encryption-settings">
+   <h4 id="7422-create-a-configuration-snippet-with-strong-encryption-settings">
+    <a aria-hidden="true" class="headeranchor-link" href="#7422-create-a-configuration-snippet-with-strong-encryption-settings" name="user-content-7422-create-a-configuration-snippet-with-strong-encryption-settings">
      <span class="headeranchor">
      </span>
     </a>
-    8.4.2.2 Create a Configuration Snippet with Strong Encryption Settings
+    7.4.2.2 Create a Configuration Snippet with Strong Encryption Settings
    </h4>
    <p>
     Set Nginx up with a strong SSL cipher suite and enable some advanced features that will help keep our server secure.The parameters we will set can be reused in future Nginx configurations, so we will give the file a generic name:
@@ -6875,12 +6882,12 @@ ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
 <span class="nt">ssl_dhparam</span> <span class="o">/</span><span class="nt">etc</span><span class="o">/</span><span class="nt">ssl</span><span class="o">/</span><span class="nt">certs</span><span class="o">/</span><span class="nt">dhparam</span><span class="nc">.pem</span><span class="o">;</span>
 </pre>
    </div>
-   <h4 id="8423-adjust-the-nginx-configuration-to-use-ssl">
-    <a aria-hidden="true" class="headeranchor-link" href="#8423-adjust-the-nginx-configuration-to-use-ssl" name="user-content-8423-adjust-the-nginx-configuration-to-use-ssl">
+   <h4 id="7423-adjust-the-nginx-configuration-to-use-ssl">
+    <a aria-hidden="true" class="headeranchor-link" href="#7423-adjust-the-nginx-configuration-to-use-ssl" name="user-content-7423-adjust-the-nginx-configuration-to-use-ssl">
      <span class="headeranchor">
      </span>
     </a>
-    8.4.2.3 Adjust the Nginx Configuration to Use SSL
+    7.4.2.3 Adjust the Nginx Configuration to Use SSL
    </h4>
    <p>
     Now that we have our snippets, we can adjust our Nginx configuration to enable SSL.
@@ -6914,7 +6921,7 @@ ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
     <pre><span class="nt">server</span> <span class="p">{</span>
     <span class="n">listen</span> <span class="m">80</span> <span class="n">default_server</span><span class="p">;</span>
     <span class="n">listen</span> <span class="cp">[</span><span class="p">::</span><span class="cp">]</span><span class="o">:</span><span class="m">80</span> <span class="n">default_server</span><span class="p">;</span>
-    <span class="n">server_name</span> <span class="n">XXXX</span><span class="p">;</span>
+    <span class="n">server_name</span> <span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="p">;</span>
     <span class="n">return</span> <span class="m">301</span> <span class="n">https</span><span class="o">://</span><span class="err">$</span><span class="n">server_name</span><span class="err">$</span><span class="n">request_uri</span><span class="p">;</span>
 <span class="p">}</span>
 
