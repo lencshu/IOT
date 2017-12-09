@@ -133,7 +133,7 @@ if post != -1:
     html = html.replace(htmlReplaceResize, '')
     html = html.replace(htmlReplaceParentDir, '')
 #delete sensitive infos
-    html=re.sub(r'<mdp>.*</mdp>', 'X*X*X*X*X*X',html)
+    html=re.sub(r'%mdp%.*%/mdp%', 'X*X*X*X*X*X',html)
 	
 #Lazy loading image
     html = html.replace('img alt=\"\" src', 'img class=\"lazyload\" alt=\"\" data-src')

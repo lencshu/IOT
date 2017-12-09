@@ -1435,8 +1435,8 @@ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 ```cs
 network=
 {
-  ssid=<MDP>"Vi"</MDP>
-  psk=<MDP>"jiubugaosunimima"</MDP>
+  ssid="%mdp% Vi %/mdp% "
+  psk="%mdp% jiubugaosunimima %/mdp% "
 }
 ```
 
@@ -1590,7 +1590,7 @@ echo "==== All done. You can un-plug the backup device"
   sudo tightvncserver :1 -geometry 1600x900
   tightvncserver -kill :1   //终止控制台
 
-<mdp>169088</mdp>
+%mdp% 169088 %/mdp% 
 
 重置密码
 
@@ -1647,7 +1647,7 @@ sudo update-rc.d tightvncserver defaults
 
 ~~~sh
 192.168.1.111:1
-<mdp>169088</mdp>
+%mdp% 169088 %/mdp% 
 ~~~
 
 ### 3.1.4清理垃圾
@@ -1858,9 +1858,9 @@ sudo tar -C ~/dogtunnel/dt -xzf dtunnel_linux_arm_0.80.tgz
 ```
 cd dt
 chmod +x ./dtunnel
-./dtunnel -reg <mdp>lencshu</mdp> -local :22 -clientkey <mdp>16908888</mdp>
+./dtunnel -reg %mdp% lencshu %/mdp%  -local :22 -clientkey %mdp% 16908888 %/mdp% 
 #任意目录可执行命令
-/home/pi/dogtunnel/dt/dtunnel -reg <mdp>lencshu</mdp> -local :22 -clientkey <mdp>16908888</mdp>
+/home/pi/dogtunnel/dt/dtunnel -reg %mdp% lencshu %/mdp%  -local :22 -clientkey %mdp% 16908888 %/mdp% 
 ```
 
 #### 3.3.2.2 VPS
@@ -1880,9 +1880,9 @@ sudo tar -C /home/liang/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
 ```
 cd dt
 chmod +x ./dtunnel
-./dtunnel -link <mdp>lencshu</mdp> -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp>
+./dtunnel -link %mdp% lencshu %/mdp%  -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
 #任意目录可执行
-/home/liang/dogtunnel/dt/dtunnel -link <mdp>lencshu</mdp> -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp>
+/home/liang/dogtunnel/dt/dtunnel -link %mdp% lencshu %/mdp%  -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
 ```
 
 
@@ -1895,11 +1895,11 @@ chmod +x ./dtunnel
 
 ```python
 #服务端 Raspbian
-sudo nohup /home/pi/dogtunnel/dt/dtunnel -reg <mdp>lencshu</mdp> -local :<mdp>22</mdp> -clientkey <mdp>16908888</mdp> -v 2>& 1 1 > /var/log/dtunnel.log &
+sudo nohup /home/pi/dogtunnel/dt/dtunnel -reg %mdp% lencshu %/mdp%  -local :%mdp% 22 %/mdp%  -clientkey %mdp% 16908888 %/mdp%  -v 2>& 1 1 > /var/log/dtunnel.log &
 #客户端 66
-sudo nohup /root/dogtunnel/dt/dtunnel -link <mdp>lencshu</mdp> -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp> -v 2>& 1 1 > /var/log/dtunnel.log &
+sudo nohup /root/dogtunnel/dt/dtunnel -link %mdp% lencshu %/mdp%  -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp%  -v 2>& 1 1 > /var/log/dtunnel.log &
 # 日志文件目录权限问题
-nohup /home/pi/dogtunnel/dt/dtunnel -reg xxx -local :<mdp>22</mdp> -clientkey <mdp>888888</mdp> -v 2>& 1 1 > /home/pi/log/dogtunnel.log &
+nohup /home/pi/dogtunnel/dt/dtunnel -reg xxx -local :%mdp% 22 %/mdp%  -clientkey %mdp% 888888 %/mdp%  -v 2>& 1 1 > /home/pi/log/dogtunnel.log &
 ```
 
 后重启
@@ -1934,9 +1934,9 @@ case "$1" in
     echo "Starting DogTunnel"
     # run application you want to start
     #服务端
-    #/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :<mdp>22</mdp> -clientkey <mdp>16908888</mdp>
+    #/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :%mdp% 22 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
     #客户端
-    /root/dogtunnel/dt/dtunnel -link lencshu -local :<mdp>8888</mdp> -clientkey <mdp>16908888</mdp>
+    /root/dogtunnel/dt/dtunnel -link lencshu -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
     ;;
   stop)
     echo "Stopping DogTunnel"
@@ -2933,9 +2933,9 @@ power on
 agent on
 #The Bluetooth agent is what manages the Bluetooth 'pairing code'. It can either respond to a 'pairing code' coming in, or can send one out.
 scan on
-pair <mdp>00:14:02:12:29:83</mdp>
-trust <mdp>00:14:02:12:29:83</mdp>
-#connect <mdp>00:14:02:12:29:83</mdp>
+pair %mdp% 00:14:02:12:29:83 %/mdp% 
+trust %mdp% 00:14:02:12:29:83 %/mdp% 
+#connect %mdp% 00:14:02:12:29:83 %/mdp% 
 ~~~
 
 Then connect to the device with terminal via:
@@ -2950,7 +2950,7 @@ sudo hciconfig hci0 up   #启动hci设备
 sudo hciconfig hci0 down #关闭hci设备
 #命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器
 
-sudo rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1
+sudo rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1
 
 sudo rfcomm watch hci0
 
@@ -2959,7 +2959,7 @@ sudo rfcomm watch hci0
 hcidump
 ~~~
 
- Connected /dev/rfcomm0 to <mdp>00:14:02:12:29:83</mdp> on channel 1
+ Connected /dev/rfcomm0 to %mdp% 00:14:02:12:29:83 %/mdp%  on channel 1
 
 
 If that doesn't work you can also try adding pi to the lp group
@@ -2973,7 +2973,7 @@ sudo nano /etc/bluetooth/rfcomm.conf
 
 rfcomm0 {
     bind no;
-    device <mdp>00:14:02:12:29:83</mdp>;
+    device %mdp% 00:14:02:12:29:83 %/mdp% ;
     channel 1;
     comment “Connection to Bluetooth serial module”;
 }
@@ -2982,7 +2982,7 @@ The "bind no" is important, otherwise it will try to autmatically bind, which pr
 
 sudo rfcomm connect 0
 
-sudo rfcomm connect rfcomm0 <mdp>00:14:02:12:29:83</mdp>
+sudo rfcomm connect rfcomm0 %mdp% 00:14:02:12:29:83 %/mdp% 
 
 ~~~python
 wget https://sourceforge.net/p/pyserial/code/HEAD/tree/trunk/pyserial/serial/tools/miniterm.py
@@ -2998,7 +2998,7 @@ sudo service bluetooth restart
 
 ~~~python
 sudo hciconfig hci0 up
-sudo rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1
+sudo rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1
 ~~~
 
 ## 6.3 Python运行外部shell命令
@@ -3071,7 +3071,7 @@ from subprocess import Popen, PIPE
 
 sudo_password = 'My_pass'
 command_open = 'sudo hciconfig hci0 up'.split()
-command_connect = 'rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1'.split()
+command_connect = 'rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1'.split()
 
 p = Popen(['sudo', '-S'] + command_open, stdin=PIPE, stderr=PIPE,universal_newlines=True)
 sudo_prompt = p.communicate(sudo_password + '\n')
@@ -3098,10 +3098,10 @@ import time,os
 
 target_name = "X4"
 killcount=0
-target_address = '<mdp>00:14:02:12:29:83</mdp>'
-sudo_password = '<mdp>169088@L</mdp>'
+target_address = '%mdp% 00:14:02:12:29:83 %/mdp% '
+sudo_password = '%mdp% 169088@L %/mdp% '
 command_open = 'sudo hciconfig hci0 up'.split()
-command_connect = 'nohup rfcomm connect 0 <mdp>00:14:02:12:29:83</mdp> 1 > /home/pi/log/rfcomm_x4.log 2>&1 &'.split()
+command_connect = 'nohup rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1 > /home/pi/log/rfcomm_x4.log 2>&1 &'.split()
 
 
 def detect_drone():
@@ -3114,7 +3114,7 @@ def detect_drone():
 
 def status_blue():
   stdoutdata = subprocess.check_output(["hcitool","con"])
-  if "<mdp>00:14:02:12:29:83</mdp>" in stdoutdata.split():
+  if "%mdp% 00:14:02:12:29:83 %/mdp% " in stdoutdata.split():
     print("Bluetooth device is connected")
     return 1
   else:
@@ -3565,10 +3565,10 @@ apt-get install -y nano
 
 ```css
 adduser liang
-<mdp>@L</mdp>
+%mdp% @L %/mdp% 
 usermod -a -G sudo liang
 sudo passwd root
-<mdp>@Ro</mdp>
+%mdp% @Ro %/mdp% 
 ```
 
 配置SSH
@@ -3625,11 +3625,11 @@ sudo nano /etc/shadowsocks.json
 
 ```css
 {
-"server":"<mdp>66.122.222.250</mdp>",
-"server_port":<mdp>28888</mdp>,
+"server":"%mdp% 66.122.222.250 %/mdp% ",
+"server_port":%mdp% 28888 %/mdp% ,
 "local_address": "127.0.0.1",
 "local_port":1080,
-"password":"<mdp>16908888</mdp>",
+"password":"%mdp% 16908888 %/mdp% ",
 "timeout":300,
 "method":"aes-256-cfb"
 }
