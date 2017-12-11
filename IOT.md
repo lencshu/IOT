@@ -3928,8 +3928,8 @@ service nginx force-reload
 
 echo "====== https ======"
 curl  https://get.acme.sh | sh
-%mdp% export DP_Id="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"
-export DP_Key="EeotFgcHjpFSm5vUZuj3TG" %/mdp%
+export DP_Id="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%"
+export DP_Key="%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%"
 echo -e "GD_Key=\"%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk\"\nGD_Secret=\"EeotFgcHjpFSm5vUZuj3TG\" %/mdp%" > ~/.acme.sh/account.conf
 # sed -i '2s/^/GD_Key="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"\nGD_Secret="EeotFgcHjpFSm5vUZuj3TG"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
 reboot
