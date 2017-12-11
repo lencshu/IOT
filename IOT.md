@@ -3900,13 +3900,13 @@ echo "====== shadowsocks ======"
 apt-get install -y python-pip
 pip install shadowsocks
 apt-get install -y python-m2crypto
-echo -e "{\n\"server\":\"66.112.222.250\",\n\"server_port\":2888,\n\"local_address\": \"127.0.0.1\",\n\"local_port\":1080,\n\"password\":\"16908888\",\n\"timeout\":600,\n\"method\":\"rc4-md5\"\n}" > /etc/shadowsocks.json
+echo -e "%mdp% {\n\"server\":\"66.112.222.250\",\n\"server_port\":2888,\n\"local_address\": \"127.0.0.1\",\n\"local_port\":1080,\n\"password\":\"16908888\",\n\"timeout\":600,\n\"method\":\"rc4-md5\"\n} %/mdp%" > /etc/shadowsocks.json
 sudo chmod 755 /etc/shadowsocks.json
 sudo useradd ssuser
 echo "/usr/local/bin/ssserver -c /etc/shadowsocks.json -d start --user ssuser" >> /etc/rc.local
 echo "====== openvpn ======"
 apt-get install -y openvpn
-echo -e "11125796\n169088SD" > /root/Pshu.conf
+echo -e "%mdp% 11125796\n169088SD %/mdp%" > /root/Pshu.conf
 wget -P /root/ http://202.120.126.112/openvpn/shu.ovpn
 
 echo "====== dogtunnel ======"
@@ -3915,22 +3915,22 @@ mkdir -P /root/dogtunnel/dt
 wget -P http://dog-tunnel.tk/down/dtunnel_linux_x64_0.80.tgz
 sudo tar -C /root/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
 chmod +x /root/dogtunnel/dt/dtunnel
-echo -e '#! /bin/sh\n# /etc/init.d/noip \n### BEGIN INIT INFO\n# Provides:          noip\n# Required-Start:    $remote_fs $syslog\n# Required-Stop:     $remote_fs $syslog\n# Default-Start:     2 3 4 5\n# Default-Stop:      0 1 6\n# Short-Description: Simple script to start a program at boot\n# Description:       A simple script which will start / stop a program a boot / shutdown.\n### END INIT INFO\n# If you want a command to always run, put it here\n# Carry out specific functions when asked to by the system\ncase "$1" in\n  start)\n    echo "Starting DogTunnel"\n    /root/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey 16908888\n    ;;\n  stop)\n    echo "Stopping DogTunnel"\n    # kill application you want to stop\n    killall dtunnel\n    ;;\n  *)\n    echo "Usage: /etc/init.d/dtunnel {start|stop}"\n    exit 1\n    ;;\nesac\nexit 0' > /etc/init.d/dogtunnel && chmod +755 /etc/init.d/dogtunnel
+echo -e '#! /bin/sh\n# /etc/init.d/noip \n### BEGIN INIT INFO\n# Provides:          noip\n# Required-Start:    $remote_fs $syslog\n# Required-Stop:     $remote_fs $syslog\n# Default-Start:     2 3 4 5\n# Default-Stop:      0 1 6\n# Short-Description: Simple script to start a program at boot\n# Description:       A simple script which will start / stop a program a boot / shutdown.\n### END INIT INFO\n# If you want a command to always run, put it here\n# Carry out specific functions when asked to by the system\ncase "$1" in\n  start)\n    echo "Starting DogTunnel"\n    %mdp% /root/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey 16908888\n %/mdp%    ;;\n  stop)\n    echo "Stopping DogTunnel"\n    # kill application you want to stop\n    killall dtunnel\n    ;;\n  *)\n    echo "Usage: /etc/init.d/dtunnel {start|stop}"\n    exit 1\n    ;;\nesac\nexit 0' > /etc/init.d/dogtunnel && chmod +755 /etc/init.d/dogtunnel
 sudo update-rc.d /etc/init.d/dogtunnel defaults
 
 echo "====== nginx ======"
 sudo apt-get update
 sudo apt-get install -y nginx
-mkdir -p /home/wwwroot/gliang.eu
-echo -e "events {\n        worker_connections 51200;\n}\nhttp {\n        server {\n        root /home/wwwroot/gliang.eu;\n        }\n}" > /etc/nginx/nginx.conf
+mkdir -p %mdp% /home/wwwroot/gliang.eu %/mdp%
+echo -e "events {\n        worker_connections 51200;\n}\nhttp {\n        server {\n        %mdp% root /home/wwwroot/gliang.eu %/mdp%;\n        }\n}" > /etc/nginx/nginx.conf
 echo "Welcome!" > /home/wwwroot/gliang.eu/index.html
 service nginx force-reload
 
 echo "====== https ======"
 curl  https://get.acme.sh | sh
-export DP_Id="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"
-export DP_Key="EeotFgcHjpFSm5vUZuj3TG"
-echo -e "GD_Key=\"dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk\"\nGD_Secret=\"EeotFgcHjpFSm5vUZuj3TG\"" > ~/.acme.sh/account.conf
+%mdp% export DP_Id="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"
+export DP_Key="EeotFgcHjpFSm5vUZuj3TG" %/mdp%
+echo -e "GD_Key=\"%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk\"\nGD_Secret=\"EeotFgcHjpFSm5vUZuj3TG\" %/mdp%" > ~/.acme.sh/account.conf
 # sed -i '2s/^/GD_Key="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"\nGD_Secret="EeotFgcHjpFSm5vUZuj3TG"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
 reboot
 ~~~
@@ -3951,12 +3951,12 @@ nano start03.sh
 #!/bin/bash
 echo "====== HTTPS ======"
 acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
-acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file /home/wwwroot/gliang.eu/key.pem --fullchain-file /home/wwwroot/gliang.eu/cert.pem --reloadcmd  "service nginx force-reload"
+acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file %mdp% /home/wwwroot/gliang.eu/key.pem --fullchain-file /home/wwwroot/gliang.eu/cert.pem %/mdp% --reloadcmd  "service nginx force-reload"
 acme.sh  --upgrade  --auto-upgrade
 
 echo "====== Nginx full HTTPS ======"
 
-echo -e 'events {\nworker_connections 51200;\n}\nhttp {\nserver{\nlisten 80;\nserver_name gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nrewrite ^/(.*) https://gliang.eu/$1 permanent;\n}\nserver {\nlisten 443;\nserver_name   gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nssl  on;\nssl_certificate /home/wwwroot/gliang.eu/cert.pem;\nssl_certificate_key /home/wwwroot/gliang.eu/key.pem;\n}\n}' > /etc/nginx/nginx.conf
+echo -e '%mdp% events {\nworker_connections 51200;\n}\nhttp {\nserver{\nlisten 80;\nserver_name gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nrewrite ^/(.*) https://gliang.eu/$1 permanent;\n}\nserver {\nlisten 443;\nserver_name   gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nssl  on;\nssl_certificate /home/wwwroot/gliang.eu/cert.pem;\nssl_certificate_key /home/wwwroot/gliang.eu/key.pem;\n}\n} %/mdp%' > /etc/nginx/nginx.conf
 
 service nginx force-reload
 ~~~
