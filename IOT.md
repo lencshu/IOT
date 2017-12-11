@@ -3550,25 +3550,60 @@ while arduinoSer.isOpen():
 
 # 7 VPS Web配置
 
+系统：ubuntu 14 x86_64 
+
 ## 7.1 初始化配置
 
-安装sudo和nano
+- 安装sudo和nano
 
-```css
+```shell
 apt-get update
 apt-get upgrade
-apt-get install sudo
+apt-get install -y sudo
 apt-get install -y nano
 ```
 
-添加账户
+- BBR网络加速开启
+	
+	- 准备：在Ubuntu安装gcc-4.9
+	
+	~~~shell
+	sudo apt-get update
+	sudo apt-get install -y software-properties-common
+	sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+	sudo apt-get update
+	sudo apt-get -y install g++-4.9
+	readlink `which gcc`
+	运行这条命令创建文件链接：
+	ln -sf `which gcc-4.9` /usr/bin/gcc
+	~~~
+
+	- 脚本，执行此命令会自动重启.
+
+		~~~shell
+		wget --no-check-certificate -qO 'BBR.sh' 'https://moeclub.org/attachment/LinuxShell/BBR.sh' && chmod a+x BBR.sh && bash BBR.sh -f
+		~~~
+
+	- 检测:重启后运行以下命令,结果不为空,则开启BBR成功.
+		`lsmod |grep 'bbr'`
+
+	- 一键BBR改进版/增强版
+
+		~~~shell	
+		wget --no-check-certificate -qO 'BBR_POWERED.sh' 'https://moeclub.org/attachment/LinuxShell/BBR_POWERED.sh' && chmod a+x BBR_POWERED.sh && bash BBR_POWERED.sh
+		~~~	
+	- 检测:重启后运行以下命令,结果不为空,则开启BBR成功.
+		`lsmod |grep 'bbr_powered'`
+
+
+- 添加账户
 
 ```css
 adduser liang
-%mdp% @L %/mdp% 
+%mdp% @L %/mdp%
 usermod -a -G sudo liang
 sudo passwd root
-%mdp% @Ro %/mdp% 
+%mdp% @Ro %/mdp%
 ```
 
 配置SSH
@@ -3625,14 +3660,15 @@ sudo nano /etc/shadowsocks.json
 
 ```css
 {
-"server":"%mdp% 66.122.222.250 %/mdp% ",
-"server_port":%mdp% 28888 %/mdp% ,
+"server":"%mdp% 66.112.222.250 %/mdp%",
+"server_port":%mdp% 2888 %/mdp%,
 "local_address": "127.0.0.1",
 "local_port":1080,
-"password":"%mdp% 16908888 %/mdp% ",
-"timeout":300,
-"method":"aes-256-cfb"
+"password":"%mdp% 16908888 %/mdp%",
+"timeout":600,
+"method":"rc4-md5"
 }
+
 ```
 
 ```
@@ -3650,324 +3686,286 @@ sudo nano /etc/rc.local
 /usr/local/bin/ssserver -c /etc/shadowsocks.json -d start --user ssuser
 ```
 
-## 7.3 BBR 网络加速
 
-下载并安装内核
+## 7.3 OpenVPN
 
-```css
-wget kernel.ubuntu.com/~kernel-ppa/mainline/v4.11.3/linux-headers-4.11.3-041103_4.11.3-041103.201705251233_all.deb 
-wget kernel.ubuntu.com/~kernel-ppa/mainline/v4.11.3/linux-headers-4.11.3-041103-generic_4.11.3-041103.201705251233_amd64.deb
-wget kernel.ubuntu.com/~kernel-ppa/mainline/v4.11.3/linux-image-4.11.3-041103-generic_4.11.3-041103.201705251233_amd64.deb
-sudo dpkg -i linux-headers-4.11*.deb linux-image-4.11*.deb
-```
+~~~python
+apt-get install -y openvpn
+echo -e "%mdp% 11125796\n169088SD %/mdp%" > /root/Pshu.conf
+wget -P /root/ http://202.120.126.112/openvpn/shu.ovpn
+openvpn --config /root/shu.ovpn --auth-user-pass /root/Pshu.conf
+~~~
 
-升级内核
+## 7.4 nginx
 
-```css
-sudo /usr/sbin/update-grub
-sudo reboot
-```
+~~~python
+sudo apt-get update
+sudo apt-get install nginx
+~~~
 
-检查内核，查看内核版本，含有 4.11 就表示 OK 了
+配置nginx服务器 nginx -t
 
-```css
-uname -a
-```
+~~~shell
+nano /etc/nginx/nginx.conf
+~~~
 
-开启BBR
+~~~css
 
-```css
-su
-echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-sysctl -p
-```
-
-检查BBR状态
-
-```css
-sysctl net.ipv4.tcp_available_congestion_control
-#返回值一般为：net.ipv4.tcp_available_congestion_control = bbr cubic reno
-sysctl net.ipv4.tcp_congestion_control
-#返回值一般为：net.ipv4.tcp_congestion_control = bbr
-sysctl net.core.default_qdisc
-#返回值一般为：net.core.default_qdisc = fq
-lsmod | grep bbr
-#返回值有 tcp_bbr 模块即说明bbr已启动
-```
-
-## 7.4 HTTPS
-
-### 7.4.1 Create the SSL Certificate
-
-create a self-signed key and certificate pair with OpenSSL in a single command:
-
-```css
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
-```
-
-**The most important line is the one that requests the Common Name (e.g. server FQDN or YOUR name). You need to enter the domain name associated with your server or, more likely, your server's public IP address.**
-
-While we are using OpenSSL, we should also create a strong Diffie-Hellman group, which is used in negotiating [Perfect Forward Secrecy](https://en.wikipedia.org/wiki/Forward_secrecy) with clients.
-
-We can do this by typing:
-
-```
-sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-```
-
-This may take a few minutes, but when it's done you will have a strong DH group at `/etc/ssl/certs/dhparam.pem` that we can use in our configuration.
-
-### 7.4.2 Configure Nginx to Use SSL
-
- #### 7.4.2.1 Configure Nginx to Use SSL
-
-create a new Nginx configuration snippet `self-signed.conf` in the `/etc/nginx/snippets` directory
-
-```
-sudo nano /etc/nginx/snippets/self-signed.conf
-```
-
-we just need to set the `ssl_certificate` directive to our certificate file and the `ssl_certificate_key` to the associated key. In our case, this will look like this:
-
-```
-ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
-```
-
-#### 7.4.2.2 Create a Configuration Snippet with Strong Encryption Settings
-
-Set Nginx up with a strong SSL cipher suite and enable some advanced features that will help keep our server secure.The parameters we will set can be reused in future Nginx configurations, so we will give the file a generic name:
-
-```
-sudo nano /etc/nginx/snippets/ssl-params.conf
-```
-
-Finally, you should take take a moment to read up on [HTTP Strict Transport Security, or HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security), and specifically about the ["preload" functionality](https://hstspreload.appspot.com/). Preloading HSTS provides increased security, but can have far reaching consequences if accidentally enabled or enabled incorrectly. In this guide, we will not preload the settings, but you can modify that if you are sure you understand the implications:
-
-```
-# from https://cipherli.st/
-# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
-
-ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-ssl_prefer_server_ciphers on;
-ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
-ssl_ecdh_curve secp384r1;
-ssl_session_cache shared:SSL:10m;
-ssl_session_tickets off;
-ssl_stapling on;
-ssl_stapling_verify on;
-resolver 8.8.8.8 8.8.4.4 valid=300s;
-resolver_timeout 5s;
-# Disable preloading HSTS for now.  You can use the commented out header line that includes
-# the "preload" directive if you understand the implications.
-#add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
-add_header Strict-Transport-Security "max-age=63072000; includeSubdomains";
-add_header X-Frame-Options DENY;
-add_header X-Content-Type-Options nosniff;
-
-ssl_dhparam /etc/ssl/certs/dhparam.pem;
-```
-
-#### 7.4.2.3 Adjust the Nginx Configuration to Use SSL
-
-Now that we have our snippets, we can adjust our Nginx configuration to enable SSL.
-
-Before we go any further, let's back up our current server block file:
-
-```
-sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak
-```
-
-Now, open the server block file to make adjustments:
-
-```
-sudo nano /etc/nginx/sites-available/default
-```
-
-we need to start a new server block directly below to contain the remaining configuration. We can uncomment the two `listen` directives that use port 443. We can add `http2` to these lines in order to enable HTTP/2 within this block. Afterwards, we just need to include the two snippet files we set up:
-
-```
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    server_name gliang.eu;
-    return 301 https://$server_name$request_uri;
+events {
+        worker_connections 51200;
 }
 
-server {
-
-    # SSL configuration
-
-    listen 443 ssl http2 default_server;
-    listen [::]:443 ssl http2 default_server;
-    include snippets/self-signed.conf;
-    include snippets/ssl-params.conf;
-    root /var/www/html;
-    # Add index.php to the list if you are using PHP
-    index index.html index.htm index.nginx-debian.html;
-}
-```
-
-####  Allow Both HTTP and HTTPS Traffic
-
-(Alternative Configuration)
-
-```
-server {
-    #listen 80 default_server;
-    #listen [::]:80 default_server;
-    listen 443 ssl http2 default_server;
-    listen [::]:443 ssl http2 default_server;
-
-    server_name gliang.eu;
-    include snippets/self-signed.conf;
-    include snippets/ssl-params.conf;
-    location / {
-      # First attempt to serve request as file, then
-      # as directory, then fall back to displaying a 404.
-      try_files $uri $uri/ =404;
+http {
+        server {
+        root /home/wwwroot/gliang.eu;
         }
-    root /var/www/html;
-    # Add index.php to the list if you are using PHP
-    index index.html index.htm index.nginx-debian.html;
+}
 
-  }
-```
+~~~
 
-### 7.4.3 Adjust the Firewall
+重启nginx 
 
-see the available profiles by typing:
+~~~python
+nginx -s reopen
+~~~
 
-```
-sudo ufw app list
-```
+## 7.5 https
 
-You should see a list like this:
+### 7.5.1 安装 acme.sh并生成证书
 
-```
-OutputAvailable applications:
-  Nginx Full
-  Nginx HTTP
-  Nginx HTTPS
-  OpenSSH
+http 方式需要在你的网站根目录下放置一个文件, 来验证你的域名所有权,完成验证. 然后就可以生成证书了.
 
-```
+GoDaddy.com申请production API 
+https://developer.godaddy.com/keys/
 
-You can see the current setting by typing:
+~~~shell
+curl  https://get.acme.sh | sh
+export DP_Id="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%"
+export DP_Key="%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%"
+echo -e "GD_Key=\"%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%\"\nGD_Secret=\"%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%\"" > ~/.acme.sh/account.conf
+sed -i '2s/^/GD_Key="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%"\nGD_Secret="%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
+acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
+~~~
 
-```
-sudo ufw status
+The GD_Key and GD_Secret will be saved in ~/.acme.sh/account.conf and will be reused when needed.
 
-```
+~~~sh
+Multi domain='DNS:%mdp% www.gliang.eu %/mdp%'
+Getting domain auth token for each domain
+Getting webroot for domain='%mdp% gliang.eu %/mdp%'
+Getting new-authz for domain='%mdp% gliang.eu %/mdp%'
+The new-authz request is ok.
+Getting webroot for domain='www.%mdp% gliang.eu %/mdp%'
+Getting new-authz for domain='www.%mdp% gliang.eu %/mdp%'#'
+The new-authz request is ok.
+Found domain api file: /root/.acme.sh/dnsapi/dns_gd.sh
+Adding record
+Added, sleeping 10 seconds
+Found domain api file: /root/.acme.sh/dnsapi/dns_gd.sh
+Adding record
+Added, sleeping 10 seconds
+Sleep 120 seconds for the txt records to take effect
+Verifying:%mdp% gliang.eu %/mdp%
+Success
+Verifying:www.%mdp% gliang.eu %/mdp%
+Success
+Verify finished, start to sign.
+Cert success.
+Your cert is in  /root/.acme.sh/%mdp% gliang.eu %/mdp%/%mdp% gliang.eu %/mdp%.cer 
+Your cert key is in  /root/.acme.sh/%mdp% gliang.eu %/mdp%/%mdp% gliang.eu %/mdp%.key 
+The intermediate CA cert is in  /root/.acme.sh/%mdp% gliang.eu %/mdp%/ca.cer 
+And the full chain certs is there:  /root/.acme.sh/%mdp% gliang.eu %/mdp%/fullchain.cer 
+~~~
 
-It will probably look like this, meaning that only HTTP traffic is allowed to the web server:
+验证证书：
 
-```
-OutputStatus: active
+~~~sh
+curl -X GET -H "Authorization: sso-key %mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk:EeotFgcHjpFSm5vUZuj3TG %/mdp%" "https://api.godaddy.com/v1/domains/available?domain=%mdp% gliang.eu %/mdp%"
+~~~
 
-To                         Action      From
---                         ------      ----
-OpenSSH                    ALLOW       Anywhere
-Nginx HTTP                 ALLOW       Anywhere
-OpenSSH (v6)               ALLOW       Anywhere (v6)
-Nginx HTTP (v6)            ALLOW       Anywhere (v6)
+### 7.5.2 copy证书到 nginx
 
-```
+注意, 默认生成的证书都放在安装目录下: `~/.acme.sh/`, 请不要直接使用此目录下的文件, 例如: 不要直接让 nginx/apache 的配置文件使用这下面的文件. 这里面的文件都是内部使用, 而且目录结构可能会变化.所以安装到`/home/wwwroot/gliang.eu/`
 
-To additionally let in HTTPS traffic, we can allow the "Nginx Full" profile and then delete the redundant "Nginx HTTP" profile allowance:
-
-```
-sudo ufw allow 'Nginx Full'
-sudo ufw delete allow 'Nginx HTTP'
-
-```
-
-Your status should look like this now:
-
-```
-sudo ufw status
-
-OutputStatus: active
-
-To                         Action      From
---                         ------      ----
-OpenSSH                    ALLOW       Anywhere
-Nginx Full                 ALLOW       Anywhere
-OpenSSH (v6)               ALLOW       Anywhere (v6)
-Nginx Full (v6)            ALLOW       Anywhere (v6)
-```
-
-### 7.4.4 Enable the Changes in Nginx
-
-Now that we've made our changes and adjusted our firewall, we can restart Nginx to implement our new changes.
-
-First, we should check to make sure that there are no syntax errors in our files. We can do this by typing:
-
-```
-sudo nginx -t
-```
-
-If everything is successful, you will get a result that looks like this:
-
-```
-Outputnginx: [warn] "ssl_stapling" ignored, issuer certificate not found
-nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
-nginx: configuration file /etc/nginx/nginx.conf test is successful
-```
-
-We can safely restart Nginx to implement our changes:
-
-```
-sudo systemctl restart nginx
-```
+~~~sh
+acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file /home/wwwroot/gliang.eu/key.pem --fullchain-file /home/wwwroot/gliang.eu/cert.pem --reloadcmd  "service nginx force-reload"
+~~~
 
 
+!!! hint ""
+	一个小提醒, 这里用的是 service nginx force-reload, 不是 service nginx reload, 据测试, reload 并不会重新加载证书, 所以用的 force-reload
 
-### 7.4.5 Let’s Encrypt
+Nginx 的配置 ssl_certificate 使用 /etc/nginx/ssl/fullchain.cer ，而非 /etc/nginx/ssl/<domain>.cer ，否则 SSL Labs 的测试会报 Chain issues Incomplete 错误。
 
- **Install**
 
-On Ubuntu systems, the Certbot team maintains a [PPA](https://help.ubuntu.com/community/PPA). Once you add it to your list of repositories all you'll need to do is apt-get the following packages.
+### 7.5.3 更新证书 和 acme.sh
 
-```
+目前证书在 60 天以后会自动更新, 你无需任何操作. 今后有可能会缩短这个时间, 不过都是自动的, 你不用关心.
+
+目前由于 acme 协议和 letsencrypt CA 都在频繁的更新, 因此 acme.sh 也经常更新以保持同步.
+
+
+~~~sh
+# 手动升级
+acme.sh --upgrade
+sed -i '2s/^/GD_Key="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"\nGD_Secret="EeotFgcHjpFSm5vUZuj3TG %/mdp%"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
+# 开启自动升级:
+acme.sh  --upgrade  --auto-upgrade
+# 关闭自动更新:
+acme.sh --upgrade  --auto-upgrade  0
+~~~
+
+
+### 7.5.4 更新nginx
+
+!!! hint ""
+	配置nginx服务器 nginx -t
+
+~~~shell
+nano /etc/nginx/nginx.conf
+~~~
+
+~~~python
+
+# 全站ssl
+
+events {
+        worker_connections 51200;
+}
+http {
+	server{
+	listen 80;
+	server_name gliang.eu;
+	root  /home/wwwroot/gliang.eu/;
+	index         index.html index.htm;
+	rewrite ^/(.*) https://gliang.eu/$1 permanent;
+   }
+
+	server {
+        listen        443;
+        server_name   gliang.eu;
+        root          /home/wwwroot/gliang.eu/;
+        index         index.html index.htm;
+
+        ssl           on;
+        ssl_certificate /home/wwwroot/gliang.eu/cert.pem;
+        ssl_certificate_key /home/wwwroot/gliang.eu/key.pem;
+	}
+}
+
+
+~~~
+
+
+
+
+
+~~~sh
+apt-get --yes --force-yes install $something
+~~~
+
+
+
+---
+
+#自动化脚本Vps
+
+##01
+
+
+~~~shell
+echo -e '#!/bin/bash\necho "====== starting ======"\napt-get update\napt-get upgrade\napt-get install -y sudo\napt-get install -y nano\nsudo apt-get update\nsudo apt-get install --assume-yes software-properties-common\nsudo add-apt-repository ppa:ubuntu-toolchain-r/test\nsudo apt-get update\nsudo apt-get install --assume-yes g++-4.9\nln -sf `which gcc-4.9` /usr/bin/gcc\nwget --no-check-certificate -qO 'BBR.sh' 'https://moeclub.org/attachment/LinuxShell/BBR.sh' && chmod a+x BBR.sh && bash BBR.sh -f' > start01.sh && chmod a+x ./start01.sh
+~~~
+
+---
+
+##02
+
+~~~shell
+nano start02.sh
+~~~
+
+~~~shell
+#!/bin/bash
+echo "====== BBR_POWERED ======"
+lsmod |grep 'bbr'
+wget --no-check-certificate -qO 'BBR_POWERED.sh' 'https://moeclub.org/attachment/LinuxShell/BBR_POWERED.sh' && chmod a+x BBR_POWERED.sh && bash BBR_POWERED.sh
+lsmod |grep 'bbr_powered'
+echo "====== new user ======"
+adduser liang
+usermod -a -G sudo liang
+echo "====== change PWD of root ======"
+passwd root
+echo "====== shadowsocks ======"
+apt-get install -y python-pip
+pip install shadowsocks
+apt-get install -y python-m2crypto
+echo -e "{\n\"server\":\"66.112.222.250\",\n\"server_port\":2888,\n\"local_address\": \"127.0.0.1\",\n\"local_port\":1080,\n\"password\":\"16908888\",\n\"timeout\":600,\n\"method\":\"rc4-md5\"\n}" > /etc/shadowsocks.json
+sudo chmod 755 /etc/shadowsocks.json
+sudo useradd ssuser
+echo "/usr/local/bin/ssserver -c /etc/shadowsocks.json -d start --user ssuser" >> /etc/rc.local
+echo "====== openvpn ======"
+apt-get install -y openvpn
+echo -e "11125796\n169088SD" > /root/Pshu.conf
+wget -P /root/ http://202.120.126.112/openvpn/shu.ovpn
+
+echo "====== dogtunnel ======"
+sudo apt-get install -y golang-go
+mkdir -P /root/dogtunnel/dt
+wget -P http://dog-tunnel.tk/down/dtunnel_linux_x64_0.80.tgz
+sudo tar -C /root/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
+chmod +x /root/dogtunnel/dt/dtunnel
+echo -e '#! /bin/sh\n# /etc/init.d/noip \n### BEGIN INIT INFO\n# Provides:          noip\n# Required-Start:    $remote_fs $syslog\n# Required-Stop:     $remote_fs $syslog\n# Default-Start:     2 3 4 5\n# Default-Stop:      0 1 6\n# Short-Description: Simple script to start a program at boot\n# Description:       A simple script which will start / stop a program a boot / shutdown.\n### END INIT INFO\n# If you want a command to always run, put it here\n# Carry out specific functions when asked to by the system\ncase "$1" in\n  start)\n    echo "Starting DogTunnel"\n    /root/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey 16908888\n    ;;\n  stop)\n    echo "Stopping DogTunnel"\n    # kill application you want to stop\n    killall dtunnel\n    ;;\n  *)\n    echo "Usage: /etc/init.d/dtunnel {start|stop}"\n    exit 1\n    ;;\nesac\nexit 0' > /etc/init.d/dogtunnel && chmod +755 /etc/init.d/dogtunnel
+sudo update-rc.d /etc/init.d/dogtunnel defaults
+
+echo "====== nginx ======"
 sudo apt-get update
-sudo apt-get install software-properties-common
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt-get update
-sudo apt-get install python-certbot-nginx
-```
+sudo apt-get install -y nginx
+mkdir -p /home/wwwroot/gliang.eu
+echo -e "events {\n        worker_connections 51200;\n}\nhttp {\n        server {\n        root /home/wwwroot/gliang.eu;\n        }\n}" > /etc/nginx/nginx.conf
+echo "Welcome!" > /home/wwwroot/gliang.eu/index.html
+service nginx force-reload
 
-Certbot has an Nginx plugin, which is supported on many platforms, and automates both obtaining and installing certs:
+echo "====== https ======"
+curl  https://get.acme.sh | sh
+export DP_Id="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"
+export DP_Key="EeotFgcHjpFSm5vUZuj3TG"
+echo -e "GD_Key=\"dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk\"\nGD_Secret=\"EeotFgcHjpFSm5vUZuj3TG\"" > ~/.acme.sh/account.conf
+# sed -i '2s/^/GD_Key="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"\nGD_Secret="EeotFgcHjpFSm5vUZuj3TG"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
+reboot
+~~~
 
-```
-sudo certbot --nginx
-```
-
-Running this command will get a certificate for you and have Certbot edit your Nginx configuration automatically to serve it. If you're feeling more conservative and would like to make the changes to your Nginx configuration by hand, you can use the `certonly`subcommand:
-
-```
-sudo certbot --nginx certonly
-```
-
-Automating renewal
-The Certbot packages on your system come with a cron job that will renew your certificates automatically before they expire. Since Let's Encrypt certificates last for 90 days, it's highly advisable to take advantage of this feature. You can test automatic renewal for your certificates by running this command:
-
-```
-sudo certbot renew --dry-run
-```
-
-If that appears to be working correctly, you can arrange for automatic renewal by adding a cron or systemd job which runs the following:
-certbot renew 
+~~~sh
+chmod a+x ./start02.sh
+~~~
 
 
-```
-git clone https://github.com/certbot/certbot.git
-cd certbot
-./certbot-auto certonly -d gliang.eu -d www.gliang.eu
-```
+---
+##03
 
- gliang.eu www.gliang.eu这样两个域名，会自动使用同一个证书进行认证，一切没问题后会在 /etc/letsencrypt/live/www.embbnux.com 下生成证书
+~~~shell
+nano start03.sh
+~~~
+
+~~~shell
+#!/bin/bash
+echo "====== HTTPS ======"
+acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
+acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file /home/wwwroot/gliang.eu/key.pem --fullchain-file /home/wwwroot/gliang.eu/cert.pem --reloadcmd  "service nginx force-reload"
+acme.sh  --upgrade  --auto-upgrade
+
+echo "====== Nginx full HTTPS ======"
+
+echo -e 'events {\nworker_connections 51200;\n}\nhttp {\nserver{\nlisten 80;\nserver_name gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nrewrite ^/(.*) https://gliang.eu/$1 permanent;\n}\nserver {\nlisten 443;\nserver_name   gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nssl  on;\nssl_certificate /home/wwwroot/gliang.eu/cert.pem;\nssl_certificate_key /home/wwwroot/gliang.eu/key.pem;\n}\n}' > /etc/nginx/nginx.conf
+
+service nginx force-reload
+~~~
+
+
+~~~sh
+chmod a+x ./start03.sh
+~~~
+
 
 
 ***

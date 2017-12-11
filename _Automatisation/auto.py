@@ -60,7 +60,7 @@ else :
 	conf.set("HTML", "DeleteOriginHtml",deleteOriginHtml)
 	conf.set("TimeTag", "IniModifiedTime",deleteOriginHtml)
 	conf.set("MultiMedia", "DirName",multiMediaDir) # 获取指定section 的option值
-	# conf.set("MultiMedia", "LastChangeTime",lastChangeTime )
+	conf.set("MultiMedia", "LastChangeTime",lastChangeTime )
 	timeTag=time.strftime("%Y-%m-%d %H:%M:%S %a", time.localtime())
 	conf.set("TimeTag", "IniModifiedTime",timeTag)
 	conf.write(open('auto.ini', 'w'))
@@ -75,6 +75,9 @@ lastChangeTime=float(lastChangeTime)
 print lastChangeTime
 refTimeAfterAll = lastChangeTime
 ChangedTime=0
+pngChangedSigne=0
+htmlOriginalExiste = os.path.exists(parentDir+"\\"+ htmlName)
+# pngExiste=0
 
 def iniConfPng(t):
 	conf.read('auto.ini')
@@ -93,14 +96,12 @@ for file in os.listdir(mediaFolder):
 			# print fileTime,lastChangeTime,refTimeAfterAll #Debug
 			pngtoModify = os.path.abspath(pngPath)
 			numberPNGchanged+=1
-			# pngChangedSigne=1
 			print numberPNGchanged
 			pn = subprocess.Popen("pngquant.exe " + pngtoModify + args, shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
 			pn.wait()
+			pngChangedSigne=1
 			refTimeAfterAll=os.path.getmtime(pngPath)
 			# print refTimeAfterAll #debug
-			iniConfPng(refTimeAfterAll)
-			print "==== PNGs newly modified date updated "
 			# (out, error) = pn.communicate()
 			# if str(error):
 			# 	print "Error : " + error
@@ -112,20 +113,28 @@ for file in os.listdir(mediaFolder):
 		elif lastChangeTime == 0:
 			if ChangedTime < fileTime:
 				ChangedTime = fileTime
-			iniConfPng(ChangedTime)
-			print "==== PNGs initialised modified date created "
-			# pngChangedSigne=2
+				pngChangedSigne=2
+
+if pngChangedSigne==1:
+	iniConfPng(refTimeAfterAll)
+	print "==== PNGs newly modified date updated "
+if pngChangedSigne==2:
+	iniConfPng(ChangedTime)
+	print "==== PNGs initialised modified date created "
+# if pngChangedSigne==3:
+# 	iniConfPng(0)
+# 	print "==== No PNGs found in the mediafolder "
 
 
 ##
 ## 网页重制并加入sidebar
 ##
 
-htmlExiste = os.path.exists(parentDir+"\\index.html")
+indexExiste = os.path.exists(parentDir+"\\index.html")
 htmlOriginalPath = parentDir + "\\" + htmlName
 indexPath = parentDir + "\\index.html"
 
-if htmlExiste:
+if indexExiste and htmlOriginalExiste:
 	os.remove(indexPath)
 #========change the html file name======
 html = open(htmlOriginalPath,"r+")
