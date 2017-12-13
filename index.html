@@ -3947,7 +3947,15 @@ rm -rf <span class="nv">$mountb</span> <span class="nv">$mountr</span>
     tightvncserver -kill :1   //终止控制台
    </p>
    <p>
-    X*X*X*X*X*X
+    X
+    <em>
+     X
+    </em>
+    X
+    <em>
+     X
+    </em>
+    X*X
    </p>
    <p>
     重置密码
@@ -4326,9 +4334,9 @@ sudo tar -C ~/dogtunnel/dt -xzf dtunnel_linux_arm_0.80.tgz
    <div class="codehilite">
     <pre>cd dt
 chmod +x ./dtunnel
-./dtunnel -reg X*X*X*X*X*X 
+./dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
 #任意目录可执行命令
-/home/pi/dogtunnel/dt/dtunnel -reg X*X*X*X*X*X 
+/home/pi/dogtunnel/dt/dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
 </pre>
    </div>
    <h4 id="3322-vps">
@@ -4355,9 +4363,9 @@ sudo tar -C /home/liang/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
    <div class="codehilite">
     <pre>cd dt
 chmod +x ./dtunnel
-./dtunnel -link X*X*X*X*X*X 
+./dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
 #任意目录可执行
-/home/liang/dogtunnel/dt/dtunnel -link X*X*X*X*X*X 
+/home/liang/dogtunnel/dt/dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
 </pre>
    </div>
    <h3 id="333">
@@ -4381,11 +4389,11 @@ chmod +x ./dtunnel
    </p>
    <div class="codehilite">
     <pre><span class="c1">#服务端 Raspbian</span>
-X*X*X*X*X*X
+<span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">clientkey</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
 <span class="c1">#客户端 66</span>
-X*X*X*X*X*X
+<span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">link</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">clientkey</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
 <span class="c1"># 日志文件目录权限问题</span>
-X*X*X*X*X*X
+<span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="n">xxx</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">clientkey</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
 </pre>
    </div>
    <p>
@@ -4433,9 +4441,9 @@ X*X*X*X*X*X
     <span class="n">echo</span> <span class="s">"Starting DogTunnel"</span>
     <span class="c1"># run application you want to start</span>
     <span class="c1">#服务端</span>
-    <span class="c1">#/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :X*X*X*X*X*X </span>
+    <span class="c1">#/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X </span>
     <span class="c1">#客户端</span>
-    X*X*X*X*X*X 
+    <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">link</span> <span class="n">lencshu</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">clientkey</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span> 
     <span class="p">;;</span>
   <span class="n">stop</span><span class="p">)</span>
     <span class="n">echo</span> <span class="s">"Stopping DogTunnel"</span>
@@ -5697,8 +5705,8 @@ sudo systemctl restart cloudprintd
 <span class="n">agent</span> <span class="n">on</span>
 <span class="c1">#The Bluetooth agent is what manages the Bluetooth 'pairing code'. It can either respond to a 'pairing code' coming in, or can send one out.</span>
 <span class="n">scan</span> <span class="n">on</span>
-X*X*X*X*X*X 
-X*X*X*X*X*X 
+<span class="n">pair</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span> 
+<span class="n">trust</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span> 
 <span class="c1">#connect X*X*X*X*X*X </span>
 </pre>
    </div>
@@ -5715,7 +5723,7 @@ X*X*X*X*X*X
 <span class="n">sudo</span> <span class="n">hciconfig</span> <span class="n">hci0</span> <span class="n">down</span> <span class="c1">#关闭hci设备</span>
 <span class="c1">#命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器</span>
 
-X*X*X*X*X*X
+<span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">connect</span> <span class="mi">0</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="mi">1</span>
 
 <span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">watch</span> <span class="n">hci0</span>
 
@@ -5725,7 +5733,15 @@ X*X*X*X*X*X
 </pre>
    </div>
    <p>
-    Connected /dev/rfcomm0 to X*X*X*X*X*X  on channel 1
+    Connected /dev/rfcomm0 to X
+    <em>
+     X
+    </em>
+    X
+    <em>
+     X
+    </em>
+    X*X  on channel 1
    </p>
    <p>
     If that doesn’t work you can also try adding pi to the lp group
@@ -5740,7 +5756,7 @@ X*X*X*X*X*X
 
 <span class="n">rfcomm0</span> <span class="p">{</span>
     <span class="n">bind</span> <span class="n">no</span><span class="p">;</span>
-    X*X*X*X*X*X
+    <span class="n">device</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span> <span class="p">;</span>
     <span class="n">channel</span> <span class="mi">1</span><span class="p">;</span>
     <span class="n">comment</span> <span class="err">“</span><span class="n">Connection</span> <span class="n">to</span> <span class="n">Bluetooth</span> <span class="n">serial</span> <span class="n">module</span><span class="err">”</span><span class="p">;</span>
 <span class="p">}</span>
@@ -5753,7 +5769,15 @@ X*X*X*X*X*X
     sudo rfcomm connect 0
    </p>
    <p>
-    sudo rfcomm connect rfcomm0 X*X*X*X*X*X
+    sudo rfcomm connect rfcomm0 X
+    <em>
+     X
+    </em>
+    X
+    <em>
+     X
+    </em>
+    X*X
    </p>
    <div class="codehilite">
     <pre><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">sourceforge</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">p</span><span class="o">/</span><span class="n">pyserial</span><span class="o">/</span><span class="n">code</span><span class="o">/</span><span class="n">HEAD</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">trunk</span><span class="o">/</span><span class="n">pyserial</span><span class="o">/</span><span class="n">serial</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">miniterm</span><span class="o">.</span><span class="n">py</span>
@@ -5771,7 +5795,7 @@ X*X*X*X*X*X
    </h3>
    <div class="codehilite">
     <pre><span class="n">sudo</span> <span class="n">hciconfig</span> <span class="n">hci0</span> <span class="n">up</span>
-X*X*X*X*X*X
+<span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">connect</span> <span class="mi">0</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="mi">1</span>
 </pre>
    </div>
    <h2 id="63-pythonshell">
@@ -6657,10 +6681,10 @@ ln -sf <span class="sb">`</span>which gcc-4.9<span class="sb">`</span> /usr/bin/
    </ul>
    <div class="codehilite">
     <pre><span class="nt">adduser</span> <span class="nt">liang</span>
-X*X*X*X*X*X
+<span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span>
 <span class="nt">usermod</span> <span class="nt">-a</span> <span class="nt">-G</span> <span class="nt">sudo</span> <span class="nt">liang</span>
 <span class="nt">sudo</span> <span class="nt">passwd</span> <span class="nt">root</span>
-X*X*X*X*X*X
+<span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span><span class="o">*</span><span class="nt">X</span>
 </pre>
    </div>
    <p>
@@ -6727,7 +6751,7 @@ sudo update-rc.d sslh defaults
    <div class="codehilite">
     <pre><span class="p">{</span>
 <span class="s2">"server"</span><span class="o">:</span><span class="s2">"X*X*X*X*X*X"</span><span class="o">,</span>
-X*X*X*X*X*X
+<span class="s2">"server_port"</span><span class="o">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">,</span>
 <span class="s2">"local_address"</span><span class="o">:</span> <span class="s2">"127.0.0.1"</span><span class="o">,</span>
 <span class="s2">"local_port"</span><span class="o">:</span><span class="m">1080</span><span class="o">,</span>
 <span class="s2">"password"</span><span class="o">:</span><span class="s2">"X*X*X*X*X*X"</span><span class="o">,</span>
@@ -6832,8 +6856,8 @@ sudo useradd ssuser
     <pre>curl  https://get.acme.sh <span class="p">|</span> sh
 <span class="nb">export </span><span class="nv">DP_Id</span><span class="o">=</span><span class="s2">"X*X*X*X*X*X"</span>
 <span class="nb">export </span><span class="nv">DP_Key</span><span class="o">=</span><span class="s2">"X*X*X*X*X*X"</span>
-<span class="nb">echo</span> -e <span class="s2">"GD_Key=\"X*X*X*X*X*X\""</span> &gt; ~/.acme.sh/account.conf
-sed -i <span class="s1">'2s/^/GD_Key="X*X*X*X*X*X"\n/'</span> /root/.acme.sh/dnsapi/dns_gd.sh
+<span class="nb">echo</span> -e <span class="s2">"GD_Key=\"X*X*X*X*X*X\"\nGD_Secret=\"X*X*X*X*X*X\""</span> &gt; ~/.acme.sh/account.conf
+sed -i <span class="s1">'2s/^/GD_Key="X*X*X*X*X*X"\nGD_Secret="X*X*X*X*X*X"\n/'</span> /root/.acme.sh/dnsapi/dns_gd.sh
 acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
 </pre>
    </div>
@@ -6862,8 +6886,8 @@ Verifying:www.X*X*X*X*X*X
 Success
 Verify finished, start to sign.
 Cert success.
-Your cert is in  /root/.acme.sh/X*X*X*X*X*X.cer 
-Your cert key is in  /root/.acme.sh/X*X*X*X*X*X.key 
+Your cert is in  /root/.acme.sh/X*X*X*X*X*X/X*X*X*X*X*X.cer 
+Your cert key is in  /root/.acme.sh/X*X*X*X*X*X/X*X*X*X*X*X.key 
 The intermediate CA cert is in  /root/.acme.sh/X*X*X*X*X*X/ca.cer 
 And the full chain certs is there:  /root/.acme.sh/X*X*X*X*X*X/fullchain.cer 
 </pre>
@@ -6872,7 +6896,7 @@ And the full chain certs is there:  /root/.acme.sh/X*X*X*X*X*X/fullchain.cer
     验证证书：
    </p>
    <div class="codehilite">
-    <pre>curl -X GET -H <span class="s2">"Authorization: sso-key X*X*X*X*X*X"</span>
+    <pre>curl -X GET -H <span class="s2">"Authorization: sso-key X*X*X*X*X*X"</span> <span class="s2">"https://api.godaddy.com/v1/domains/available?domain=X*X*X*X*X*X"</span>
 </pre>
    </div>
    <h3 id="752-copy-nginx">
@@ -7084,7 +7108,7 @@ acme.sh  --upgrade  --auto-upgrade
 
 <span class="nb">echo</span> <span class="s2">"====== Nginx full HTTPS ======"</span>
 
-<span class="nb">echo</span> -e <span class="s1">'X*X*X*X*X*X'</span> &gt; /etc/nginx/nginx.conf
+<span class="nb">echo</span> -e <span class="s1">'events {\nworker_connections 51200;\n}\nhttp {\nserver{\nlisten 80;\nserver_name gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nrewrite ^/(.*) https://gliang.eu/$1 permanent;\n}\nserver {\nlisten 443;\nserver_name   gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nssl  on;\nssl_certificate /home/wwwroot/gliang.eu/cert.pem;\nssl_certificate_key /home/wwwroot/gliang.eu/key.pem;\n}\n}'</span> &gt; /etc/nginx/nginx.conf
 
 service nginx force-reload
 </pre>

@@ -1435,8 +1435,8 @@ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 ```cs
 network=
 {
-  ssid="%mdp% Vi %/mdp% "
-  psk="%mdp% jiubugaosunimima %/mdp% "
+  ssid="X*X*X*X*X*X "
+  psk="X*X*X*X*X*X "
 }
 ```
 
@@ -1590,7 +1590,7 @@ echo "==== All done. You can un-plug the backup device"
   sudo tightvncserver :1 -geometry 1600x900
   tightvncserver -kill :1   //终止控制台
 
-%mdp% 169088 %/mdp% 
+X*X*X*X*X*X 
 
 重置密码
 
@@ -1647,7 +1647,7 @@ sudo update-rc.d tightvncserver defaults
 
 ~~~sh
 192.168.1.111:1
-%mdp% 169088 %/mdp% 
+X*X*X*X*X*X 
 ~~~
 
 ### 3.1.4清理垃圾
@@ -1858,9 +1858,9 @@ sudo tar -C ~/dogtunnel/dt -xzf dtunnel_linux_arm_0.80.tgz
 ```
 cd dt
 chmod +x ./dtunnel
-./dtunnel -reg %mdp% lencshu %/mdp%  -local :22 -clientkey %mdp% 16908888 %/mdp% 
+./dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
 #任意目录可执行命令
-/home/pi/dogtunnel/dt/dtunnel -reg %mdp% lencshu %/mdp%  -local :22 -clientkey %mdp% 16908888 %/mdp% 
+/home/pi/dogtunnel/dt/dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
 ```
 
 #### 3.3.2.2 VPS
@@ -1880,9 +1880,9 @@ sudo tar -C /home/liang/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
 ```
 cd dt
 chmod +x ./dtunnel
-./dtunnel -link %mdp% lencshu %/mdp%  -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
+./dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
 #任意目录可执行
-/home/liang/dogtunnel/dt/dtunnel -link %mdp% lencshu %/mdp%  -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
+/home/liang/dogtunnel/dt/dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
 ```
 
 
@@ -1895,11 +1895,11 @@ chmod +x ./dtunnel
 
 ```python
 #服务端 Raspbian
-sudo nohup /home/pi/dogtunnel/dt/dtunnel -reg %mdp% lencshu %/mdp%  -local :%mdp% 22 %/mdp%  -clientkey %mdp% 16908888 %/mdp%  -v 2>& 1 1 > /var/log/dtunnel.log &
+sudo nohup /home/pi/dogtunnel/dt/dtunnel -reg X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X  -v 2>& 1 1 > /var/log/dtunnel.log &
 #客户端 66
-sudo nohup /root/dogtunnel/dt/dtunnel -link %mdp% lencshu %/mdp%  -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp%  -v 2>& 1 1 > /var/log/dtunnel.log &
+sudo nohup /root/dogtunnel/dt/dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X  -v 2>& 1 1 > /var/log/dtunnel.log &
 # 日志文件目录权限问题
-nohup /home/pi/dogtunnel/dt/dtunnel -reg xxx -local :%mdp% 22 %/mdp%  -clientkey %mdp% 888888 %/mdp%  -v 2>& 1 1 > /home/pi/log/dogtunnel.log &
+nohup /home/pi/dogtunnel/dt/dtunnel -reg xxx -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X  -v 2>& 1 1 > /home/pi/log/dogtunnel.log &
 ```
 
 后重启
@@ -1934,9 +1934,9 @@ case "$1" in
     echo "Starting DogTunnel"
     # run application you want to start
     #服务端
-    #/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :%mdp% 22 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
+    #/home/pi/dogtunnel/dt/dtunnel -reg lencshu -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
     #客户端
-    /root/dogtunnel/dt/dtunnel -link lencshu -local :%mdp% 8888 %/mdp%  -clientkey %mdp% 16908888 %/mdp% 
+    /root/dogtunnel/dt/dtunnel -link lencshu -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
     ;;
   stop)
     echo "Stopping DogTunnel"
@@ -2933,9 +2933,9 @@ power on
 agent on
 #The Bluetooth agent is what manages the Bluetooth 'pairing code'. It can either respond to a 'pairing code' coming in, or can send one out.
 scan on
-pair %mdp% 00:14:02:12:29:83 %/mdp% 
-trust %mdp% 00:14:02:12:29:83 %/mdp% 
-#connect %mdp% 00:14:02:12:29:83 %/mdp% 
+pair X*X*X*X*X*X 
+trust X*X*X*X*X*X 
+#connect X*X*X*X*X*X 
 ~~~
 
 Then connect to the device with terminal via:
@@ -2950,7 +2950,7 @@ sudo hciconfig hci0 up   #启动hci设备
 sudo hciconfig hci0 down #关闭hci设备
 #命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器
 
-sudo rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1
+sudo rfcomm connect 0 X*X*X*X*X*X  1
 
 sudo rfcomm watch hci0
 
@@ -2959,7 +2959,7 @@ sudo rfcomm watch hci0
 hcidump
 ~~~
 
- Connected /dev/rfcomm0 to %mdp% 00:14:02:12:29:83 %/mdp%  on channel 1
+ Connected /dev/rfcomm0 to X*X*X*X*X*X  on channel 1
 
 
 If that doesn't work you can also try adding pi to the lp group
@@ -2973,7 +2973,7 @@ sudo nano /etc/bluetooth/rfcomm.conf
 
 rfcomm0 {
     bind no;
-    device %mdp% 00:14:02:12:29:83 %/mdp% ;
+    device X*X*X*X*X*X ;
     channel 1;
     comment “Connection to Bluetooth serial module”;
 }
@@ -2982,7 +2982,7 @@ The "bind no" is important, otherwise it will try to autmatically bind, which pr
 
 sudo rfcomm connect 0
 
-sudo rfcomm connect rfcomm0 %mdp% 00:14:02:12:29:83 %/mdp% 
+sudo rfcomm connect rfcomm0 X*X*X*X*X*X 
 
 ~~~python
 wget https://sourceforge.net/p/pyserial/code/HEAD/tree/trunk/pyserial/serial/tools/miniterm.py
@@ -2998,7 +2998,7 @@ sudo service bluetooth restart
 
 ~~~python
 sudo hciconfig hci0 up
-sudo rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1
+sudo rfcomm connect 0 X*X*X*X*X*X  1
 ~~~
 
 ## 6.3 Python运行外部shell命令
@@ -3071,7 +3071,7 @@ from subprocess import Popen, PIPE
 
 sudo_password = 'My_pass'
 command_open = 'sudo hciconfig hci0 up'.split()
-command_connect = 'rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1'.split()
+command_connect = 'rfcomm connect 0 X*X*X*X*X*X  1'.split()
 
 p = Popen(['sudo', '-S'] + command_open, stdin=PIPE, stderr=PIPE,universal_newlines=True)
 sudo_prompt = p.communicate(sudo_password + '\n')
@@ -3098,10 +3098,10 @@ import time,os
 
 target_name = "X4"
 killcount=0
-target_address = '%mdp% 00:14:02:12:29:83 %/mdp% '
-sudo_password = '%mdp% 169088@L %/mdp% '
+target_address = 'X*X*X*X*X*X '
+sudo_password = 'X*X*X*X*X*X '
 command_open = 'sudo hciconfig hci0 up'.split()
-command_connect = 'nohup rfcomm connect 0 %mdp% 00:14:02:12:29:83 %/mdp%  1 > /home/pi/log/rfcomm_x4.log 2>&1 &'.split()
+command_connect = 'nohup rfcomm connect 0 X*X*X*X*X*X  1 > /home/pi/log/rfcomm_x4.log 2>&1 &'.split()
 
 
 def detect_drone():
@@ -3114,7 +3114,7 @@ def detect_drone():
 
 def status_blue():
   stdoutdata = subprocess.check_output(["hcitool","con"])
-  if "%mdp% 00:14:02:12:29:83 %/mdp% " in stdoutdata.split():
+  if "X*X*X*X*X*X " in stdoutdata.split():
     print("Bluetooth device is connected")
     return 1
   else:
@@ -3600,10 +3600,10 @@ apt-get install -y nano
 
 ```css
 adduser liang
-%mdp% @L %/mdp%
+X*X*X*X*X*X
 usermod -a -G sudo liang
 sudo passwd root
-%mdp% @Ro %/mdp%
+X*X*X*X*X*X
 ```
 
 配置SSH
@@ -3660,11 +3660,11 @@ sudo nano /etc/shadowsocks.json
 
 ```css
 {
-"server":"%mdp% 66.112.222.250 %/mdp%",
-"server_port":%mdp% 2888 %/mdp%,
+"server":"X*X*X*X*X*X",
+"server_port":X*X*X*X*X*X,
 "local_address": "127.0.0.1",
 "local_port":1080,
-"password":"%mdp% 16908888 %/mdp%",
+"password":"X*X*X*X*X*X",
 "timeout":600,
 "method":"rc4-md5"
 }
@@ -3691,7 +3691,7 @@ sudo nano /etc/rc.local
 
 ~~~python
 apt-get install -y openvpn
-echo -e "%mdp% 11125796\n169088SD %/mdp%" > /root/Pshu.conf
+echo -e "X*X*X*X*X*X" > /root/Pshu.conf
 wget -P /root/ http://202.120.126.112/openvpn/shu.ovpn
 openvpn --config /root/shu.ovpn --auth-user-pass /root/Pshu.conf
 ~~~
@@ -3740,23 +3740,23 @@ https://developer.godaddy.com/keys/
 
 ~~~shell
 curl  https://get.acme.sh | sh
-export DP_Id="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%"
-export DP_Key="%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%"
-echo -e "GD_Key=\"%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%\"\nGD_Secret=\"%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%\"" > ~/.acme.sh/account.conf
-sed -i '2s/^/GD_Key="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%"\nGD_Secret="%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
+export DP_Id="X*X*X*X*X*X"
+export DP_Key="X*X*X*X*X*X"
+echo -e "GD_Key=\"X*X*X*X*X*X\"\nGD_Secret=\"X*X*X*X*X*X\"" > ~/.acme.sh/account.conf
+sed -i '2s/^/GD_Key="X*X*X*X*X*X"\nGD_Secret="X*X*X*X*X*X"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
 acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
 ~~~
 
 The GD_Key and GD_Secret will be saved in ~/.acme.sh/account.conf and will be reused when needed.
 
 ~~~sh
-Multi domain='DNS:%mdp% www.gliang.eu %/mdp%'
+Multi domain='DNS:X*X*X*X*X*X'
 Getting domain auth token for each domain
-Getting webroot for domain='%mdp% gliang.eu %/mdp%'
-Getting new-authz for domain='%mdp% gliang.eu %/mdp%'
+Getting webroot for domain='X*X*X*X*X*X'
+Getting new-authz for domain='X*X*X*X*X*X'
 The new-authz request is ok.
-Getting webroot for domain='www.%mdp% gliang.eu %/mdp%'
-Getting new-authz for domain='www.%mdp% gliang.eu %/mdp%'#'
+Getting webroot for domain='www.X*X*X*X*X*X'
+Getting new-authz for domain='www.X*X*X*X*X*X'#'
 The new-authz request is ok.
 Found domain api file: /root/.acme.sh/dnsapi/dns_gd.sh
 Adding record
@@ -3765,22 +3765,22 @@ Found domain api file: /root/.acme.sh/dnsapi/dns_gd.sh
 Adding record
 Added, sleeping 10 seconds
 Sleep 120 seconds for the txt records to take effect
-Verifying:%mdp% gliang.eu %/mdp%
+Verifying:X*X*X*X*X*X
 Success
-Verifying:www.%mdp% gliang.eu %/mdp%
+Verifying:www.X*X*X*X*X*X
 Success
 Verify finished, start to sign.
 Cert success.
-Your cert is in  /root/.acme.sh/%mdp% gliang.eu %/mdp%/%mdp% gliang.eu %/mdp%.cer 
-Your cert key is in  /root/.acme.sh/%mdp% gliang.eu %/mdp%/%mdp% gliang.eu %/mdp%.key 
-The intermediate CA cert is in  /root/.acme.sh/%mdp% gliang.eu %/mdp%/ca.cer 
-And the full chain certs is there:  /root/.acme.sh/%mdp% gliang.eu %/mdp%/fullchain.cer 
+Your cert is in  /root/.acme.sh/X*X*X*X*X*X/X*X*X*X*X*X.cer 
+Your cert key is in  /root/.acme.sh/X*X*X*X*X*X/X*X*X*X*X*X.key 
+The intermediate CA cert is in  /root/.acme.sh/X*X*X*X*X*X/ca.cer 
+And the full chain certs is there:  /root/.acme.sh/X*X*X*X*X*X/fullchain.cer 
 ~~~
 
 验证证书：
 
 ~~~sh
-curl -X GET -H "Authorization: sso-key %mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk:EeotFgcHjpFSm5vUZuj3TG %/mdp%" "https://api.godaddy.com/v1/domains/available?domain=%mdp% gliang.eu %/mdp%"
+curl -X GET -H "Authorization: sso-key X*X*X*X*X*X" "https://api.godaddy.com/v1/domains/available?domain=X*X*X*X*X*X"
 ~~~
 
 ### 7.5.2 copy证书到 nginx
@@ -3808,7 +3808,7 @@ Nginx 的配置 ssl_certificate 使用 /etc/nginx/ssl/fullchain.cer ，而非 /e
 ~~~sh
 # 手动升级
 acme.sh --upgrade
-sed -i '2s/^/GD_Key="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"\nGD_Secret="EeotFgcHjpFSm5vUZuj3TG %/mdp%"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
+sed -i '2s/^/GD_Key="X*X*X*X*X*X"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
 # 开启自动升级:
 acme.sh  --upgrade  --auto-upgrade
 # 关闭自动更新:
@@ -3900,13 +3900,13 @@ echo "====== shadowsocks ======"
 apt-get install -y python-pip
 pip install shadowsocks
 apt-get install -y python-m2crypto
-echo -e "%mdp% {\n\"server\":\"66.112.222.250\",\n\"server_port\":2888,\n\"local_address\": \"127.0.0.1\",\n\"local_port\":1080,\n\"password\":\"16908888\",\n\"timeout\":600,\n\"method\":\"rc4-md5\"\n} %/mdp%" > /etc/shadowsocks.json
+echo -e "X*X*X*X*X*X" > /etc/shadowsocks.json
 sudo chmod 755 /etc/shadowsocks.json
 sudo useradd ssuser
 echo "/usr/local/bin/ssserver -c /etc/shadowsocks.json -d start --user ssuser" >> /etc/rc.local
 echo "====== openvpn ======"
 apt-get install -y openvpn
-echo -e "%mdp% 11125796\n169088SD %/mdp%" > /root/Pshu.conf
+echo -e "X*X*X*X*X*X" > /root/Pshu.conf
 wget -P /root/ http://202.120.126.112/openvpn/shu.ovpn
 
 echo "====== dogtunnel ======"
@@ -3915,22 +3915,22 @@ mkdir -P /root/dogtunnel/dt
 wget -P http://dog-tunnel.tk/down/dtunnel_linux_x64_0.80.tgz
 sudo tar -C /root/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
 chmod +x /root/dogtunnel/dt/dtunnel
-echo -e '#! /bin/sh\n# /etc/init.d/noip \n### BEGIN INIT INFO\n# Provides:          noip\n# Required-Start:    $remote_fs $syslog\n# Required-Stop:     $remote_fs $syslog\n# Default-Start:     2 3 4 5\n# Default-Stop:      0 1 6\n# Short-Description: Simple script to start a program at boot\n# Description:       A simple script which will start / stop a program a boot / shutdown.\n### END INIT INFO\n# If you want a command to always run, put it here\n# Carry out specific functions when asked to by the system\ncase "$1" in\n  start)\n    echo "Starting DogTunnel"\n    %mdp% /root/dogtunnel/dt/dtunnel -link lencshu -local :8888 -clientkey 16908888\n %/mdp%    ;;\n  stop)\n    echo "Stopping DogTunnel"\n    # kill application you want to stop\n    killall dtunnel\n    ;;\n  *)\n    echo "Usage: /etc/init.d/dtunnel {start|stop}"\n    exit 1\n    ;;\nesac\nexit 0' > /etc/init.d/dogtunnel && chmod +755 /etc/init.d/dogtunnel
+echo -e '#! /bin/sh\n# /etc/init.d/noip \n### BEGIN INIT INFO\n# Provides:          noip\n# Required-Start:    $remote_fs $syslog\n# Required-Stop:     $remote_fs $syslog\n# Default-Start:     2 3 4 5\n# Default-Stop:      0 1 6\n# Short-Description: Simple script to start a program at boot\n# Description:       A simple script which will start / stop a program a boot / shutdown.\n### END INIT INFO\n# If you want a command to always run, put it here\n# Carry out specific functions when asked to by the system\ncase "$1" in\n  start)\n    echo "Starting DogTunnel"\n    X*X*X*X*X*X    ;;\n  stop)\n    echo "Stopping DogTunnel"\n    # kill application you want to stop\n    killall dtunnel\n    ;;\n  *)\n    echo "Usage: /etc/init.d/dtunnel {start|stop}"\n    exit 1\n    ;;\nesac\nexit 0' > /etc/init.d/dogtunnel && chmod +755 /etc/init.d/dogtunnel
 sudo update-rc.d /etc/init.d/dogtunnel defaults
 
 echo "====== nginx ======"
 sudo apt-get update
 sudo apt-get install -y nginx
-mkdir -p %mdp% /home/wwwroot/gliang.eu %/mdp%
-echo -e "events {\n        worker_connections 51200;\n}\nhttp {\n        server {\n        %mdp% root /home/wwwroot/gliang.eu %/mdp%;\n        }\n}" > /etc/nginx/nginx.conf
+mkdir -p X*X*X*X*X*X
+echo -e "events {\n        worker_connections 51200;\n}\nhttp {\n        server {\n        X*X*X*X*X*X;\n        }\n}" > /etc/nginx/nginx.conf
 echo "Welcome!" > /home/wwwroot/gliang.eu/index.html
 service nginx force-reload
 
 echo "====== https ======"
 curl  https://get.acme.sh | sh
-export DP_Id="%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk %/mdp%"
-export DP_Key="%mdp% EeotFgcHjpFSm5vUZuj3TG %/mdp%"
-echo -e "GD_Key=\"%mdp% dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk\"\nGD_Secret=\"EeotFgcHjpFSm5vUZuj3TG\" %/mdp%" > ~/.acme.sh/account.conf
+export DP_Id="X*X*X*X*X*X"
+export DP_Key="X*X*X*X*X*X"
+echo -e "GD_Key=\"X*X*X*X*X*X" > ~/.acme.sh/account.conf
 # sed -i '2s/^/GD_Key="dKiQai3byGrX_EeorLuTYKW1XdzhYkEnDmk"\nGD_Secret="EeotFgcHjpFSm5vUZuj3TG"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
 reboot
 ~~~
@@ -3951,12 +3951,12 @@ nano start03.sh
 #!/bin/bash
 echo "====== HTTPS ======"
 acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
-acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file %mdp% /home/wwwroot/gliang.eu/key.pem --fullchain-file /home/wwwroot/gliang.eu/cert.pem %/mdp% --reloadcmd  "service nginx force-reload"
+acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file X*X*X*X*X*X --reloadcmd  "service nginx force-reload"
 acme.sh  --upgrade  --auto-upgrade
 
 echo "====== Nginx full HTTPS ======"
 
-echo -e '%mdp% events {\nworker_connections 51200;\n}\nhttp {\nserver{\nlisten 80;\nserver_name gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nrewrite ^/(.*) https://gliang.eu/$1 permanent;\n}\nserver {\nlisten 443;\nserver_name   gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nssl  on;\nssl_certificate /home/wwwroot/gliang.eu/cert.pem;\nssl_certificate_key /home/wwwroot/gliang.eu/key.pem;\n}\n} %/mdp%' > /etc/nginx/nginx.conf
+echo -e 'events {\nworker_connections 51200;\n}\nhttp {\nserver{\nlisten 80;\nserver_name gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nrewrite ^/(.*) https://gliang.eu/$1 permanent;\n}\nserver {\nlisten 443;\nserver_name   gliang.eu;\nroot  /home/wwwroot/gliang.eu/;\nindex  index.html index.htm;\nssl  on;\nssl_certificate /home/wwwroot/gliang.eu/cert.pem;\nssl_certificate_key /home/wwwroot/gliang.eu/key.pem;\n}\n}' > /etc/nginx/nginx.conf
 
 service nginx force-reload
 ~~~
