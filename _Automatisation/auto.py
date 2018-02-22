@@ -39,8 +39,18 @@ C:\Users\lencs\Desktop\Blog\gliang.eu\source\_posts\Fr-Ch ==>从ini中读取
 2.3 是否要在祖父目录里生成Pwdoriginal网页
 === 网页处理 +sidebar +lazyload - 相对路径更改为祖父目录
 '''
+print '1.Update to Github:{Yes:Enter}\n2.MarkDown Edit\n3.Update to Hexo & Github\n'
+ms=raw_input('Chose:') or 1
+if int(ms)==1:
+	modeSwitch=1
+elif int(ms)==2:
+	modeSwitch=0
+elif int(ms)==3:
+	modeSwitch=1
+	ifhexo=1
 
-modeSwitch=raw_input("Update to Github:1,MarkDown Edit:{Enter}") or 0
+# modeSwitch=raw_input("Update to Github:{Yes:Enter or 1}, MarkDown Edit:0") or 1
+# ifhexo=raw_input("Update to Hexo:{No:Enter or 0}, Yes:1") or 0
 
 ##
 ## 1.初始化变量

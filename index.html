@@ -1679,22 +1679,35 @@ For Level Colors
          </li>
          <li>
           <a href="#442">
-           4.4.2 部署
+           4.4.2 配置项目
+          </a>
+         </li>
+         <li>
+          <a href="#443-app">
+           4.4.3 App配置
+          </a>
+         </li>
+         <li>
+          <a href="#444-restful-api">
+           4.4.4 RESTful API
+          </a>
+         </li>
+         <li>
+          <a href="#445-arduino">
+           4.4.5 与Arduino对接
+          </a>
+         </li>
+         <li>
+          <a href="#446-vps">
+           4.4.6 与vps对接
           </a>
          </li>
         </ul>
        </li>
        <li>
-        <a href="#45">
-         4.5
+        <a href="#45-python-flask-restful-api">
+         4.5 使用 Python 和 Flask 设计 RESTful API
         </a>
-        <ul>
-         <li>
-          <a href="#python-flask-restful-api">
-           使用 Python 和 Flask 设计 RESTful API
-          </a>
-         </li>
-        </ul>
        </li>
       </ul>
      </li>
@@ -5295,18 +5308,22 @@ sudo apt install mongodb
    </h3>
    <ul>
     <li>
-     安装框架
+     安装各种框架
     </li>
    </ul>
    <div class="codehilite">
     <pre><span class="hll"><span class="c1">#最后支持py2.7的版本</span>
 </span><span class="n">pip</span> <span class="n">install</span> <span class="n">Django</span><span class="o">==</span><span class="mf">1.11</span><span class="o">.</span><span class="mi">10</span>
 
+<span class="c1">#Restful API</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">djangorestframework</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">markdown</span>
+<span class="c1"># Filtering support</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="nb">filter</span>
 
+<span class="c1">#mongodb database</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">mongoengine</span>
+
 <span class="c1">#PY time zone</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">pytz</span>
 </pre>
@@ -5317,8 +5334,11 @@ sudo apt install mongodb
     </li>
    </ul>
    <div class="codehilite">
-    <pre><span class="hll"><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">vps</span>
+    <pre><span class="hll"><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">pi</span>
 </span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">startapp</span> <span class="n">sensors</span>
+
+<span class="c1"># 管理员用户</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
 </pre>
    </div>
    <ul>
@@ -5339,11 +5359,31 @@ sudo apt install mongodb
     <pre><span class="hll"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span> <span class="n">sensors</span>
 </span></pre>
    </div>
-   <p>
-    If you edit your models.py file in order to add, remove, or change fields of existing models, or if you add new models, you will have to make a new migration using the makemigrations command. The migration will allow Django to keep track of model changes. Then you will have to apply it with the migrate command to keep the
-    <br/>
-    database in sync with your models.
-   </p>
+   <div class="admonition hint">
+    <p>
+     If you ：
+     <br/>
+     - edit your models.py file in order to add, remove,
+     <br/>
+     - change fields of existing models,
+     <br/>
+     - add new models,
+     <br/>
+     You will have to:
+     <br/>
+     - 1. make a new migration using the
+     <code>
+      python manage.py makemigrations sensors
+     </code>
+     . The migration will allow Django to keep track of model changes.
+     <br/>
+     - 2. Then you will have to apply it with the
+     <code>
+      python manage.py migrate
+     </code>
+     to keep the database in sync with your models.
+    </p>
+   </div>
    <ul>
     <li>
      运行调试
@@ -5353,15 +5393,6 @@ sudo apt install mongodb
     <pre><span class="hll"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
 </span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">shell</span>
 </pre>
-   </div>
-   <ul>
-    <li>
-     administration
-    </li>
-   </ul>
-   <div class="codehilite">
-    <pre><span class="hll"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
-</span></pre>
    </div>
    <p>
     curl.exe -u lencshu:169088@Dj -X POST -d “temperature=1&amp;distance=1”
@@ -5374,22 +5405,401 @@ sudo apt install mongodb
      <span class="headeranchor">
      </span>
     </a>
-    4.4.2 部署
+    4.4.2 配置项目
    </h3>
-   <h2 id="45">
-    <a aria-hidden="true" class="headeranchor-link" href="#45" name="user-content-45">
+   <div class="codehilite">
+    <pre><span class="hll"><span class="c1">#apps</span>
+</span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'django.contrib.admin'</span><span class="p">,</span>
+    <span class="s">'django.contrib.auth'</span><span class="p">,</span>
+    <span class="s">'django.contrib.contenttypes'</span><span class="p">,</span>
+    <span class="s">'django.contrib.sessions'</span><span class="p">,</span>
+    <span class="s">'django.contrib.messages'</span><span class="p">,</span>
+    <span class="s">'django.contrib.staticfiles'</span><span class="p">,</span>
+    <span class="s">'rest_framework'</span><span class="p">,</span>
+    <span class="s">'sensors'</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="hll"><span class="c1">#Timezone</span>
+</span><span class="n">TIME_ZONE</span> <span class="o">=</span> <span class="s">'Europe/Paris'</span>
+
+<span class="hll"><span class="c1">#Restframework</span>
+</span><span class="n">REST_FRAMEWORK</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># Use Django's standard `django.contrib.auth` permissions,</span>
+    <span class="c1"># or allow read-only access for unauthenticated users.</span>
+    <span class="s">'DEFAULT_PERMISSION_CLASSES'</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s">'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre>
+   </div>
+   <h3 id="443-app">
+    <a aria-hidden="true" class="headeranchor-link" href="#443-app" name="user-content-443-app">
      <span class="headeranchor">
      </span>
     </a>
-    4.5
+    4.4.3 App配置
+   </h3>
+   <p>
+    <strong>
+     models.py
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span><span class="c1"># from __future__ import unicode_literals</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+<span class="c1"># Create your models here.</span>
+
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+<span class="c1"># from django.contrib.auth.models import User</span>
+<span class="k">class</span> <span class="nc">Data</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">timezone</span><span class="o">.</span><span class="n">now</span><span class="p">)</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">humity</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">light</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s">'-title'</span><span class="p">,</span><span class="s">'-temperature'</span><span class="p">)</span>
+</pre>
+   </div>
+   <p>
+    <strong>
+     views.py
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="c1"># Create your views here.</span>
+<span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">get_object_or_404</span> 
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Data</span>
+
+<span class="k">def</span> <span class="nf">data_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">posts</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> 
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s">'list.html'</span><span class="p">,{</span><span class="s">'posts'</span><span class="p">:</span> <span class="n">posts</span><span class="p">})</span>
+</pre>
+   </div>
+   <p>
+    <strong>
+     模板配置—list.html&amp;base.html
+    </strong>
+   </p>
+   <p>
+    <strong>
+     base.html
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="p">{</span><span class="o">%</span> <span class="n">load</span> <span class="n">staticfiles</span> <span class="o">%</span><span class="p">}</span>
+</span><span class="o">&lt;</span><span class="err">!</span><span class="n">DOCTYPE</span> <span class="n">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">html</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">title</span> <span class="o">%</span><span class="p">}{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">link</span> <span class="n">href</span><span class="o">=</span><span class="s">"{</span><span class="si">% s</span><span class="s">tatic "</span><span class="n">css</span><span class="o">/</span><span class="n">blog</span><span class="o">.</span><span class="n">css</span><span class="s">" %}"</span> <span class="n">rel</span><span class="o">=</span><span class="s">"stylesheet"</span><span class="o">&gt;</span> 
+<span class="o">&lt;/</span><span class="n">head</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"content"</span><span class="o">&gt;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s">"sidebar"</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">h2</span><span class="o">&gt;</span><span class="n">Sensors</span> <span class="n">data</span> <span class="n">listing</span><span class="o">&lt;/</span><span class="n">h2</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">From</span> <span class="n">Arduino</span><span class="o">-</span><span class="n">raspberry</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">body</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">html</span><span class="o">&gt;</span>
+</pre>
+   </div>
+   <p>
+    <strong>
+     list.html
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll">{% extends "base.html" %}
+</span>{% block title %}My Blog{% endblock %}
+{% block content %}
+  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Datas<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  {% for post in posts %}
+    <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>{{ post.title }}<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"date"</span><span class="p">&gt;</span>
+      Temperature: {{ post.temperature }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      Humity: {{ post.humity }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      Light: {{ post.light }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+      Distance: {{ post.distance }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    {{ post.body|truncatewords:30|linebreaks }}
+  {% endfor %}
+{% endblock %}
+</pre>
+   </div>
+   <p>
+    <strong>
+     配置—urls.py
+    </strong>
+   </p>
+   <p>
+    <strong>
+     App Urls
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span> 
+</span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># post views</span>
+        <span class="n">url</span><span class="p">(</span><span class="s">r'^$'</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">data_list</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'data_list'</span><span class="p">),</span> 
+<span class="p">]</span>
+</pre>
+   </div>
+   <p>
+    <strong>
+     项目urls
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">include</span><span class="p">,</span> <span class="n">url</span>
+</span><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r'^admin/'</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="c1"># url(r'^api-auth/', include('rest_framework.urls')),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r'^s/'</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">'sensors.urls'</span><span class="p">,</span><span class="n">namespace</span><span class="o">=</span><span class="s">'sensors'</span><span class="p">,</span><span class="n">app_name</span><span class="o">=</span><span class="s">'sensors'</span><span class="p">)),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r'^api/'</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">'sensors.api.urls'</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">'api'</span><span class="p">)),</span>
+<span class="p">]</span>
+</pre>
+   </div>
+   <p>
+    <strong>
+     配置admin.py
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">unicode_literals</span>
+
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+
+<span class="c1"># Register your models here.</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Data</span>
+
+<span class="k">class</span> <span class="nc">DataAdmin</span><span class="p">(</span><span class="n">admin</span><span class="o">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'title'</span><span class="p">,</span> <span class="s">'distance'</span><span class="p">,</span> <span class="s">'temperature'</span><span class="p">,</span> <span class="s">'humity'</span><span class="p">,</span> <span class="s">'light'</span><span class="p">)</span>
+    <span class="n">date_hierarchy</span> <span class="o">=</span> <span class="s">'title'</span>
+    <span class="n">ordering</span> <span class="o">=</span> <span class="p">[</span><span class="s">'-title'</span><span class="p">,</span><span class="s">'-temperature'</span><span class="p">]</span>
+
+<span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Data</span><span class="p">,</span> <span class="n">DataAdmin</span><span class="p">)</span>
+</pre>
+   </div>
+   <h3 id="444-restful-api">
+    <a aria-hidden="true" class="headeranchor-link" href="#444-restful-api" name="user-content-444-restful-api">
+     <span class="headeranchor">
+     </span>
+    </a>
+    4.4.4 RESTful API
+   </h3>
+   <p>
+    <strong>
+     Views
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="ch">#!/usr/bin/env python</span>
+</span><span class="c1">#-*- coding: utf-8 -*- </span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span><span class="p">,</span> <span class="n">JsonResponse</span>
+<span class="kn">from</span> <span class="nn">django.views.decorators.csrf</span> <span class="kn">import</span> <span class="n">csrf_exempt</span>
+<span class="kn">from</span> <span class="nn">rest_framework.renderers</span> <span class="kn">import</span> <span class="n">JSONRenderer</span>
+<span class="kn">from</span> <span class="nn">rest_framework.parsers</span> <span class="kn">import</span> <span class="n">JSONParser</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">from</span> <span class="nn">.serializers</span> <span class="kn">import</span> <span class="n">SubjectSerializer</span>
+
+<span class="nd">@csrf_exempt</span>
+<span class="k">def</span> <span class="nf">data_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="c1"># List all code snippets, or create a new data.</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'GET'</span><span class="p">:</span>
+        <span class="n">datas</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">SubjectSerializer</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">JSONParser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">SubjectSerializer</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+<span class="nd">@csrf_exempt</span>
+<span class="k">def</span> <span class="nf">data_detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="c1"># Retrieve, update or delete a code datas.</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">datas</span> <span class="o">=</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">Data</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">404</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'GET'</span><span class="p">:</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">SubjectSerializer</span><span class="p">(</span><span class="n">datas</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'PUT'</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">JSONParser</span><span class="p">()</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">serializer</span> <span class="o">=</span> <span class="n">SubjectSerializer</span><span class="p">(</span><span class="n">datas</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">serializer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">serializer</span><span class="o">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'DELETE'</span><span class="p">:</span>
+        <span class="n">datas</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">204</span><span class="p">)</span>
+</pre>
+   </div>
+   <p>
+    <strong>
+     序列化
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">serializers</span> 
+</span><span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">datetime</span><span class="o">,</span><span class="nn">pytz</span>
+<span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">timezone</span>
+
+<span class="c1"># def parisnow():</span>
+    <span class="c1"># return datetime.datetime.now(tz=pytz.timezone("Europe/Paris")).isoformat()1</span>
+
+<span class="k">class</span> <span class="nc">SubjectSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span> 
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">read_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">humity</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+    <span class="n">light</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validated_data</span><span class="p">):</span>
+        <span class="c1">#Create and return a new `Subject` instance, given the validated data.</span>
+        <span class="k">return</span> <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="o">**</span><span class="n">validated_data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">validated_data</span><span class="p">):</span>
+
+        <span class="c1"># Update and return an existing `Snippet` instance, given the validated data.</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">validated_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'title'</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+        <span class="c1"># instance.title = validated_data.get('title', parisnow())</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="n">validated_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'distance'</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">temperature</span> <span class="o">=</span> <span class="n">validated_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'temperature'</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">temperature</span><span class="p">)</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">humity</span> <span class="o">=</span> <span class="n">validated_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'humity'</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">humity</span><span class="p">)</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">light</span> <span class="o">=</span> <span class="n">validated_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'light'</span><span class="p">,</span> <span class="n">instance</span><span class="o">.</span><span class="n">light</span><span class="p">)</span>
+        <span class="n">instance</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">instance</span>
+</pre>
+   </div>
+   <p>
+    <strong>
+     URLs
+    </strong>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span> 
+</span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r'^api/$'</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">data_list</span><span class="p">),</span>
+    <span class="n">url</span><span class="p">(</span><span class="s">r'^api/(?P&lt;pk&gt;[0-9]+)/$'</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">data_detail</span><span class="p">),</span>
+<span class="p">]</span>
+</pre>
+   </div>
+   <h3 id="445-arduino">
+    <a aria-hidden="true" class="headeranchor-link" href="#445-arduino" name="user-content-445-arduino">
+     <span class="headeranchor">
+     </span>
+    </a>
+    4.4.5 与Arduino对接
+   </h3>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="ch">#!/usr/bin/env python</span>
+</span><span class="c1">#-*- coding: utf-8 -*- </span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">datetime</span><span class="o">,</span><span class="nn">pytz</span>
+<span class="kn">import</span> <span class="nn">django</span>
+<span class="kn">import</span> <span class="nn">serial</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">"DJANGO_SETTINGS_MODULE"</span><span class="p">,</span> <span class="s">"pi.settings"</span><span class="p">)</span>
+<span class="n">django</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
+
+<span class="kn">from</span> <span class="nn">sensors.models</span> <span class="kn">import</span> <span class="n">Data</span>
+<span class="k">def</span> <span class="nf">parisnow</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">tz</span><span class="o">=</span><span class="n">pytz</span><span class="o">.</span><span class="n">timezone</span><span class="p">(</span><span class="s">"Europe/Paris"</span><span class="p">))</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+<span class="n">timeDelay</span><span class="o">=</span><span class="mi">0</span>
+
+<span class="n">ser</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="s">'/dev/ttyACM0'</span><span class="p">,</span> <span class="mi">9600</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">ser</span><span class="o">.</span><span class="n">isOpen</span><span class="p">():</span>
+    <span class="n">rawLigne</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="c1">#print len(rawLigne)</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">tempeData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">rawLigne</span><span class="p">)</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">tempeData</span><span class="p">[</span><span class="s">"Triger"</span><span class="p">]):</span>
+        <span class="k">print</span> <span class="n">tempeData</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">tempeData</span><span class="p">[</span><span class="s">"Humity"</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">timeDelay</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">timeDelay</span><span class="o">&gt;=</span><span class="mi">10</span><span class="p">:</span>
+                <span class="k">print</span> <span class="s">'Saved to database'</span>
+                <span class="n">Data</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">parisnow</span><span class="p">(),</span> <span class="n">distance</span> <span class="o">=</span> <span class="n">tempeData</span><span class="p">[</span><span class="s">"Distance"</span><span class="p">],</span><span class="n">temperature</span> <span class="o">=</span> <span class="n">tempeData</span><span class="p">[</span><span class="s">"Temperature"</span><span class="p">],</span><span class="n">humity</span> <span class="o">=</span> <span class="n">tempeData</span><span class="p">[</span><span class="s">"Humity"</span><span class="p">],</span><span class="n">light</span> <span class="o">=</span> <span class="n">tempeData</span><span class="p">[</span><span class="s">"Light"</span><span class="p">])</span>
+                <span class="n">timeDelay</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">except</span><span class="p">:</span>
+      <span class="c1"># do nothing, not a valid JSON</span>
+      <span class="k">pass</span>
+</pre>
+   </div>
+   <h3 id="446-vps">
+    <a aria-hidden="true" class="headeranchor-link" href="#446-vps" name="user-content-446-vps">
+     <span class="headeranchor">
+     </span>
+    </a>
+    4.4.6 与vps对接
+   </h3>
+   <p>
+    数据格式
+    <br/>
+    <code>
+     {"title": "2018-02-20T23:49:16.202497+01:00", "distance": 2, "temperature": 16, "humity": 37, "light": 47}
+    </code>
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="ch">#!/usr/bin/env python</span>
+</span><span class="c1">#-*- coding: utf-8 -*- </span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">"http://127.0.0.1:8000/api/"</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s">'{"title": "2018-02-20T23:52:16.202497+01:00", "distance": 2, "temperature": 16, "humity": 37, "light": 47}'</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">"application/x-www-form-urlencoded"</span><span class="p">,</span>
+    <span class="s">'Cache-Control'</span><span class="p">:</span> <span class="s">"no-cache"</span><span class="p">,</span>
+    <span class="s">'Postman-Token'</span><span class="p">:</span> <span class="s">"64fb7111-5dfd-de0d-cc5e-eb4c063a9486"</span>
+    <span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s">"POST"</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre>
+   </div>
+   <h2 id="45-python-flask-restful-api">
+    <a aria-hidden="true" class="headeranchor-link" href="#45-python-flask-restful-api" name="user-content-45-python-flask-restful-api">
+     <span class="headeranchor">
+     </span>
+    </a>
+    4.5 使用 Python 和 Flask 设计 RESTful API
    </h2>
-   <h3 id="python-flask-restful-api">
-    <a aria-hidden="true" class="headeranchor-link" href="#python-flask-restful-api" name="user-content-python-flask-restful-api">
-     <span class="headeranchor">
-     </span>
-    </a>
-    使用 Python 和 Flask 设计 RESTful API
-   </h3>
    <p>
     什么是 REST？
     <br/>
