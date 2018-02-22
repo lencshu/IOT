@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*- 
 #pip install gittle
 #git config --global core.autocrlf false
 #
@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 import re
 from gittle import Gittle
 import sys
+import shutil
 
 '''
 更新上传
@@ -23,6 +24,12 @@ import sys
 1.5 PNG图片压缩
 === 网页处理 +sidebar +lazyload ->相对路径
 1.6 Github
+---
+1.7 读取markdown并在hexo文件目录里生成修改后的文件
+C:\Users\lencs\Desktop\Blog\gliang.eu\source\_posts\Fr-Ch ==>从ini中读取
+1.8 复制照片文件夹
+1.9 运行hexo命令
+1.10 运行git命令
 '''
 
 '''
@@ -96,11 +103,37 @@ def confAdd(linenumber,pwd):
 	confPwd.set("pwd", str(lineNumber),pwd)
 
 def iniConfPng(t):
-	conf.read('auto.ini')
-	conf.set("MultiMedia", "LastChangeTime",t)
+	confAuto.read('auto.ini')
+	confAuto.set("MultiMedia", "LastChangeTime",t)
 	timeTag=time.strftime("%Y-%m-%d %H:%M:%S %a", time.localtime())
-	conf.set("TimeTag", "IniModifiedTime",timeTag)
-	conf.write(open('auto.ini', 'w'))
+	confAuto.set("TimeTag", "IniModifiedTime",timeTag)
+	confAuto.write(open('auto.ini', 'w'))
+
+def executeCommand(cmd,cwDir,arg=""):
+	pr = subprocess.Popen(cmd+arg, cwd = cwDir, shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+	(out, error) = pr.communicate()
+	if str(error):
+		print "Error : " + str(error)
+	if str(out):
+		print "out : " + str(out)
+
+def confReadOrAdd(section,option):
+    try:
+        value=confAuto.get(section,option)
+    except ConfigParser.NoSectionError:
+        confAuto.add_section(section)
+        print "Enter the valur of",option,':'
+        value = raw_input()
+        confAuto.set(section, option, value)
+        confAuto.write(open('auto.ini', 'w'))
+    except ConfigParser.NoOptionError:
+        print "Enter the valur of",option,':'
+        value = raw_input()
+		# confAuto.set("HTML", "ifpwd",ifpwd)
+        confAuto.set(section, option, value)
+        confAuto.write(open('auto.ini', 'w'))
+    return value
+
 
 ##
 ## 1.1. 生成/读取auto.ini
@@ -108,48 +141,87 @@ def iniConfPng(t):
 
 if iniAutoExiste:
 	confAuto.read('auto.ini')	   # 文件路径
-	htmlName = confAuto.get("HTML", "HtmlName") # 获取指定section 的option值
-	sidebarSize = confAuto.get("HTML", "SidebarSize")
-	mainpageSize = confAuto.get("HTML", "MainpageSize")
-	# deleteOriginHtml = confAuto.get("HTML", "DeleteOriginHtml")
-	multiMediaDir = confAuto.get("MultiMedia", "DirName") # 获取指定section 的option值
-	lastChangeTime = confAuto.get("MultiMedia", "LastChangeTime")
+	htmlName = confReadOrAdd("HTML", "HtmlName") # 获取指定section 的option值
+	sidebarSize = confReadOrAdd("HTML", "SidebarSize")
+	mainpageSize = confReadOrAdd("HTML", "MainpageSize")
+	ifpwd = confReadOrAdd("HTML", "ifpwd")
+	multiMediaDir = confReadOrAdd("MultiMedia", "DirName") # 获取指定section 的option值
+	lastChangeTime = confReadOrAdd("MultiMedia", "LastChangeTime")
+
+	ifhexo = confReadOrAdd("HEXO", "ifhexo")
+	if int(ifhexo):
+		lang = confReadOrAdd("HEXO", "lang")
+		hexoDir = confReadOrAdd("HEXO", "hexoDir")
 
 else :
 	confAuto.read('auto.ini')
 	confAuto.add_section("MultiMedia") # 增加section
 	confAuto.add_section("HTML") 
 	confAuto.add_section("TimeTag")
+	confAuto.add_section("HEXO")
 	htmlName = raw_input("Original Html Name: ")
 	multiMediaDir = raw_input("The name of [MultiMedia] directory: ") or "MultiMedia"
 	sidebarSize = raw_input("Side Bar Size (%) [30]: ") or "30"
 	sidebarSize = "width:" + sidebarSize + "%"
 	mainpageSize = raw_input("Main Page Size (%) [68]: ") or "68"
 	mainpageSize = mainpageSize + "%;"
-	# deleteOriginHtml = raw_input("Want To Delete Origin Html(Yes:1/[No:0]): ") or "0"
+	ifpwd = raw_input("Want To mask PWD(Yes:1/[No:0]): ") or "0"
 	lastChangeTime = raw_input("Last Changed time of All PNGs Files [0]: ") or "0"
+	ifhexo = raw_input("Post to hexo or not?[no:enter]: ") or "0"
+	if int(ifhexo):
+		postDir = raw_input("Post directory: ")
+		lang = raw_input("Hexo lang type: ")
+		hexoDir = raw_input("Hexo Root directory [Default:enter]: ") or "C:\\Users\\lencs\\Desktop\\Blog\\gliang.eu"
+
+	else:
+		postDir = ''
+		hexoDir = "C:\\Users\\lencs\\Desktop\\Blog\\gliang.eu"
 
 	confAuto.set("HTML", "HtmlName",htmlName) # 增加指定section 的option
 	confAuto.set("HTML", "SidebarSize",sidebarSize)
 	confAuto.set("HTML", "MainpageSize",mainpageSize)
-	# confAuto.set("HTML", "DeleteOriginHtml",deleteOriginHtml)
+	confAuto.set("HTML", "ifpwd",ifpwd)
 	confAuto.set("MultiMedia", "DirName",multiMediaDir) # 获取指定section 的option值
 	confAuto.set("MultiMedia", "LastChangeTime",lastChangeTime )
+	confAuto.set("HEXO", "ifhexo",ifhexo )
+	confAuto.set("HEXO", "postDir",postDir )
+	confAuto.set("HEXO", "hexoDir",hexoDir )
+	confAuto.set("HEXO", "lang",lang)
+
 	timeTag=time.strftime("%Y-%m-%d %H:%M:%S %a", time.localtime())
 	confAuto.set("TimeTag", "IniModifiedTime",timeTag)
 	confAuto.write(open('auto.ini', 'w'))
 
 
+### 简单处理
+
+markdownName=htmlName.split('.')[0]+".md"
+markdownPath=parentDir+"\\"+markdownName
+
+args = " --force --verbose --quality=45-80 --ext=.png"
+mediaFolder = parentDir +"\\" + multiMediaDir
+lastChangeTime=float(lastChangeTime)
+refTimeAfterAll = lastChangeTime
+
+if int(ifhexo):
+	postDir = hexoDir + "\\source\\_posts\\" + lang
+	imagesHexoDir = postDir + '\\' + htmlName.split('.')[0] + '\\' + multiMediaDir
+	
+	imagesHexoExiste = os.path.exists(imagesHexoDir)
+	
+	if not os.path.exists(mediaFolder):
+		os.makedirs(mediaFolder)
+	if (not imagesHexoExiste):
+		os.makedirs(imagesHexoDir)
+	
+	imagesHexoDir = imagesHexoDir.replace('\\','/')
 
 
 ##
 ## 1.2创建祖父目录里面的密码配置文件pwd.ini
 ##
 
-markdownName=htmlName.split('.')[0]+".md"
-markdownPath=parentDir+"\\"+markdownName
-
-if not iniPwdExiste:
+if (not iniPwdExiste) and int(ifpwd):
 	confPwd.read(pwdPath)	   # 文件路径
 	confPwd.add_section("file")
 	confPwd.add_section("pwd")
@@ -158,21 +230,23 @@ if not iniPwdExiste:
 	confPwd.set("file", "IniCreatTime",timeTag)
 	confPwd.set("file", "IniModifiedTime",timeTag)
 	confPwd.write(open(pwdPath, 'w'))
+
 ##
 ## 2.2 读取祖父目录里面的密码配置文件pwd.ini
 ##
 
-else :
+elif int(ifpwd):
 	confPwd.read(pwdPath)
 	lineNumberInsert=confPwd.options('pwd')
 	optionsNumber=len(confPwd.options('pwd'))
 	itemsToInsert=confPwd.items('pwd')
 
+
 ##
 ## 1.去掉markdown里面的敏感信息并更新到pwd.ini
 ##
 
-if modeSwitch:
+if modeSwitch and int(ifpwd):
 	with open(markdownPath) as mdFile:
 		confPwd.read(pwdPath)
 		for line in mdFile:
@@ -194,7 +268,7 @@ if modeSwitch:
 ##
 ## 2. 将pwd.ini里面的敏感信息添加回markdown
 ##	
-else :
+elif (not modeSwitch) and int(ifpwd):
 	with open(markdownPath,'r') as mdFile:
 		for line in mdFile:
 			lineNumber+=1
@@ -229,15 +303,9 @@ if not ready :
 
 #变量初始化
 if modeSwitch:
-	args = " --force --verbose --quality=45-80 --ext=.png"
-	mediaFolder = parentDir +"\\" + multiMediaDir
-	lastChangeTime=float(lastChangeTime)
 	print lastChangeTime
-	refTimeAfterAll = lastChangeTime
 	ChangedTime=0
 	pngChangedSigne=0
-
-
 
 	for file in os.listdir(mediaFolder):
 		if file.endswith(".png"):
@@ -358,20 +426,137 @@ if not modeSwitch:
 ## 1.6 Github
 ##
 if modeSwitch:
-	def executeCommand(cmd,arg=""):
-		pr = subprocess.Popen(cmd+arg, cwd = parentDir, shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
-		(out, error) = pr.communicate()
-		if str(error):
-			print "Error : " + str(error)
-		if str(out):
-			print "out : " + str(out)
-
-	executeCommand("git add .")
 	print "==== Git stage all "
-	executeCommand("git commit -m ",commentContent)
+	executeCommand("git add .", parentDir)
 	print "==== Git commit all "
-	executeCommand("git push -u origin master")
+	executeCommand("git commit -m ", parentDir, commentContent)
+	print "==== All files are uploading to Github "
+	executeCommand("git push -u origin master", parentDir)
+	print "==== uploaded "
+
+
+
+##
+## 1.7 读取markdown并在hexo文件目录里生成修改后的文件
+## C:\Users\lencs\Desktop\Blog\gliang.eu\source\_posts\Fr-Ch ==>从ini中读取
+##
+
+# postDir="C:\\Users\\lencs\\Desktop\\Blog\\gliang.eu\\source\\_posts\\Fr-Ch"
+# hexoDir="C:\\Users\\lencs\\Desktop\\Blog\\gliang.eu"
+# imagesHexoDir="C:/Users/lencs/Desktop/Blog/gliang.eu/source/_posts/Fr-Ch/MC59/images"
+
+
+if modeSwitch and int(ifhexo):
+
+	postPath=postDir + '\\' + markdownName
+	mdImagesPathdel=parentDir+"\\"
+	postExiste = os.path.exists(postPath)
+	
+	annotationTarget=0
+	pattern = re.compile(r"^[\t\r\f\v ]")
+	lostTarget=0
+
+	if postExiste:
+		os.remove(postPath)
+	# keyCircle="<p align=\"center\">"
+	keyCircle="[TOC]\n\n---"
+	mdSimReplace = open(markdownPath,"r")
+	mdSimReplace = mdSimReplace.read()
+	post = mdSimReplace.find(keyCircle)
+	if post != -1:
+		mdSimReplace = mdSimReplace.replace(keyCircle,'---')
+		mdSimReplace = re.sub(r"{:height=\"\d+px\" width=\"\d+px\"}</p>", '' ,mdSimReplace)
+		mdSimReplace = mdSimReplace.replace('</p>','')
+		# print mdImagesPathdel
+		mdSimReplace = mdSimReplace.replace(mdImagesPathdel,'')
+		mdSimReplace = mdSimReplace.replace('</audio>',"</audio>\n")
+		mdSimReplace = mdSimReplace.replace("<p align=\"center\">",'')
+		# mdSimReplace = mdSimReplace.replace("[TOC]\n\n---",'---')
+	file = open('temp.md', 'w')
+	file.write(mdSimReplace)
+	file.close( )
+	
+	print "==== Simple replacement done, starting hint decode"
+	with open('temp.md','r') as mdFile:
+		for line in mdFile:
+			videKey=pattern.search(line)
+			if "!!!" in line:
+				if annotationTarget==1:
+					line="{% endnote %}\n"+line
+				else:
+					annotationTarget=1
+				tagKey=re.findall(r'\".*?\"',line)
+				# if 'hint' in line.lower():
+					# line = re.sub(r'.*!!!.*', '{% note info %}',line) + '\t'+ tagKey[0]
+				if 'hint' or 'note' or 'caution' or 'unknow' or 'question' or 'danger' or 'attention' in line.lower():
+				# if 'note' or 'caution' or 'unknow' or 'question' or 'danger' in line.lower():
+					line = re.sub(r'.*!!!.*', '{% note success %}',line) + '\t'+ tagKey[0] + '\n'
+				lostTarget=0
+	
+				# if "\t" in line:
+					# line = re.sub(r"\t", '',line)			
+				# print line
+			# print videKey
+			if videKey and annotationTarget:
+				# print videKey
+				line = re.sub(r"^\s*", '' ,line)
+				# lostTarget=0
+			elif (not videKey) and annotationTarget:
+				lostTarget+=1
+			if lostTarget==2:
+				line = re.sub(r"^\s*", '' ,line)
+				line=line+"{% endnote %}\n"
+				annotationTarget=0
+				lostTarget=0
+			# print line
+			open(postPath, 'a+' ).write(line)
+	os.remove('temp.md')
+
+
+
+##
+## 1.8 复制照片文件夹
+##
+
+mediaSourceFolder = mediaFolder.replace('\\','/')
+# print mediaSourceFolder
+
+if modeSwitch and int(ifhexo):
+	print "==== Hint Decoded, Coping images"
+	# print imagesHexoExiste,imagesHexoDir
+	# shutil.wait()
+	# RMDIR /S
+	shutil.rmtree(imagesHexoDir)
+	time.sleep(2)
+	# rmImages = subprocess.Popen("rm -force -Recurse " + imagesHexoDir, shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+	# rmImages.wait()
+	shutil.copytree(mediaSourceFolder, imagesHexoDir)
+	time.sleep(2)
+
+
+##
+## 1.9 运行hexo命令
+##
+
+if modeSwitch and int(ifhexo):
+	print "==== Delete original HTMLs"
+	executeCommand("hexo clean", hexoDir)
+	print "==== Generate new HTMLs "
+	executeCommand("hexo g", hexoDir)
+	print "==== Uplading to Hexo GitPage "
+	executeCommand("hexo d", hexoDir)
+
+##
+## 1.10 运行git命令
+##
+
+if modeSwitch and int(ifhexo):
+	print "==== Git hexo stage all "
+	executeCommand("git add .", hexoDir)
+	print "==== Git hexo commit all "
+	executeCommand("git commit -m ", hexoDir, commentContent)
 	print "==== All filed uploaded to Github "
+	executeCommand("git push -u origin hexo", hexoDir)
 
 
 

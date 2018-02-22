@@ -19,6 +19,23 @@
 A { text-decoration: none} 
 A:hover { text-decoration:underline;} 
 
+
+img {
+  box-shadow: 1px 1px 10px #d3d3d3;
+  height: auto;
+  max-width: 60vw;
+}
+
+/*img {
+  border: 0px dotted #e6e6e6;
+  padding: 0em;
+  max-width:2.5rem;
+  max-height:500px;
+  box-shadow: 1px 1px 10px #d3d3d3;
+  overflow:hidden;
+  zoom: 0.65;
+}*/
+
 .markdown-body {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -1129,7 +1146,7 @@ For Level Colors
     page-break-after: avoid;
   }
 }
-</style><style>/*github*/
+</style><script type='text/javascript' src='Markdown_vi/lazyload.js'></script><style>/*github*/
 .codehilite {background-color:#fff;color:#333333;}
 .codehilite .hll {background-color:#ffffcc;}
 .codehilite .c{color:#999988;font-style:italic}
@@ -1375,6 +1392,16 @@ MathJax.Hub.Config({
 <li><a href="#4-raspberry-arduino">4 Raspberry 和 Arduino 串口通信</a><ul>
 <li><a href="#41">4.1 配置协议</a></li>
 <li><a href="#42-json">4.2 Json解码</a></li>
+<li><a href="#43-mongodb">4.3 mongodb 数据库</a></li>
+<li><a href="#44-django">4.4 Django 框架</a><ul>
+<li><a href="#441">4.4.1 初始化</a></li>
+<li><a href="#442">4.4.2 部署</a></li>
+</ul>
+</li>
+<li><a href="#45">4.5</a><ul>
+<li><a href="#python-flask-restful-api">使用 Python 和 Flask 设计 RESTful API</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#5-arduino">5 Arduino 四轴飞行器</a><ul>
@@ -1762,8 +1789,8 @@ cond(no)-&gt;sub1(right)-&gt;op1
 <h1 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1 传感器 执行器</h1>
 <h2 id="11-arduino"><a name="user-content-11-arduino" href="#11-arduino" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1.1 Arduino传感器模块示例</h2>
 <h3 id="111-ir"><a name="user-content-111-ir" href="#111-ir" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1.1.1 IR 模块</h3>
-<div class="codehilite"><pre><span class="cp">#include &lt;IRremote.h&gt;</span>
-<span class="cp">#include &lt;IRremoteInt.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;IRremote.h&gt;</span>
+<span class="cp"># include &lt;IRremoteInt.h&gt;</span>
 
 <span class="kt">int</span> <span class="n">receiver</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span> <span class="c1">// Signal Pin of IR receiver to Arduino Digital Pin 13</span>
 
@@ -1904,9 +1931,9 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 
 <h3 id="113"><a name="user-content-113" href="#113" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1.1.3 超声波测距</h3>
-<div class="codehilite"><pre><span class="cp">#include &lt;SR04.h&gt;</span>
-<span class="cp">#define TRIG_PIN 12</span>
-<span class="cp">#define ECHO_PIN 11</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;SR04.h&gt;</span>
+<span class="cp"># define TRIG_PIN 12</span>
+<span class="cp"># define ECHO_PIN 11</span>
 <span class="n">SR04</span> <span class="n">sr04</span> <span class="o">=</span> <span class="n">SR04</span><span class="p">(</span><span class="n">ECHO_PIN</span><span class="p">,</span><span class="n">TRIG_PIN</span><span class="p">);</span>
 <span class="kt">long</span> <span class="n">a</span><span class="p">;</span>
 
@@ -1925,7 +1952,7 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 
 <h3 id="114"><a name="user-content-114" href="#114" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1.1.4 温度湿度</h3>
-<div class="codehilite"><pre><span class="cp">#include &lt;SimpleDHT.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;SimpleDHT.h&gt;</span>
 
 <span class="c1">// for DHT11,</span>
 <span class="c1">//      VCC: 5V or 3V</span>
@@ -2057,9 +2084,9 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 <h3 id="118-led"><a name="user-content-118-led" href="#118-led" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>1.1.8 彩色LED</h3>
 <div class="codehilite"><pre><span class="c1">// Define Pins</span>
-<span class="cp">#define BLUE 3</span>
-<span class="cp">#define GREEN 5</span>
-<span class="cp">#define RED 6</span>
+<span class="cp"># define BLUE 3</span>
+<span class="cp"># define GREEN 5</span>
+<span class="cp"># define RED 6</span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span>
 <span class="p">{</span>
@@ -2079,7 +2106,7 @@ cond(no)-&gt;sub1(right)-&gt;op1
 <span class="c1">// main loop</span>
 <span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span>
 <span class="p">{</span>
-<span class="cp">#define delayTime 10 </span><span class="c1">// fading time between colors</span>
+<span class="cp"># define delayTime 10 </span><span class="c1">// fading time between colors</span>
 
 <span class="n">redValue</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span> <span class="c1">// choose a value between 1 and 255 to change the color.</span>
 <span class="n">greenValue</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -2261,7 +2288,7 @@ cond(no)-&gt;sub1(right)-&gt;op1
 <span class="c1">// https://bblanchon.github.io/ArduinoJson/</span>
 <span class="c1">// If you like this project, please add a star!</span>
 
-<span class="cp">#include &lt;ArduinoJson.h&gt;</span>
+<span class="cp"># include &lt;ArduinoJson.h&gt;</span>
 
 <span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
   <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
@@ -2344,7 +2371,7 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 
 <h3 id="215"><a name="user-content-215" href="#215" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.1.5 代码整合</h3>
-<div class="codehilite"><pre><span class="cp">#include &lt;ArduinoJson.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;ArduinoJson.h&gt;</span>
 
 <span class="kt">void</span> <span class="nf">jsonBuffer</span><span class="p">(</span><span class="kt">long</span> <span class="n">ti</span><span class="p">,</span> <span class="kt">int</span> <span class="n">ir</span><span class="p">,</span><span class="kt">int</span> <span class="n">di</span><span class="p">,</span> <span class="kt">int</span> <span class="n">te</span><span class="p">,</span> <span class="kt">int</span> <span class="n">hu</span><span class="p">,</span> <span class="kt">int</span> <span class="n">li</span><span class="p">)</span> <span class="p">{</span>
 <span class="n">StaticJsonBuffer</span><span class="o">&lt;</span><span class="mi">70</span><span class="o">&gt;</span> <span class="n">jsonBuffer</span><span class="p">;</span>
@@ -2386,8 +2413,8 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 
 <h3 id="216"><a name="user-content-216" href="#216" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.1.6 时间函数库</h3>
-<div class="codehilite"><pre><span class="cp">#include &lt;Time.h&gt;</span>
-<span class="cp">#include &lt;TimeLib.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;Time.h&gt;</span>
+<span class="cp"># include &lt;TimeLib.h&gt;</span>
 
 <span class="c1">//The functions available in the library include</span>
 <span class="n">hour</span><span class="p">();</span>            <span class="c1">// the hour now  (0-23)</span>
@@ -2427,21 +2454,21 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 
 <h3 id="217-arduino"><a name="user-content-217-arduino" href="#217-arduino" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.1.7 改造并集成Arduino传感器</h3>
-<div class="codehilite"><pre><span class="cp">#include &lt;Time.h&gt;</span>
-<span class="cp">#include &lt;TimeLib.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;Time.h&gt;</span>
+<span class="cp"># include &lt;TimeLib.h&gt;</span>
 
-<span class="cp">#include &lt;ArduinoJson.h&gt;</span>
+<span class="cp"># include &lt;ArduinoJson.h&gt;</span>
 
-<span class="cp">#include &lt;IRremote.h&gt;</span>
-<span class="cp">#include &lt;IRremoteInt.h&gt;</span>
+<span class="cp"># include &lt;IRremote.h&gt;</span>
+<span class="cp"># include &lt;IRremoteInt.h&gt;</span>
 
-<span class="cp">#include &lt;SR04.h&gt;</span>
-<span class="cp">#define TRIG_PIN 12</span>
-<span class="cp">#define ECHO_PIN 11</span>
+<span class="cp"># include &lt;SR04.h&gt;</span>
+<span class="cp"># define TRIG_PIN 12</span>
+<span class="cp"># define ECHO_PIN 11</span>
 <span class="n">SR04</span> <span class="n">sr04</span> <span class="o">=</span> <span class="n">SR04</span><span class="p">(</span><span class="n">ECHO_PIN</span><span class="p">,</span><span class="n">TRIG_PIN</span><span class="p">);</span>
 
-<span class="c1">//#include &lt;SimpleDHT.h&gt; int pinDHT11 = 2; SimpleDHT11 dht11;</span>
-<span class="cp">#include &lt;DHT.h&gt;</span>
+<span class="c1">//# include &lt;SimpleDHT.h&gt; int pinDHT11 = 2; SimpleDHT11 dht11;</span>
+<span class="cp"># include &lt;DHT.h&gt;</span>
 <span class="n">DHT</span> <span class="n">dht</span><span class="p">;</span>
 
 <span class="kt">int</span> <span class="n">lightPin</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -2616,23 +2643,23 @@ cond(no)-&gt;sub1(right)-&gt;op1
 
 
 <h2 id="22"><a name="user-content-22" href="#22" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>2.2 集成多任务控制</h2>
-<div class="codehilite"><pre><span class="cp">#include &lt;Time.h&gt;</span>
-<span class="cp">#include &lt;TimeLib.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;Time.h&gt;</span>
+<span class="cp"># include &lt;TimeLib.h&gt;</span>
 
-<span class="cp">#include &lt;TimedAction.h&gt;</span>
+<span class="cp"># include &lt;TimedAction.h&gt;</span>
 
-<span class="cp">#include &lt;ArduinoJson.h&gt;</span>
+<span class="cp"># include &lt;ArduinoJson.h&gt;</span>
 
-<span class="cp">#include &lt;IRremote.h&gt;</span>
-<span class="cp">#include &lt;IRremoteInt.h&gt;</span>
+<span class="cp"># include &lt;IRremote.h&gt;</span>
+<span class="cp"># include &lt;IRremoteInt.h&gt;</span>
 
-<span class="cp">#include &lt;SR04.h&gt;</span>
-<span class="cp">#define TRIG_PIN 12</span>
-<span class="cp">#define ECHO_PIN 11</span>
+<span class="cp"># include &lt;SR04.h&gt;</span>
+<span class="cp"># define TRIG_PIN 12</span>
+<span class="cp"># define ECHO_PIN 11</span>
 <span class="n">SR04</span> <span class="n">sr04</span> <span class="o">=</span> <span class="n">SR04</span><span class="p">(</span><span class="n">ECHO_PIN</span><span class="p">,</span><span class="n">TRIG_PIN</span><span class="p">);</span>
 
-<span class="c1">//#include &lt;SimpleDHT.h&gt; int pinDHT11 = 2; SimpleDHT11 dht11;</span>
-<span class="cp">#include &lt;DHT.h&gt;</span>
+<span class="c1">//# include &lt;SimpleDHT.h&gt; int pinDHT11 = 2; SimpleDHT11 dht11;</span>
+<span class="cp"># include &lt;DHT.h&gt;</span>
 <span class="n">DHT</span> <span class="n">dht</span><span class="p">;</span>
 
 <span class="kt">int</span> <span class="n">lightPin</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -2918,9 +2945,9 @@ sudo passwd pi
 <p>插上优盘，执行命令。<br />
 <strong>sudo sh b.sh</strong></p>
 <div class="codehilite"><pre><span class="ch">#!/bin/sh</span>
-<span class="c1">#install tools</span>
+<span class="c1"># install tools</span>
 sudo apt-get -y install rsync dosfstools parted kpartx exfat-fuse
-<span class="c1">#mount USB device</span>
+<span class="c1"># mount USB device</span>
 <span class="nv">usbmount</span><span class="o">=</span>/mnt
 mkdir -p <span class="nv">$usbmount</span>
 <span class="k">if</span> <span class="o">[</span> -z <span class="nv">$1</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
@@ -2940,10 +2967,10 @@ mkdir -p <span class="nv">$usbmount</span>
   <span class="nb">exit </span>0
 <span class="k">fi</span>
 <span class="nv">img</span><span class="o">=</span><span class="nv">$usbmount</span>/rpi-<span class="sb">`</span>date +%Y%m%d-%H%M<span class="sb">`</span>.img
-<span class="c1">#img=$usbmount/rpi.img</span>
+<span class="c1"># img=$usbmount/rpi.img</span>
 <span class="nb">echo</span> <span class="o">=====================</span> part 1, create a new blank <span class="nv">img</span> <span class="o">===============================</span>
 <span class="c1"># New img file</span>
-<span class="c1">#sudo rm $img</span>
+<span class="c1"># sudo rm $img</span>
 <span class="nv">bootsz</span><span class="o">=</span><span class="sb">`</span>df -P <span class="p">|</span> grep /boot <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
 <span class="nv">rootsz</span><span class="o">=</span><span class="sb">`</span>df -P <span class="p">|</span> grep /dev/root <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span><span class="sb">`</span>
 <span class="nv">totalsz</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="nv">$bootsz</span> <span class="nv">$rootsz</span> <span class="p">|</span> awk <span class="s1">&#39;{print int(($1+$2)*1.3)}&#39;</span><span class="sb">`</span>
@@ -2953,7 +2980,7 @@ sudo dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="
 <span class="nv">bootend</span><span class="o">=</span><span class="sb">`</span>sudo fdisk -l /dev/mmcblk0 <span class="p">|</span> grep mmcblk0p1 <span class="p">|</span> awk <span class="s1">&#39;{print $3}&#39;</span><span class="sb">`</span>
 <span class="nv">rootstart</span><span class="o">=</span><span class="sb">`</span>sudo fdisk -l /dev/mmcblk0 <span class="p">|</span> grep mmcblk0p2 <span class="p">|</span> awk <span class="s1">&#39;{print $2}&#39;</span><span class="sb">`</span>
 <span class="nb">echo</span> <span class="s2">&quot;boot: </span><span class="nv">$bootstart</span><span class="s2"> &gt;&gt;&gt; </span><span class="nv">$bootend</span><span class="s2">, root: </span><span class="nv">$rootstart</span><span class="s2"> &gt;&gt;&gt; end&quot;</span>
-<span class="c1">#rootend=`sudo fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk &#39;{print $3}&#39;`</span>
+<span class="c1"># rootend=`sudo fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk &#39;{print $3}&#39;`</span>
 sudo parted <span class="nv">$img</span> --script -- mklabel msdos
 sudo parted <span class="nv">$img</span> --script -- mkpart primary fat32 <span class="si">${</span><span class="nv">bootstart</span><span class="si">}</span>s <span class="si">${</span><span class="nv">bootend</span><span class="si">}</span>s
 sudo parted <span class="nv">$img</span> --script -- mkpart primary ext4 <span class="si">${</span><span class="nv">rootstart</span><span class="si">}</span>s -1
@@ -3004,7 +3031,7 @@ sudo rsync --force -rltWDEgop --delete --stats --progress <span class="se">\</sp
   sudo mkdir <span class="nv">$mountr</span>/tmp
   sudo chmod a+w <span class="nv">$mountr</span>/tmp
 <span class="k">fi</span>
-<span class="c1">#sudo rm -f $mountr/etc/udev/rules.d/70-persistent-net.rules</span>
+<span class="c1"># sudo rm -f $mountr/etc/udev/rules.d/70-persistent-net.rules</span>
 sync
 ls -lia <span class="nv">$mountr</span>/home/pi/
 <span class="nb">echo</span> <span class="s2">&quot;...Root partition done&quot;</span>
@@ -3263,7 +3290,7 @@ sudo tar -C ~/dogtunnel/dt -xzf dtunnel_linux_arm_0.80.tgz
 <div class="codehilite"><pre>cd dt
 chmod +x ./dtunnel
 ./dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
-#任意目录可执行命令
+# 任意目录可执行命令
 /home/pi/dogtunnel/dt/dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
 </pre></div>
 
@@ -3282,7 +3309,7 @@ sudo tar -C /home/liang/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
 <div class="codehilite"><pre>cd dt
 chmod +x ./dtunnel
 ./dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
-#任意目录可执行
+# 任意目录可执行
 /home/liang/dogtunnel/dt/dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
 </pre></div>
 
@@ -3290,9 +3317,9 @@ chmod +x ./dtunnel
 <h3 id="333"><a name="user-content-333" href="#333" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.3.3 添加开机自启动脚本</h3>
 <h4 id="3330"><a name="user-content-3330" href="#3330" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.3.3.0 准备步骤</h4>
 <p><strong>将命令更改为后台运行并且任意目录可执行</strong></p>
-<div class="codehilite"><pre><span class="c1">#服务端 Raspbian</span>
+<div class="codehilite"><pre><span class="c1"># 服务端 Raspbian</span>
 <span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">clientkey</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
-<span class="c1">#客户端 66</span>
+<span class="c1"># 客户端 66</span>
 <span class="n">sudo</span> <span class="n">nohup</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">link</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">clientkey</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
 <span class="c1"># 日志文件目录权限问题</span>
 <span class="n">nohup</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">/</span><span class="n">dt</span><span class="o">/</span><span class="n">dtunnel</span> <span class="o">-</span><span class="n">reg</span> <span class="n">xxx</span> <span class="o">-</span><span class="n">local</span> <span class="p">:</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">clientkey</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="o">-</span><span class="n">v</span> <span class="mi">2</span><span class="o">&gt;&amp;</span> <span class="mi">1</span> <span class="mi">1</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">dogtunnel</span><span class="o">.</span><span class="n">log</span> <span class="o">&amp;</span>
@@ -3438,10 +3465,10 @@ A backup will be made to: /root/.bashrc-miniconda3.bak</p>
 <span class="c1"># Bdd the following line to the end of the file</span>
 <span class="n">export</span> <span class="n">PATH</span><span class="o">=</span><span class="s">&quot;/home/pi/miniconda3/bin:$PATH&quot;</span>
 
-<span class="c1">#Save and close this file</span>
+<span class="c1"># Save and close this file</span>
 <span class="n">source</span> <span class="o">~/.</span><span class="n">bashrc</span>
 <span class="n">python</span> <span class="o">-</span><span class="n">version</span>
-<span class="c1">#Python 3.4.3 :: Continuum Analytics, Inc.</span>
+<span class="c1"># Python 3.4.3 :: Continuum Analytics, Inc.</span>
 
 <span class="n">sudo</span> <span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">pi</span> <span class="n">miniconda3</span>
 <span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="nb">set</span> <span class="n">show_channel_urls</span> <span class="bp">True</span>
@@ -3461,7 +3488,7 @@ A backup will be made to: /root/.bashrc-miniconda3.bak</p>
 <p><strong>配置Pyserial</strong></p>
 <div class="codehilite"><pre><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">py2</span><span class="o">.</span><span class="mi">7</span> <span class="n">python</span><span class="o">=</span><span class="mf">2.7</span>
 <span class="n">source</span> <span class="n">activate</span> <span class="n">py27</span>
-<span class="c1">#通过-c指定通过某个channel安装</span>
+<span class="c1"># 通过-c指定通过某个channel安装</span>
 <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">pyserial</span>
 </pre></div>
 
@@ -3476,29 +3503,29 @@ A backup will be made to: /root/.bashrc-miniconda3.bak</p>
 <h3 id="342"><a name="user-content-342" href="#342" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.4.2 参考命令</h3>
 <h4 id="3421"><a name="user-content-3421" href="#3421" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.4.2.1 卸载</h4>
 <div class="codehilite"><pre><span class="n">sudo</span> <span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="o">~/</span><span class="n">miniconda3</span> <span class="o">~/.</span><span class="n">condarc</span> <span class="o">~/.</span><span class="n">conda</span> <span class="o">~/.</span><span class="n">continuum</span>
-<span class="c1">#remove the anaconda directory from your PATH environment variable</span>
+<span class="c1"># remove the anaconda directory from your PATH environment variable</span>
 <span class="n">sudo</span> <span class="n">nano</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/.</span><span class="n">bashrc</span>
 <span class="n">source</span> <span class="o">~/.</span><span class="n">bashrc</span>
 </pre></div>
 
 
 <h4 id="3422"><a name="user-content-3422" href="#3422" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>3.4.2.2 常用命令</h4>
-<div class="codehilite"><pre><span class="c1">#查看列表</span>
+<div class="codehilite"><pre><span class="c1"># 查看列表</span>
 <span class="n">conda</span> <span class="nb">list</span>
 
-<span class="c1">#更新</span>
+<span class="c1"># 更新</span>
 <span class="n">conda</span> <span class="n">update</span> <span class="n">conda</span>
 
-<span class="c1">#环境</span>
+<span class="c1"># 环境</span>
 <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">env_vi</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.4</span><span class="o">.</span><span class="mi">3</span>
 <span class="n">conda</span> <span class="n">env</span> <span class="nb">list</span>
 
-<span class="c1">#切换新环境</span>
+<span class="c1"># 切换新环境</span>
 <span class="n">source</span> <span class="n">activate</span> <span class="n">py27</span>
-<span class="c1">#退出环境，也可以使用`activate root`切回root环境</span>
+<span class="c1"># 退出环境，也可以使用`activate root`切回root环境</span>
 <span class="n">source</span> <span class="n">activate</span> <span class="n">root</span>
 <span class="n">source</span> <span class="n">deactivate</span> <span class="n">py27</span>
-<span class="c1">#移除环境</span>
+<span class="c1"># 移除环境</span>
 <span class="n">conda</span> <span class="n">remove</span> <span class="o">--</span><span class="nb">all</span> <span class="o">-</span><span class="n">n</span> <span class="n">py27</span>
 <span class="c1"># 创建只有django的python2环境，名字py2-dj，注意，python=2 django是连续参数</span>
 <span class="n">conda</span> <span class="n">create</span> <span class="n">python</span><span class="o">=</span><span class="mi">2</span> <span class="n">django</span> <span class="o">-</span><span class="n">n</span> <span class="n">py2</span><span class="o">-</span><span class="n">dj</span>
@@ -3517,7 +3544,7 @@ A backup will be made to: /root/.bashrc-miniconda3.bak</p>
 <p>installing CUPS</p>
 <div class="codehilite"><pre>sudo apt-get update
 sudo apt-get install cups
-<span class="c1">#The usergroup created by CUPS is “lpadmin”. The default Rasbian user (and the user we’re logged into) is “pi” (adjust the following command accordingly if you want a different user to have access to the printer).</span>
+<span class="c1"># The usergroup created by CUPS is “lpadmin”. The default Rasbian user (and the user we’re logged into) is “pi” (adjust the following command accordingly if you want a different user to have access to the printer).</span>
 sudo usermod -a -G lpadmin pi
 </pre></div>
 
@@ -3571,14 +3598,14 @@ sudo usermod -a -G lpadmin pi
 <p>电脑连接<br />
 <a href="http://192.168.1.111:631/printers/Vi.Canon">http://192.168.1.111:631/printers/Vi.Canon</a></p>
 <p>注册为谷歌print</p>
-<div class="codehilite"><pre><span class="c1">#安装</span>
+<div class="codehilite"><pre><span class="c1"># 安装</span>
 git clone https://github.com/armooo/cloudprint.git
 sudo apt-get install libcups2-dev
 sudo pip3 install pycups
 apt-get install python-cups
 sudo apt-get install python3-dev
 sudo pip install daemon
-<span class="c1">#sudo python setup.py install</span>
+<span class="c1"># sudo python setup.py install</span>
 sudo pip install cloudprint
 </pre></div>
 
@@ -3623,7 +3650,7 @@ nano /etc/resolv.conf
 
 
 <p>in your terminal. You will have a blank slate to work with. Next copy and paste the following code:</p>
-<div class="codehilite"><pre><span class="c1">#Google Servers</span>
+<div class="codehilite"><pre><span class="c1"># Google Servers</span>
 <span class="n">nameserver</span> <span class="mf">8.8</span><span class="o">.</span><span class="mf">8.8</span>
 <span class="n">nameserver</span> <span class="mf">8.8</span><span class="o">.</span><span class="mf">4.4</span>
 </pre></div>
@@ -3764,8 +3791,8 @@ sudo systemctl status saned.socket</p>
             <span class="c1">#tempData[&quot;Triger&quot;] # will return &#39;blabla&#39;</span>
             <span class="k">print</span><span class="p">(</span><span class="n">tempData</span><span class="p">)</span>
 
-<span class="c1">#data[&quot;masks&quot;][&quot;id&quot;]    # will return &#39;valore&#39;</span>
-<span class="c1">#data[&quot;om_points&quot;]      # will return &#39;value&#39;</span>
+<span class="c1"># data[&quot;masks&quot;][&quot;id&quot;]    # will return &#39;valore&#39;</span>
+<span class="c1"># data[&quot;om_points&quot;]      # will return &#39;value&#39;</span>
 </pre></div>
 
 
@@ -3830,6 +3857,103 @@ sudo systemctl status saned.socket</p>
 </pre></div>
 
 
+<h2 id="43-mongodb"><a name="user-content-43-mongodb" href="#43-mongodb" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.3 mongodb 数据库</h2>
+<div class="codehilite"><pre><span class="hll">&lt;!-- win --&gt;
+</span>choco install mongodb
+
+&lt;!-- Raspbian --&gt;
+sudo apt install mongodb
+</pre></div>
+
+
+<h2 id="44-django"><a name="user-content-44-django" href="#44-django" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.4 Django 框架</h2>
+<h3 id="441"><a name="user-content-441" href="#441" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.4.1 初始化</h3>
+<ul>
+<li>安装框架</li>
+</ul>
+<div class="codehilite"><pre><span class="hll"><span class="c1">#最后支持py2.7的版本</span>
+</span><span class="n">pip</span> <span class="n">install</span> <span class="n">Django</span><span class="o">==</span><span class="mf">1.11</span><span class="o">.</span><span class="mi">10</span>
+
+<span class="n">pip</span> <span class="n">install</span> <span class="n">djangorestframework</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">markdown</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">django</span><span class="o">-</span><span class="nb">filter</span>
+
+<span class="n">pip</span> <span class="n">install</span> <span class="n">mongoengine</span>
+<span class="c1">#PY time zone</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">pytz</span>
+</pre></div>
+
+
+<ul>
+<li>创建项目和app</li>
+</ul>
+<div class="codehilite"><pre><span class="hll"><span class="n">django</span><span class="o">-</span><span class="n">admin</span> <span class="n">startproject</span> <span class="n">vps</span>
+</span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">startapp</span> <span class="n">sensors</span>
+</pre></div>
+
+
+<ul>
+<li>初始化数据库链表</li>
+</ul>
+<div class="codehilite"><pre><span class="hll"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+</span></pre></div>
+
+
+<ul>
+<li>初始化app链表</li>
+</ul>
+<div class="codehilite"><pre><span class="hll"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span> <span class="n">sensors</span>
+</span></pre></div>
+
+
+<p>If you edit your models.py file in order to add, remove, or change fields of existing models, or if you add new models, you will have to make a new migration using the makemigrations command. The migration will allow Django to keep track of model changes. Then you will have to apply it with the migrate command to keep the <br />
+database in sync with your models.</p>
+<ul>
+<li>运行调试</li>
+</ul>
+<div class="codehilite"><pre><span class="hll"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">shell</span>
+</pre></div>
+
+
+<ul>
+<li>administration</li>
+</ul>
+<div class="codehilite"><pre><span class="hll"><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</span></pre></div>
+
+
+<p>curl.exe -u lencshu:169088@Dj -X POST -d &ldquo;temperature=1&amp;distance=1&rdquo; <a href="http://127.0.0.1:8000/api/subjects/">http://127.0.0.1:8000/api/subjects/</a></p>
+<h3 id="442"><a name="user-content-442" href="#442" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.4.2 部署</h3>
+<h2 id="45"><a name="user-content-45" href="#45" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.5</h2>
+<h3 id="python-flask-restful-api"><a name="user-content-python-flask-restful-api" href="#python-flask-restful-api" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>使用 Python 和 Flask 设计 RESTful API</h3>
+<p>什么是 REST？<br />
+六条设计规范定义了一个 REST 系统的特点:</p>
+<p>客户端-服务器: 客户端和服务器之间隔离，服务器提供服务，客户端进行消费。<br />
+无状态: 从客户端到服务器的每个请求都必须包含理解请求所必需的信息。换句话说， 服务器不会存储客户端上一次请求的信息用来给下一次使用。<br />
+可缓存: 服务器必须明示客户端请求能否缓存。<br />
+分层系统: 客户端和服务器之间的通信应该以一种标准的方式，就是中间层代替服务器做出响应的时候，客户端不需要做任何变动。<br />
+统一的接口: 服务器和客户端的通信方法必须是统一的。<br />
+按需编码: 服务器可以提供可执行代码或脚本，为客户端在它们的环境中执行。这个约束是唯一一个是可选的。<br />
+什么是一个 RESTful 的 web service？<br />
+REST 架构的最初目的是适应万维网的 HTTP 协议。</p>
+<p>RESTful web services 概念的核心就是“资源”。 资源可以用 URI 来表示。客户端使用 HTTP 协议定义的方法来发送请求到这些 URIs，当然可能会导致这些被访问的”资源“状态的改变。</p>
+<p>HTTP 标准的方法有如下:</p>
+<p>==========  =====================  ==================================<br />
+HTTP 方法   行为                   示例<br />
+==========  =====================  ==================================<br />
+GET         获取资源的信息         <a href="http://example.com/api/orders">http://example.com/api/orders</a><br />
+GET         获取某个特定资源的信息 <a href="http://example.com/api/orders/123">http://example.com/api/orders/123</a><br />
+POST        创建新资源             <a href="http://example.com/api/orders">http://example.com/api/orders</a><br />
+PUT         更新资源               <a href="http://example.com/api/orders/123">http://example.com/api/orders/123</a><br />
+DELETE      删除资源               <a href="http://example.com/api/orders/123">http://example.com/api/orders/123</a><br />
+==========  ====================== ==================================<br />
+REST 设计不需要特定的数据格式。在请求中数据可以以 JSON 形式, 或者有时候作为 url 中查询参数项。</p>
+<p>安装flask</p>
+<div class="codehilite"><pre><span class="hll"><span class="n">pip</span> <span class="n">install</span> <span class="n">flask</span>
+</span></pre></div>
+
+
 <hr />
 <h1 id="5-arduino"><a name="user-content-5-arduino" href="#5-arduino" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5 Arduino 四轴飞行器</h1>
 <h2 id="51-i2c"><a name="user-content-51-i2c" href="#51-i2c" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5.1 I2C通讯</h2>
@@ -3844,8 +3968,8 @@ sudo systemctl status saned.socket</p>
 -罗盘数据 3 axis digital Magnetometer (compass) from Honeywell (HMC5883L), I2C Address:  0x1E <br />
 -气压计 Barometric Pressure and Temperature Sensor from Bosch (BMP085), I2C Address:  0x77 </p>
 <h4 id="5111"><a name="user-content-5111" href="#5111" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5.1.1.1 集合库示例</h4>
-<div class="codehilite"><pre><span class="cp">#include &lt;Wire.h&gt;</span>
-<span class="cp">#include &lt;GY80.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;Wire.h&gt;</span>
+<span class="cp"># include &lt;GY80.h&gt;</span>
 
 <span class="n">GY80</span> <span class="n">sensor</span> <span class="o">=</span> <span class="n">GY80</span><span class="p">();</span> <span class="c1">//create GY80 instance</span>
 
@@ -3897,7 +4021,7 @@ sudo systemctl status saned.socket</p>
 
 <h4 id="5112"><a name="user-content-5112" href="#5112" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5.1.1.2 集合库使用说明</h4>
 <p>Copy Folder to Arduino/libraries</p>
-<div class="codehilite"><pre><span class="cp">#include &lt;GY80.h&gt;</span>
+<div class="codehilite"><pre><span class="cp"># include &lt;GY80.h&gt;</span>
 
 <span class="c1">//Create the GY80 class (here named sensor):</span>
 <span class="n">GY80</span> <span class="n">sensor</span> <span class="o">=</span> <span class="n">GY80</span><span class="p">();</span>
@@ -4063,11 +4187,11 @@ sudo systemctl status saned.socket</p>
 </ol>
 <h3 id="512"><a name="user-content-512" href="#512" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>5.1.2 地址冲突问题</h3>
 <div class="codehilite"><pre><span class="c1">//.h文件里</span>
-<span class="c1">//#define HMC5983_Address 0x1E    //把这行注销掉</span>
-<span class="cp">#define ConfigurationRegisterA 0x00</span>
-<span class="cp">#define ConfigurationRegisterB 0x01</span>
-<span class="cp">#define ModeRegister 0x02</span>
-<span class="cp">#define DataRegisterBegin 0x03</span>
+<span class="c1">//# define HMC5983_Address 0x1E    //把这行注销掉</span>
+<span class="cp"># define ConfigurationRegisterA 0x00</span>
+<span class="cp"># define ConfigurationRegisterB 0x01</span>
+<span class="cp"># define ModeRegister 0x02</span>
+<span class="cp"># define DataRegisterBegin 0x03</span>
 
 <span class="c1">//.cpp 里改成这样</span>
 <span class="n">HMC5983</span><span class="o">::</span><span class="n">HMC5983</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">Addr</span><span class="p">)</span>
@@ -4107,7 +4231,7 @@ sudo systemctl status saned.socket</p>
 <hr />
 <h1 id="6-raspberry-arduino"><a name="user-content-6-raspberry-arduino" href="#6-raspberry-arduino" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6 Raspberry 和 Arduino 蓝牙通信</h1>
 <h2 id="61-pybluez"><a name="user-content-61-pybluez" href="#61-pybluez" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6.1 pybluez 库</h2>
-<div class="codehilite"><pre><span class="c1">#安装配置依赖库</span>
+<div class="codehilite"><pre><span class="c1"># 安装配置依赖库</span>
 <span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">bluetooth</span><span class="o">/</span><span class="n">bluez</span><span class="o">-</span><span class="mf">5.9</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
 <span class="n">tar</span> <span class="n">xvf</span> <span class="n">bluez</span><span class="o">-</span><span class="mf">5.9</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
@@ -4188,29 +4312,29 @@ sudo systemctl status saned.socket</p>
 <p>Save and reboot. Try removing the device then repairing and trusting the device with bluetoothctl</p>
 <div class="codehilite"><pre><span class="n">power</span> <span class="n">on</span>
 <span class="n">agent</span> <span class="n">on</span>
-<span class="c1">#The Bluetooth agent is what manages the Bluetooth &#39;pairing code&#39;. It can either respond to a &#39;pairing code&#39; coming in, or can send one out.</span>
+<span class="c1"># The Bluetooth agent is what manages the Bluetooth &#39;pairing code&#39;. It can either respond to a &#39;pairing code&#39; coming in, or can send one out.</span>
 <span class="n">scan</span> <span class="n">on</span>
 <span class="n">pair</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span> 
 <span class="n">trust</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span> 
-<span class="c1">#connect X*X*X*X*X*X </span>
+<span class="c1"># connect X*X*X*X*X*X </span>
 </pre></div>
 
 
 <p>Then connect to the device with terminal via:</p>
 <div class="codehilite"><pre><span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">watch</span> <span class="n">hci0</span>
 
-<span class="c1">#or</span>
+<span class="c1"># or</span>
 
-<span class="c1">#除了bluetoothctl，在Raspbian是shell中可以通过hciconfig来控制蓝牙模块。比如开关蓝牙模块</span>
+<span class="c1"># 除了bluetoothctl，在Raspbian是shell中可以通过hciconfig来控制蓝牙模块。比如开关蓝牙模块</span>
 <span class="n">sudo</span> <span class="n">hciconfig</span> <span class="n">hci0</span> <span class="n">up</span>   <span class="c1">#启动hci设备</span>
 <span class="n">sudo</span> <span class="n">hciconfig</span> <span class="n">hci0</span> <span class="n">down</span> <span class="c1">#关闭hci设备</span>
-<span class="c1">#命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器</span>
+<span class="c1"># 命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器</span>
 
 <span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">connect</span> <span class="mi">0</span> <span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span><span class="o">*</span><span class="n">X</span>  <span class="mi">1</span>
 
 <span class="n">sudo</span> <span class="n">rfcomm</span> <span class="n">watch</span> <span class="n">hci0</span>
 
-<span class="c1">#与此同时，你可以用下面命令来查看蓝牙设备的工作日志： </span>
+<span class="c1"># 与此同时，你可以用下面命令来查看蓝牙设备的工作日志： </span>
 
 <span class="n">hcidump</span>
 </pre></div>
@@ -4250,12 +4374,12 @@ The &ldquo;bind no&rdquo; is important, otherwise it will try to autmatically bi
 
 <h2 id="63-pythonshell"><a name="user-content-63-pythonshell" href="#63-pythonshell" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6.3 Python运行外部shell命令</h2>
 <h3 id="631-subprocess"><a name="user-content-631-subprocess" href="#631-subprocess" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>6.3.1 subprocess 库</h3>
-<div class="codehilite"><pre><span class="c1">#The os.system has many problems and subprocess is a much better way to executing unix command. The syntax is:</span>
+<div class="codehilite"><pre><span class="c1"># The os.system has many problems and subprocess is a much better way to executing unix command. The syntax is:</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s">&quot;command1&quot;</span><span class="p">)</span>
 <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s">&quot;command1&quot;</span><span class="p">,</span> <span class="s">&quot;arg1&quot;</span><span class="p">,</span> <span class="s">&quot;arg2&quot;</span><span class="p">])</span>
 
-<span class="c1">#subprocess模块中只定义了一个类: Popen。可以使用Popen来创建进程，并与进程进行复杂的交互。它的构造函数如下：</span>
+<span class="c1"># subprocess模块中只定义了一个类: Popen。可以使用Popen来创建进程，并与进程进行复杂的交互。它的构造函数如下：</span>
 
 <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">bufsize</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">executable</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stdin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">preexec_fn</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">close_fds</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">universal_newlines</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">startupinfo</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">creationflags</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -4272,13 +4396,13 @@ The &ldquo;bind no&rdquo; is important, otherwise it will try to autmatically bi
 <p>参数env是字典类型，用于指定子进程的环境变量。如果env = None，子进程的环境变量将从父进程中继承。</p>
 <p>参数Universal_newlines:不同操作系统下，文本的换行符是不一样的。如：windows下用’/r/n’表示换，而Linux下用’/n’。如果将此参数设置为True，Python统一把这些换行符当作’/n’来处理。</p>
 <p>参数startupinfo与createionflags只在windows下用效，它们将被传递给底层的CreateProcess()函数，用于设置子进程的一些属性，如：主窗口的外观，进程的优先级等等。</p>
-<div class="codehilite"><pre><span class="c1">#To store output to the output variable, run:</span>
+<div class="codehilite"><pre><span class="c1"># To store output to the output variable, run:</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="s">&quot;date&quot;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
 <span class="k">print</span> <span class="s">&quot;Today is&quot;</span><span class="p">,</span> <span class="n">output</span>
 
-<span class="c1">#get real time output:</span>
+<span class="c1"># get real time output:</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="n">cmdping</span> <span class="o">=</span> <span class="s">&quot;ping -c4 www.cyberciti.biz&quot;</span>
 <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmdping</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
@@ -4376,9 +4500,9 @@ nohup <span class="nb">command</span> <span class="p">&amp;</span>
 这之间的差别是带&amp;的命令行，即使terminal（终端）关闭，或者电脑死机程序依然运行（前提是你把程序递交到服务器上).它把标准输出(STDOUT)和标准错误（STDERR）结果输出到nohup.txt文件这个看似很方便，但是当输出很大的时候，nohup.txt文件会非常大，或者多个后台命令的时候大家都会输出到nohup.txt文件，不利于查找结果和调试程序。所以能够重定向输出会非常方便。下面要介绍标准输出，标准输入 和标准错误了。 <br />
 其实我们一直都在用，只是没有注意到，比如 </p>
 <div class="codehilite"><pre>&gt;./command.sh &gt; output
-<span class="c1">#这其中的&gt;就是标准输出符号，其实是 1&gt;output 的缩写</span>
+<span class="c1"># 这其中的&gt;就是标准输出符号，其实是 1&gt;output 的缩写</span>
 &gt;./command.sh 2&gt; output
-<span class="c1">#这里的2&gt;就是将标准错误输出到output文件里。 </span>
+<span class="c1"># 这里的2&gt;就是将标准错误输出到output文件里。 </span>
 </pre></div>
 
 
@@ -4709,10 +4833,10 @@ python setup.py bdist_wheel --qmake<span class="o">=</span>/usr/bin/qmake-qt4
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
 <span class="c1">#======导入库文件======</span>
-<span class="c1">#串口通信</span>
+<span class="c1"># 串口通信</span>
 <span class="kn">import</span> <span class="nn">serial</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="c1">#蓝牙通信</span>
+<span class="c1"># 蓝牙通信</span>
 <span class="kn">from</span> <span class="nn">pymultiwii</span> <span class="kn">import</span> <span class="n">MultiWii</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
@@ -4725,7 +4849,7 @@ python setup.py bdist_wheel --qmake<span class="o">=</span>/usr/bin/qmake-qt4
 <span class="n">arduinoSer</span> <span class="o">=</span> <span class="n">serial</span><span class="o">.</span><span class="n">Serial</span><span class="p">(</span><span class="n">serialPort</span><span class="p">,</span> <span class="mi">9600</span><span class="p">)</span>
 <span class="n">arduinoDrone</span> <span class="o">=</span> <span class="n">MultiWii</span><span class="p">(</span><span class="n">bluePort</span><span class="p">)</span>
 
-<span class="c1">#arduinoDrone.arm()</span>
+<span class="c1"># arduinoDrone.arm()</span>
 <span class="c1">#======主程序======</span>
 <span class="k">while</span> <span class="n">arduinoSer</span><span class="o">.</span><span class="n">isOpen</span><span class="p">():</span>
   <span class="c1">#======时间同步======</span>
@@ -5222,7 +5346,7 @@ update-rc.d servicename <span class="nb">enable</span>  <span class="o">[</span>
 <span class="c1"># Cancel service at giving Level</span>
 update-rc.d servicename disable  <span class="o">[</span>S<span class="p">|</span>2<span class="p">|</span>3<span class="p">|</span>4<span class="p">|</span>5<span class="o">]</span>
 
-<span class="c1">#设定启动级别 </span>
+<span class="c1"># 设定启动级别 </span>
 update-rc.d xxx<span class="o">(</span>脚本名<span class="o">)</span> start <span class="m">98</span> <span class="m">2</span> . 
     <span class="c1">#98 为启动序号，</span>
 ​    <span class="c1">#2是系统的运行级别，可自己调整，</span>
@@ -5339,7 +5463,7 @@ Save and exit</p>
 <div class="codehilite"><pre><span class="o">&gt;&gt;&gt;</span><span class="n">print</span><span class="p">(</span><span class="err">&#39;</span><span class="n">hello</span><span class="p">,</span> <span class="n">world</span><span class="err">&#39;</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span><span class="n">print</span><span class="p">(</span><span class="err">&#39;</span><span class="n">The</span> <span class="n">quick</span> <span class="n">brown</span> <span class="n">fox</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">jumps</span> <span class="n">over</span><span class="err">&#39;</span><span class="p">,</span> <span class="err">&#39;</span><span class="n">the</span> <span class="n">lazy</span> <span class="n">dog</span><span class="err">&#39;</span><span class="p">)</span>
 <span class="n">The</span> <span class="n">quick</span> <span class="n">brown</span> <span class="n">fox</span> <span class="n">jumps</span> <span class="n">over</span> <span class="n">the</span> <span class="n">lazy</span> <span class="n">dog</span>
-<span class="cp">#逗号自动转为空格</span>
+<span class="cp"># 逗号自动转为空格</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">print</span><span class="p">(</span><span class="err">&#39;</span><span class="mi">100</span> <span class="o">+</span> <span class="mi">200</span> <span class="o">=</span><span class="err">&#39;</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">200</span><span class="p">)</span>
 <span class="mi">100</span> <span class="o">+</span> <span class="mi">200</span> <span class="o">=</span> <span class="mi">300</span>
 </pre></div>
@@ -5405,7 +5529,7 @@ line1
 line2
 line3
 
-#写成程序
+# 写成程序
 print(&#39;&#39;&#39;line1
 line2
 line3&#39;&#39;&#39;)
@@ -5522,12 +5646,12 @@ False
 
 <p>list是一个可变的有序表</p>
 <p><em>追加</em></p>
-<div class="codehilite"><pre>#追加元素到末尾
+<div class="codehilite"><pre># 追加元素到末尾
 &gt;&gt;&gt; classmates.append(&#39;Adam&#39;)
 &gt;&gt;&gt; classmates
 [&#39;Michael&#39;, &#39;Bob&#39;, &#39;Tracy&#39;, &#39;Adam&#39;]
 
-#元素插入到指定的位置
+# 元素插入到指定的位置
 &gt;&gt;&gt; classmates.insert(1, &#39;Jack&#39;)
 &gt;&gt;&gt; classmates
 [&#39;Michael&#39;, &#39;Jack&#39;, &#39;Bob&#39;, &#39;Tracy&#39;, &#39;Adam&#39;]
@@ -5535,13 +5659,13 @@ False
 
 
 <p><em>删除</em></p>
-<div class="codehilite"><pre>#删除list末尾的元素
+<div class="codehilite"><pre># 删除list末尾的元素
 &gt;&gt;&gt; classmates.pop()
 &#39;Adam&#39;
 &gt;&gt;&gt; classmates
 [&#39;Michael&#39;, &#39;Jack&#39;, &#39;Bob&#39;, &#39;Tracy&#39;]
 
-#删除指定位置的元素
+# 删除指定位置的元素
 &gt;&gt;&gt; classmates.pop(1)
 &#39;Jack&#39;
 &gt;&gt;&gt; classmates
@@ -5559,7 +5683,7 @@ False
 <p>list里面的元素的数据类型也可以不同</p>
 <p><div class="codehilite"><pre>&gt;&gt;&gt; L = [&#39;Apple&#39;, 123, True]
 
-#list元素也可以是另一个list
+# list元素也可以是另一个list
 &gt;&gt;&gt; s = [&#39;python&#39;, &#39;java&#39;, [&#39;asp&#39;, &#39;php&#39;], &#39;scheme&#39;]
 &gt;&gt;&gt; len(s)
 4
@@ -5696,10 +5820,10 @@ TypeError: unhashable type: &#39;list&#39;
 <p>tuple 有序列表：元组<br />
 tuple和list非常类似，但是tuple一旦初始化就不能修改。没有append()，insert()这样的方法。所以代码更安全。如果可能，能用tuple代替list就尽量用tuple。</p>
 <p>tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来：</p>
-<p><div class="codehilite"><pre>#空的
+<p><div class="codehilite"><pre># 空的
 &gt;&gt;&gt; t = ()
 
-#定义一个只有1个元素的tuple时，加一个逗号,，以免成数学计算意义上的括号。
+# 定义一个只有1个元素的tuple时，加一个逗号,，以免成数学计算意义上的括号。
  &gt;&gt;&gt; t = (1,)
 
 #“可变的”tuple
@@ -5753,7 +5877,7 @@ elif age &gt;= 18:
 else:
     print(&#39;kid&#39;)
 
-#简写
+# 简写
 if x:
     print(&#39;True&#39;)
 </pre></div>
@@ -5811,7 +5935,7 @@ True
 &gt;&gt;&gt; bool(&#39;&#39;)
 False
 
-#函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”
+# 函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”
 &gt;&gt;&gt; a = abs # 变量a指向abs函数
 &gt;&gt;&gt; a(-1) # 所以也可以通过a调用abs函数
 1
@@ -5866,11 +5990,11 @@ False
 <span class="o">&gt;&gt;&gt;</span> <span class="n">add_end</span><span class="p">([</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">])</span>
 <span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;z&#39;</span><span class="p">,</span> <span class="s">&#39;END&#39;</span><span class="p">]</span>
 
-<span class="c1">#当你使用默认参数调用时，一开始结果也是对的</span>
+<span class="c1"># 当你使用默认参数调用时，一开始结果也是对的</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">add_end</span><span class="p">()</span>
 <span class="p">[</span><span class="s">&#39;END&#39;</span><span class="p">]</span>
 
-<span class="c1">#但是，再次调用add_end()时，结果就不对了</span>
+<span class="c1"># 但是，再次调用add_end()时，结果就不对了</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">add_end</span><span class="p">()</span>
 <span class="p">[</span><span class="s">&#39;END&#39;</span><span class="p">,</span> <span class="s">&#39;END&#39;</span><span class="p">]</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">add_end</span><span class="p">()</span>
@@ -5922,7 +6046,7 @@ Python函数在定义的时候，默认参数L的值就被计算出来了，即[
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="n">extra</span><span class="p">[</span><span class="s">&#39;city&#39;</span><span class="p">],</span> <span class="n">job</span><span class="o">=</span><span class="n">extra</span><span class="p">[</span><span class="s">&#39;job&#39;</span><span class="p">])</span>
 <span class="n">name</span><span class="p">:</span> <span class="n">Jack</span> <span class="n">age</span><span class="p">:</span> <span class="mi">24</span> <span class="n">other</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;city&#39;</span><span class="p">:</span> <span class="s">&#39;Beijing&#39;</span><span class="p">,</span> <span class="s">&#39;job&#39;</span><span class="p">:</span> <span class="s">&#39;Engineer&#39;</span><span class="p">}</span>
 
-<span class="c1">#或简化</span>
+<span class="c1"># 或简化</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">extra</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;city&#39;</span><span class="p">:</span> <span class="s">&#39;Beijing&#39;</span><span class="p">,</span> <span class="s">&#39;job&#39;</span><span class="p">:</span> <span class="s">&#39;Engineer&#39;</span><span class="p">}</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">person</span><span class="p">(</span><span class="s">&#39;Jack&#39;</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span>
 <span class="n">name</span><span class="p">:</span> <span class="n">Jack</span> <span class="n">age</span><span class="p">:</span> <span class="mi">24</span> <span class="n">other</span><span class="p">:</span> <span class="p">{</span><span class="s">&#39;city&#39;</span><span class="p">:</span> <span class="s">&#39;Beijing&#39;</span><span class="p">,</span> <span class="s">&#39;job&#39;</span><span class="p">:</span> <span class="s">&#39;Engineer&#39;</span><span class="p">}</span>
@@ -6067,15 +6191,15 @@ Python函数在定义的时候，默认参数L的值就被计算出来了，即[
 <p>创建一个0-99的数列</p>
 <div class="codehilite"><pre><span class="n">L</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 
-<span class="c1">#前10个数，每两个取一个</span>
+<span class="c1"># 前10个数，每两个取一个</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">L</span><span class="p">[:</span><span class="mi">10</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
 
-<span class="c1">#所有数，每5个取一个</span>
+<span class="c1"># 所有数，每5个取一个</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">L</span><span class="p">[::</span><span class="mi">5</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">95</span><span class="p">]</span>
 
-<span class="c1">#只写[:]就可以原样复制一个list</span>
+<span class="c1"># 只写[:]就可以原样复制一个list</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">L</span><span class="p">[:]</span>
 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">99</span><span class="p">]</span>
 </pre></div>

@@ -54,7 +54,7 @@ cond(no)->sub1(right)->op1
 ```
 
 
-##0.1 利其器之Markdown
+## 0.1 利其器之Markdown
 ### 0.1.1 侧边栏
 
 !!! Note "手动修改步骤"
@@ -232,7 +232,7 @@ ${55:上花} \overbrace{$15}^{$16}
 </snippet>
 ~~~
 
-##0.3 AutoHotkey
+## 0.3 AutoHotkey
 
 示例
 
@@ -265,14 +265,14 @@ return
 
 ***
 
-#1 传感器 执行器
-##1.1 Arduino传感器模块示例
+# 1 传感器 执行器
+## 1.1 Arduino传感器模块示例
 
 ### 1.1.1 IR 模块
 
 ~~~c
-#include <IRremote.h>
-#include <IRremoteInt.h>
+# include <IRremote.h>
+# include <IRremoteInt.h>
 
 int receiver = 13; // Signal Pin of IR receiver to Arduino Digital Pin 13
 
@@ -418,9 +418,9 @@ void loop() {
 ### 1.1.3 超声波测距
 
 ~~~c
-#include <SR04.h>
-#define TRIG_PIN 12
-#define ECHO_PIN 11
+# include <SR04.h>
+# define TRIG_PIN 12
+# define ECHO_PIN 11
 SR04 sr04 = SR04(ECHO_PIN,TRIG_PIN);
 long a;
 
@@ -440,7 +440,7 @@ void loop() {
 ### 1.1.4 温度湿度
 
 ~~~c
-#include <SimpleDHT.h>
+# include <SimpleDHT.h>
 
 // for DHT11,
 //      VCC: 5V or 3V
@@ -521,7 +521,7 @@ void loop() {
 }
 ~~~
 
-###1.1.6 有源蜂鸣器
+### 1.1.6 有源蜂鸣器
 
 ~~~c
 int buzzer = 7;//the pin of the active buzzer
@@ -577,9 +577,9 @@ void loop()
 
 ~~~c
 // Define Pins
-#define BLUE 3
-#define GREEN 5
-#define RED 6
+# define BLUE 3
+# define GREEN 5
+# define RED 6
 
 void setup()
 {
@@ -599,7 +599,7 @@ int blueValue;
 // main loop
 void loop()
 {
-#define delayTime 10 // fading time between colors
+# define delayTime 10 // fading time between colors
 
 redValue = 255; // choose a value between 1 and 255 to change the color.
 greenValue = 0;
@@ -767,15 +767,15 @@ void loop() {
 ***
 
 # 2 Arduino下位机
-##2.1 Arduino 格式化数据 ArduinoJson
-###2.1.1 Encoding JSON
+## 2.1 Arduino 格式化数据 ArduinoJson
+### 2.1.1 Encoding JSON
 ~~~mermaid
 graph TD;
 A(1.Reserve memory space:StaticJsonBuffer)-->B(2.Build object tree in memory);
 B-->C(3.Generate the JSON string);
 ~~~
 `StaticJsonBuffer<200> jsonBuffer;`
-###2.1.2 示例
+### 2.1.2 示例
 
 ~~~c
 // Copyright Benoit Blanchon 2014-2017
@@ -785,7 +785,7 @@ B-->C(3.Generate the JSON string);
 // https://bblanchon.github.io/ArduinoJson/
 // If you like this project, please add a star!
 
-#include <ArduinoJson.h>
+# include <ArduinoJson.h>
 
 void setup() {
   Serial.begin(9600);
@@ -861,17 +861,17 @@ const int BUFFER_SIZE = JSON_OBJECT_SIZE(3) + JSON_ARRAY_SIZE(2);
 StaticJsonBuffer<BUFFER_SIZE> jsonBuffer;
 ~~~
 
-###2.1.4 输入数据
+### 2.1.4 输入数据
 
 ~~~c
   String input ="{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
   JsonObject& root = jsonBuffer.parseObject(input);
 ~~~
 
-###2.1.5 代码整合
+### 2.1.5 代码整合
 
 ~~~c
-#include <ArduinoJson.h>
+# include <ArduinoJson.h>
 
 void jsonBuffer(long ti, int ir,int di, int te, int hu, int li) {
 StaticJsonBuffer<70> jsonBuffer;
@@ -911,11 +911,11 @@ void loop() {
 }
 ~~~
 
-###2.1.6 时间函数库
+### 2.1.6 时间函数库
 
 ~~~c
-#include <Time.h>
-#include <TimeLib.h>
+# include <Time.h>
+# include <TimeLib.h>
 
 //The functions available in the library include
 hour();            // the hour now  (0-23)
@@ -955,24 +955,24 @@ timeSet                          // the time is set and is synced
 
 ~~~
 
-###2.1.7 改造并集成Arduino传感器
+### 2.1.7 改造并集成Arduino传感器
 
 ~~~c
-#include <Time.h>
-#include <TimeLib.h>
+# include <Time.h>
+# include <TimeLib.h>
 
-#include <ArduinoJson.h>
+# include <ArduinoJson.h>
 
-#include <IRremote.h>
-#include <IRremoteInt.h>
+# include <IRremote.h>
+# include <IRremoteInt.h>
 
-#include <SR04.h>
-#define TRIG_PIN 12
-#define ECHO_PIN 11
+# include <SR04.h>
+# define TRIG_PIN 12
+# define ECHO_PIN 11
 SR04 sr04 = SR04(ECHO_PIN,TRIG_PIN);
 
-//#include <SimpleDHT.h> int pinDHT11 = 2; SimpleDHT11 dht11;
-#include <DHT.h>
+//# include <SimpleDHT.h> int pinDHT11 = 2; SimpleDHT11 dht11;
+# include <DHT.h>
 DHT dht;
 
 int lightPin = 2;
@@ -1145,26 +1145,26 @@ if (irrecv.decode(&results))
 }
 ~~~
 
-##2.2 集成多任务控制
+## 2.2 集成多任务控制
 
 ~~~cpp
-#include <Time.h>
-#include <TimeLib.h>
+# include <Time.h>
+# include <TimeLib.h>
 
-#include <TimedAction.h>
+# include <TimedAction.h>
 
-#include <ArduinoJson.h>
+# include <ArduinoJson.h>
 
-#include <IRremote.h>
-#include <IRremoteInt.h>
+# include <IRremote.h>
+# include <IRremoteInt.h>
 
-#include <SR04.h>
-#define TRIG_PIN 12
-#define ECHO_PIN 11
+# include <SR04.h>
+# define TRIG_PIN 12
+# define ECHO_PIN 11
 SR04 sr04 = SR04(ECHO_PIN,TRIG_PIN);
 
-//#include <SimpleDHT.h> int pinDHT11 = 2; SimpleDHT11 dht11;
-#include <DHT.h>
+//# include <SimpleDHT.h> int pinDHT11 = 2; SimpleDHT11 dht11;
+# include <DHT.h>
 DHT dht;
 
 int lightPin = 2;
@@ -1466,9 +1466,9 @@ sudo reboot
 
 ~~~
 #!/bin/sh
-#install tools
+# install tools
 sudo apt-get -y install rsync dosfstools parted kpartx exfat-fuse
-#mount USB device
+# mount USB device
 usbmount=/mnt
 mkdir -p $usbmount
 if [ -z $1 ]; then
@@ -1488,10 +1488,10 @@ if [ -z "`grep $usbmount /etc/mtab`" ]; then
   exit 0
 fi
 img=$usbmount/rpi-`date +%Y%m%d-%H%M`.img
-#img=$usbmount/rpi.img
+# img=$usbmount/rpi.img
 echo ===================== part 1, create a new blank img ===============================
 # New img file
-#sudo rm $img
+# sudo rm $img
 bootsz=`df -P | grep /boot | awk '{print $2}'`
 rootsz=`df -P | grep /dev/root | awk '{print $3}'`
 totalsz=`echo $bootsz $rootsz | awk '{print int(($1+$2)*1.3)}'`
@@ -1501,7 +1501,7 @@ bootstart=`sudo fdisk -l /dev/mmcblk0 | grep mmcblk0p1 | awk '{print $2}'`
 bootend=`sudo fdisk -l /dev/mmcblk0 | grep mmcblk0p1 | awk '{print $3}'`
 rootstart=`sudo fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $2}'`
 echo "boot: $bootstart >>> $bootend, root: $rootstart >>> end"
-#rootend=`sudo fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $3}'`
+# rootend=`sudo fdisk -l /dev/mmcblk0 | grep mmcblk0p2 | awk '{print $3}'`
 sudo parted $img --script -- mklabel msdos
 sudo parted $img --script -- mkpart primary fat32 ${bootstart}s ${bootend}s
 sudo parted $img --script -- mkpart primary ext4 ${rootstart}s -1
@@ -1552,7 +1552,7 @@ if [ ! -d $mountr/tmp ]; then
   sudo mkdir $mountr/tmp
   sudo chmod a+w $mountr/tmp
 fi
-#sudo rm -f $mountr/etc/udev/rules.d/70-persistent-net.rules
+# sudo rm -f $mountr/etc/udev/rules.d/70-persistent-net.rules
 sync
 ls -lia $mountr/home/pi/
 echo "...Root partition done"
@@ -1859,7 +1859,7 @@ sudo tar -C ~/dogtunnel/dt -xzf dtunnel_linux_arm_0.80.tgz
 cd dt
 chmod +x ./dtunnel
 ./dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
-#任意目录可执行命令
+# 任意目录可执行命令
 /home/pi/dogtunnel/dt/dtunnel -reg X*X*X*X*X*X  -local :22 -clientkey X*X*X*X*X*X 
 ```
 
@@ -1881,7 +1881,7 @@ sudo tar -C /home/liang/dogtunnel/dt -xzf dtunnel_linux_x64_0.80.tgz
 cd dt
 chmod +x ./dtunnel
 ./dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
-#任意目录可执行
+# 任意目录可执行
 /home/liang/dogtunnel/dt/dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X 
 ```
 
@@ -1894,9 +1894,9 @@ chmod +x ./dtunnel
 **将命令更改为后台运行并且任意目录可执行**
 
 ```python
-#服务端 Raspbian
+# 服务端 Raspbian
 sudo nohup /home/pi/dogtunnel/dt/dtunnel -reg X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X  -v 2>& 1 1 > /var/log/dtunnel.log &
-#客户端 66
+# 客户端 66
 sudo nohup /root/dogtunnel/dt/dtunnel -link X*X*X*X*X*X  -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X  -v 2>& 1 1 > /var/log/dtunnel.log &
 # 日志文件目录权限问题
 nohup /home/pi/dogtunnel/dt/dtunnel -reg xxx -local :X*X*X*X*X*X  -clientkey X*X*X*X*X*X  -v 2>& 1 1 > /home/pi/log/dogtunnel.log &
@@ -2067,10 +2067,10 @@ sudo nano /home/pi/.bashrc
 # Bdd the following line to the end of the file
 export PATH="/home/pi/miniconda3/bin:$PATH"
 
-#Save and close this file
+# Save and close this file
 source ~/.bashrc
 python -version
-#Python 3.4.3 :: Continuum Analytics, Inc.
+# Python 3.4.3 :: Continuum Analytics, Inc.
 
 sudo chown -R pi miniconda3
 conda config --set show_channel_urls True
@@ -2093,7 +2093,7 @@ conda config --set show_channel_urls true
 ~~~python
 conda create -n py2.7 python=2.7
 source activate py27
-#通过-c指定通过某个channel安装
+# 通过-c指定通过某个channel安装
 conda install -c conda-forge pyserial
 ~~~
 
@@ -2111,7 +2111,7 @@ jupyter notebook
 #### 3.4.2.1 卸载
 ~~~python
 sudo rm -rf ~/miniconda3 ~/.condarc ~/.conda ~/.continuum
-#remove the anaconda directory from your PATH environment variable
+# remove the anaconda directory from your PATH environment variable
 sudo nano /home/pi/.bashrc
 source ~/.bashrc
 ~~~
@@ -2120,22 +2120,22 @@ source ~/.bashrc
 #### 3.4.2.2 常用命令
 
 ~~~python
-#查看列表
+# 查看列表
 conda list
 
-#更新
+# 更新
 conda update conda
 
-#环境
+# 环境
 conda create -n env_vi python=3.4.3
 conda env list
 
-#切换新环境
+# 切换新环境
 source activate py27
-#退出环境，也可以使用`activate root`切回root环境
+# 退出环境，也可以使用`activate root`切回root环境
 source activate root
 source deactivate py27
-#移除环境
+# 移除环境
 conda remove --all -n py27
 # 创建只有django的python2环境，名字py2-dj，注意，python=2 django是连续参数
 conda create python=2 django -n py2-dj
@@ -2152,14 +2152,14 @@ conda create python=2 django -n py2-dj
  python setup.py install
 ~~~
 
-##3.5 云打印机
+## 3.5 云打印机
 
 installing CUPS
 
 ~~~shell
 sudo apt-get update
 sudo apt-get install cups
-#The usergroup created by CUPS is “lpadmin”. The default Rasbian user (and the user we’re logged into) is “pi” (adjust the following command accordingly if you want a different user to have access to the printer).
+# The usergroup created by CUPS is “lpadmin”. The default Rasbian user (and the user we’re logged into) is “pi” (adjust the following command accordingly if you want a different user to have access to the printer).
 sudo usermod -a -G lpadmin pi
 ~~~
 
@@ -2221,14 +2221,14 @@ http://192.168.1.111:631/printers/Vi.Canon
 注册为谷歌print
 
 ~~~shell
-#安装
+# 安装
 git clone https://github.com/armooo/cloudprint.git
 sudo apt-get install libcups2-dev
 sudo pip3 install pycups
 apt-get install python-cups
 sudo apt-get install python3-dev
 sudo pip install daemon
-#sudo python setup.py install
+# sudo python setup.py install
 sudo pip install cloudprint
 ~~~
 
@@ -2257,7 +2257,7 @@ sudo systemctl restart cups
 ~~~
 
 
-#配置
+# 配置
 
 ~~~python
 sudo cps-auth
@@ -2281,7 +2281,7 @@ nano /etc/resolv.conf
 in your terminal. You will have a blank slate to work with. Next copy and paste the following code:
 
 ~~~python
-#Google Servers
+# Google Servers
 nameserver 8.8.8.8
 nameserver 8.8.4.4
 ~~~
@@ -2460,11 +2460,12 @@ with serial.Serial(port="/dev/ttyACM0", baudrate=9600, timeout=1, writeTimeout=1
             #tempData["Triger"] # will return 'blabla'
             print(tempData)
 
-#data["masks"]["id"]    # will return 'valore'
-#data["om_points"]      # will return 'value'
+# data["masks"]["id"]    # will return 'valore'
+# data["om_points"]      # will return 'value'
 ~~~
 
 尝试
+
 
 从串口获取的数据类型
 
@@ -2530,6 +2531,115 @@ while ser.isOpen():
       pass
 ~~~
 
+## 4.3 mongodb 数据库
+
+
+~~~shell hl_lines="1"
+<!-- win -->
+choco install mongodb
+
+<!-- Raspbian -->
+sudo apt install mongodb
+~~~
+
+
+## 4.4 Django 框架
+
+### 4.4.1 初始化
+
+- 安装框架
+
+~~~python hl_lines="1"
+#最后支持py2.7的版本
+pip install Django==1.11.10
+
+pip install djangorestframework
+pip install markdown
+pip install django-filter
+
+pip install mongoengine
+#PY time zone
+pip install pytz
+~~~
+
+- 创建项目和app
+
+~~~python hl_lines="1"
+
+django-admin startproject vps
+python manage.py startapp sensors
+~~~
+
+- 初始化数据库链表
+
+~~~python hl_lines="1"
+python manage.py migrate
+~~~
+
+- 初始化app链表
+
+~~~python hl_lines="1"
+python manage.py makemigrations sensors
+~~~
+
+If you edit your models.py file in order to add, remove, or change fields of existing models, or if you add new models, you will have to make a new migration using the makemigrations command. The migration will allow Django to keep track of model changes. Then you will have to apply it with the migrate command to keep the 
+database in sync with your models.
+
+- 运行调试
+
+~~~python hl_lines="1"
+python manage.py runserver
+python manage.py shell
+~~~
+
+- administration
+
+~~~python hl_lines="1"
+python manage.py createsuperuser
+~~~
+
+curl.exe -u lencshu:169088@Dj -X POST -d "temperature=1&distance=1" http://127.0.0.1:8000/api/subjects/
+
+### 4.4.2 部署
+
+
+
+## 4.5
+
+### 使用 Python 和 Flask 设计 RESTful API
+
+什么是 REST？
+六条设计规范定义了一个 REST 系统的特点:
+
+客户端-服务器: 客户端和服务器之间隔离，服务器提供服务，客户端进行消费。
+无状态: 从客户端到服务器的每个请求都必须包含理解请求所必需的信息。换句话说， 服务器不会存储客户端上一次请求的信息用来给下一次使用。
+可缓存: 服务器必须明示客户端请求能否缓存。
+分层系统: 客户端和服务器之间的通信应该以一种标准的方式，就是中间层代替服务器做出响应的时候，客户端不需要做任何变动。
+统一的接口: 服务器和客户端的通信方法必须是统一的。
+按需编码: 服务器可以提供可执行代码或脚本，为客户端在它们的环境中执行。这个约束是唯一一个是可选的。
+什么是一个 RESTful 的 web service？
+REST 架构的最初目的是适应万维网的 HTTP 协议。
+
+RESTful web services 概念的核心就是“资源”。 资源可以用 URI 来表示。客户端使用 HTTP 协议定义的方法来发送请求到这些 URIs，当然可能会导致这些被访问的”资源“状态的改变。
+
+HTTP 标准的方法有如下:
+
+==========  =====================  ==================================
+HTTP 方法   行为                   示例
+==========  =====================  ==================================
+GET         获取资源的信息         http://example.com/api/orders
+GET         获取某个特定资源的信息 http://example.com/api/orders/123
+POST        创建新资源             http://example.com/api/orders
+PUT         更新资源               http://example.com/api/orders/123
+DELETE      删除资源               http://example.com/api/orders/123
+==========  ====================== ==================================
+REST 设计不需要特定的数据格式。在请求中数据可以以 JSON 形式, 或者有时候作为 url 中查询参数项。
+
+安装flask
+
+~~~python hl_lines="1"
+pip install flask
+~~~
 
 ***
 
@@ -2557,8 +2667,8 @@ There are four sensors on this board:
 #### 5.1.1.1 集合库示例
 
 ~~~c++
-#include <Wire.h>
-#include <GY80.h>
+# include <Wire.h>
+# include <GY80.h>
 
 GY80 sensor = GY80(); //create GY80 instance
 
@@ -2615,7 +2725,7 @@ Copy Folder to Arduino/libraries
 
 ~~~c++
 
-#include <GY80.h>
+# include <GY80.h>
 
 //Create the GY80 class (here named sensor):
 GY80 sensor = GY80();
@@ -2787,11 +2897,11 @@ There are four sensors on this board: I2C Address: 0x68
 ~~~c++
 
 //.h文件里
-//#define HMC5983_Address 0x1E    //把这行注销掉
-#define ConfigurationRegisterA 0x00
-#define ConfigurationRegisterB 0x01
-#define ModeRegister 0x02
-#define DataRegisterBegin 0x03
+//# define HMC5983_Address 0x1E    //把这行注销掉
+# define ConfigurationRegisterA 0x00
+# define ConfigurationRegisterB 0x01
+# define ModeRegister 0x02
+# define DataRegisterBegin 0x03
 
 //.cpp 里改成这样
 HMC5983::HMC5983(uint8_t Addr)
@@ -2840,7 +2950,7 @@ HMC5983 compass2（0x1F）；//这个地址要查手册是多少
 
 ~~~python
 
-#安装配置依赖库
+# 安装配置依赖库
 wget https://www.kernel.org/pub/linux/bluetooth/bluez-5.9.tar.xz
 tar xvf bluez-5.9.tar.xz
 sudo apt-get update
@@ -2931,11 +3041,11 @@ Save and reboot. Try removing the device then repairing and trusting the device 
 ~~~python
 power on
 agent on
-#The Bluetooth agent is what manages the Bluetooth 'pairing code'. It can either respond to a 'pairing code' coming in, or can send one out.
+# The Bluetooth agent is what manages the Bluetooth 'pairing code'. It can either respond to a 'pairing code' coming in, or can send one out.
 scan on
 pair X*X*X*X*X*X 
 trust X*X*X*X*X*X 
-#connect X*X*X*X*X*X 
+# connect X*X*X*X*X*X 
 ~~~
 
 Then connect to the device with terminal via:
@@ -2943,18 +3053,18 @@ Then connect to the device with terminal via:
 ~~~python
 sudo rfcomm watch hci0
 
-#or
+# or
 
-#除了bluetoothctl，在Raspbian是shell中可以通过hciconfig来控制蓝牙模块。比如开关蓝牙模块
+# 除了bluetoothctl，在Raspbian是shell中可以通过hciconfig来控制蓝牙模块。比如开关蓝牙模块
 sudo hciconfig hci0 up   #启动hci设备
 sudo hciconfig hci0 down #关闭hci设备
-#命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器
+# 命令中的hci0指的是0号HCI设备，即树莓派的蓝牙适配器
 
 sudo rfcomm connect 0 X*X*X*X*X*X  1
 
 sudo rfcomm watch hci0
 
-#与此同时，你可以用下面命令来查看蓝牙设备的工作日志： 
+# 与此同时，你可以用下面命令来查看蓝牙设备的工作日志： 
 
 hcidump
 ~~~
@@ -2994,7 +3104,7 @@ sudo service bluetooth restart
 
 
 
-###两行可行方案
+### 两行可行方案
 
 ~~~python
 sudo hciconfig hci0 up
@@ -3006,12 +3116,12 @@ sudo rfcomm connect 0 X*X*X*X*X*X  1
 ### 6.3.1 subprocess 库
 
 ~~~python
-#The os.system has many problems and subprocess is a much better way to executing unix command. The syntax is:
+# The os.system has many problems and subprocess is a much better way to executing unix command. The syntax is:
 import subprocess
 subprocess.call("command1")
 subprocess.call(["command1", "arg1", "arg2"])
 
-#subprocess模块中只定义了一个类: Popen。可以使用Popen来创建进程，并与进程进行复杂的交互。它的构造函数如下：
+# subprocess模块中只定义了一个类: Popen。可以使用Popen来创建进程，并与进程进行复杂的交互。它的构造函数如下：
 
 subprocess.Popen(args, bufsize=0, executable=None, stdin=None, stdout=None, stderr=None, preexec_fn=None, close_fds=False, shell=False, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0)
 
@@ -3043,13 +3153,13 @@ subprocess.Popen(args, bufsize=0, executable=None, stdin=None, stdout=None, stde
 
 
 ~~~python
-#To store output to the output variable, run:
+# To store output to the output variable, run:
 import subprocess
 p = subprocess.Popen("date", stdout=subprocess.PIPE, shell=True)
 (output, err) = p.communicate()
 print "Today is", output
 
-#get real time output:
+# get real time output:
 import subprocess
 cmdping = "ping -c4 www.cyberciti.biz"
 p = subprocess.Popen(cmdping, shell=True, stderr=subprocess.PIPE)
@@ -3157,9 +3267,9 @@ nohup command &
 
 ~~~shell
 >./command.sh > output
-#这其中的>就是标准输出符号，其实是 1>output 的缩写
+# 这其中的>就是标准输出符号，其实是 1>output 的缩写
 >./command.sh 2> output
-#这里的2>就是将标准错误输出到output文件里。 
+# 这里的2>就是将标准错误输出到output文件里。 
 ~~~
 
 而`0<`则是标准输入了。 
@@ -3472,10 +3582,10 @@ python setup.py bdist_wheel --qmake=/usr/bin/qmake-qt4
 # -*- coding: utf-8 -*-
 
 #======导入库文件======
-#串口通信
+# 串口通信
 import serial
 import json
-#蓝牙通信
+# 蓝牙通信
 from pymultiwii import MultiWii
 import time
 
@@ -3488,7 +3598,7 @@ serialPort = "/dev/ttyACM0"
 arduinoSer = serial.Serial(serialPort, 9600)
 arduinoDrone = MultiWii(bluePort)
 
-#arduinoDrone.arm()
+# arduinoDrone.arm()
 #======主程序======
 while arduinoSer.isOpen():
   #======时间同步======
@@ -3868,9 +3978,9 @@ apt-get --yes --force-yes install $something
 
 ---
 
-#自动化脚本Vps
+# 自动化脚本Vps
 
-##01
+## 01
 
 
 ~~~shell
@@ -3879,7 +3989,7 @@ echo -e '#!/bin/bash\necho "====== starting ======"\napt-get update\napt-get upg
 
 ---
 
-##02
+## 02
 
 ~~~shell
 nano start02.sh
@@ -3941,7 +4051,7 @@ chmod a+x ./start02.sh
 
 
 ---
-##03
+## 03
 
 ~~~shell
 nano start03.sh
@@ -3970,7 +4080,7 @@ chmod a+x ./start03.sh
 
 ***
 
-#8 Raspbian 和 VPS 站点通信
+# 8 Raspbian 和 VPS 站点通信
 
 
 ***
@@ -4005,7 +4115,7 @@ chmod a+x ./start03.sh
   首先将命令更改为后台运行并且任意目录可执行
   `nohup command > /dev/null 2>&1 &`
 
-##A.1 编辑 rc.local
+## A.1 编辑 rc.local
 
 ~~~sh
 sudo nano /etc/rc.local
@@ -4018,10 +4128,10 @@ sudo nano /etc/rc.local
   注意, 这个是很早的执行阶段, 可能PATH没有设置好, 所以最好用绝对路径!!!再说一次, 绝对路径! 包括脚本内!
 
 
-##A.2 计划事务
+## A.2 计划事务
  sudo crontab -e 进入计划事务编辑模式, 编辑计划, 加入这么一句`@reboot /path/to/script`. 这个可以加载比较多的指令了, 如果没有正常运行, 请用绝对路径.
 
-##A.3 注册为服务
+## A.3 注册为服务
 
 先把 脚本 放到 `/etc/init.d`目录下。该目录为定义的服务。
 图形管理界面可以使用`sysv-rc-conf`, 命令行可以使用service命令.
@@ -4078,7 +4188,7 @@ update-rc.d servicename enable  [S|2|3|4|5]
 # Cancel service at giving Level
 update-rc.d servicename disable  [S|2|3|4|5]
 
-#设定启动级别 
+# 设定启动级别 
 update-rc.d xxx(脚本名) start 98 2 . 
     #98 为启动序号，
 ​    #2是系统的运行级别，可自己调整，
@@ -4106,7 +4216,7 @@ $ sudo update-rc.d -f test remove
   service mysql stop
   ~~~
 
-##完整实例
+## 完整实例
 
 `sudo nano /etc/init.d/servicename`
 
@@ -4179,11 +4289,11 @@ sudo update-rc.d -f servicename remove
     nohup /home/pi/miniconda3/envs/py27/bin/python name.py > /home/pi/log/name.log 2>&1 &
 
 
-##A.4 shell脚本
+## A.4 shell脚本
 
 将写好的脚本（.sh文件）放到目录 `/etc/profile.d/` 下，系统启动后就会自动执行该目录下的所有shell脚本。
 
-##A.5 登陆命令行时自动运行
+## A.5 登陆命令行时自动运行
 
 Add your script executable command to the bottom of .bashrc that will run your script every time you log in.
 
@@ -4212,7 +4322,7 @@ print()在括号中加上字符串，就可以向屏幕上输出指定的文字�
 >>>print('hello, world')
 >>>print('The quick brown fox', 'jumps over', 'the lazy dog')
 The quick brown fox jumps over the lazy dog
-#逗号自动转为空格
+# 逗号自动转为空格
 >>> print('100 + 200 =', 100 + 200)
 100 + 200 = 300
 ~~~
@@ -4290,7 +4400,7 @@ line1
 line2
 line3
 
-#写成程序
+# 写成程序
 print('''line1
 line2
 line3''')
@@ -4430,12 +4540,12 @@ list是一个可变的有序表
 *追加*
 
 ~~~
-#追加元素到末尾
+# 追加元素到末尾
 >>> classmates.append('Adam')
 >>> classmates
 ['Michael', 'Bob', 'Tracy', 'Adam']
 
-#元素插入到指定的位置
+# 元素插入到指定的位置
 >>> classmates.insert(1, 'Jack')
 >>> classmates
 ['Michael', 'Jack', 'Bob', 'Tracy', 'Adam']
@@ -4444,13 +4554,13 @@ list是一个可变的有序表
 *删除*
 
 ~~~
-#删除list末尾的元素
+# 删除list末尾的元素
 >>> classmates.pop()
 'Adam'
 >>> classmates
 ['Michael', 'Jack', 'Bob', 'Tracy']
 
-#删除指定位置的元素
+# 删除指定位置的元素
 >>> classmates.pop(1)
 'Jack'
 >>> classmates
@@ -4470,7 +4580,7 @@ list里面的元素的数据类型也可以不同
 ~~~
 >>> L = ['Apple', 123, True]
 
-#list元素也可以是另一个list
+# list元素也可以是另一个list
 >>> s = ['python', 'java', ['asp', 'php'], 'scheme']
 >>> len(s)
 4
@@ -4615,10 +4725,10 @@ tuple和list非常类似，但是tuple一旦初始化就不能修改。没有app
 tuple的陷阱：当你定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来：
 
 ~~~
-#空的
+# 空的
 >>> t = ()
 
-#定义一个只有1个元素的tuple时，加一个逗号,，以免成数学计算意义上的括号。
+# 定义一个只有1个元素的tuple时，加一个逗号,，以免成数学计算意义上的括号。
  >>> t = (1,)
 
 #“可变的”tuple
@@ -4685,7 +4795,7 @@ elif age >= 18:
 else:
     print('kid')
 
-#简写
+# 简写
 if x:
     print('True')
 ~~~
@@ -4746,7 +4856,7 @@ True
 >>> bool('')
 False
 
-#函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”
+# 函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”
 >>> a = abs # 变量a指向abs函数
 >>> a(-1) # 所以也可以通过a调用abs函数
 1
@@ -4806,11 +4916,11 @@ def add_end(L=[]):
 >>> add_end(['x', 'y', 'z'])
 ['x', 'y', 'z', 'END']
 
-#当你使用默认参数调用时，一开始结果也是对的
+# 当你使用默认参数调用时，一开始结果也是对的
 >>> add_end()
 ['END']
 
-#但是，再次调用add_end()时，结果就不对了
+# 但是，再次调用add_end()时，结果就不对了
 >>> add_end()
 ['END', 'END']
 >>> add_end()
@@ -4874,7 +4984,7 @@ name: Adam age: 45 other: {'gender': 'M', 'job': 'Engineer'}
 >>> person('Jack', 24, city=extra['city'], job=extra['job'])
 name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
 
-#或简化
+# 或简化
 >>> extra = {'city': 'Beijing', 'job': 'Engineer'}
 >>> person('Jack', 24, **extra)
 name: Jack age: 24 other: {'city': 'Beijing', 'job': 'Engineer'}
@@ -5054,15 +5164,15 @@ L[0:3]表示，从索引0开始取，直到索引3为止，但不包括索引3�
 ~~~python
 L = list(range(100))
 
-#前10个数，每两个取一个
+# 前10个数，每两个取一个
 >>> L[:10:2]
 [0, 2, 4, 6, 8]
 
-#所有数，每5个取一个
+# 所有数，每5个取一个
 >>> L[::5]
 [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95]
 
-#只写[:]就可以原样复制一个list
+# 只写[:]就可以原样复制一个list
 >>> L[:]
 [0, 1, 2, 3, ..., 99]
 ~~~
