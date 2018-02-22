@@ -2681,7 +2681,7 @@ def data_list(request):
 **base.html**
 
 ~~~html hl_lines="1"
-{% load staticfiles %}
+load staticfiles 
 <!DOCTYPE html>
 <html>
 <head>
