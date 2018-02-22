@@ -2678,48 +2678,6 @@ def data_list(request):
 
 **模板配置—list.html&base.html**
 
-**base.html**
-
-~~~html hl_lines="1"
-load staticfiles 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "css/blog.css" %}" rel="stylesheet"> 
-</head>
-<body>
-  <div id="content">
-    {% block content %}
-    {% endblock %}
-  </div>
-  <div id="sidebar">
-    <h2>Sensors data listing</h2>
-      <p>From Arduino-raspberry</p>
-  </div>
-</body>
-</html>
-~~~
-
-**list.html**
-
-~~~html hl_lines="1"
-{% extends "base.html" %}
-{% block title %}My Blog{% endblock %}
-{% block content %}
-  <h1>Datas</h1>
-  {% for post in posts %}
-    <h4>{{ post.title }}</h4>
-    <p class="date">
-      Temperature: {{ post.temperature }} <p>
-      Humity: {{ post.humity }} <p>
-      Light: {{ post.light }} <p>
-      Distance: {{ post.distance }} <p>
-    </p>
-    {{ post.body|truncatewords:30|linebreaks }}
-  {% endfor %}
-{% endblock %}
-~~~
 
 **配置—urls.py**
 

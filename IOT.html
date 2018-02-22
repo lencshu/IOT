@@ -3997,47 +3997,6 @@ You will have to: <br />
 
 
 <p><strong>模板配置—list.html&amp;base.html</strong></p>
-<p><strong>base.html</strong></p>
-<div class="codehilite"><pre><span class="hll">load staticfiles 
-</span><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{% block title %}{% endblock %}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">link</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{% static &quot;</span><span class="na">css</span><span class="err">/</span><span class="na">blog</span><span class="err">.</span><span class="na">css</span><span class="err">&quot;</span> <span class="err">%}&quot;</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span><span class="p">&gt;</span> 
-<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;content&quot;</span><span class="p">&gt;</span>
-    {% block content %}
-    {% endblock %}
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;sidebar&quot;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Sensors data listing<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>From Arduino-raspberry<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
-</pre></div>
-
-
-<p><strong>list.html</strong></p>
-<div class="codehilite"><pre><span class="hll">{% extends &quot;base.html&quot; %}
-</span>{% block title %}My Blog{% endblock %}
-{% block content %}
-  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Datas<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-  {% for post in posts %}
-    <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>{{ post.title }}<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;date&quot;</span><span class="p">&gt;</span>
-      Temperature: {{ post.temperature }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-      Humity: {{ post.humity }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-      Light: {{ post.light }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-      Distance: {{ post.distance }} <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
-    {{ post.body|truncatewords:30|linebreaks }}
-  {% endfor %}
-{% endblock %}
-</pre></div>
-
-
 <p><strong>配置—urls.py</strong></p>
 <p><strong>App Urls</strong></p>
 <div class="codehilite"><pre><span class="hll"><span class="kn">from</span> <span class="nn">django.conf.urls</span> <span class="kn">import</span> <span class="n">url</span> 
