@@ -1400,6 +1400,8 @@ MathJax.Hub.Config({
 <li><a href="#444-restful-api">4.4.4 RESTful API</a></li>
 <li><a href="#445-arduino">4.4.5 与Arduino对接</a></li>
 <li><a href="#446-vps">4.4.6 与vps对接</a></li>
+<li><a href="#447">4.4.7 图表</a></li>
+<li><a href="#448">4.4.8 部署</a></li>
 </ul>
 </li>
 <li><a href="#45-python-flask-restful-api">4.5 使用 Python 和 Flask 设计 RESTful API</a></li>
@@ -4201,6 +4203,50 @@ You will have to: <br />
 </pre></div>
 
 
+<h3 id="447"><a name="user-content-447" href="#447" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.4.7 图表</h3>
+<p>pip install django-highcharts</p>
+<h3 id="448"><a name="user-content-448" href="#448" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.4.8 部署</h3>
+<p>sudo apt-get install nginx <br />
+pip install gunicorn  </p>
+<p>sudo nginx -t</p>
+<div class="codehilite"><pre><span class="hll"><span class="nt">events</span> <span class="p">{</span>
+</span>  <span class="n">worker_connections</span> <span class="m">1024</span><span class="p">;</span> 
+  <span class="n">accept_mutex</span> <span class="n">off</span><span class="p">;</span> 
+<span class="p">}</span>
+<span class="nt">http</span> <span class="p">{</span>
+    <span class="n">server</span> <span class="err">{</span>
+        <span class="n">listen</span> <span class="m">80</span><span class="p">;</span>
+        <span class="n">access_log</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+
+        <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
+            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="m">127</span><span class="o">.</span><span class="m">0</span><span class="o">.</span><span class="m">0</span><span class="o">.</span><span class="m">1</span><span class="o">:</span><span class="m">8000</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="err">$</span><span class="n">host</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span> <span class="err">$</span><span class="n">remote_addr</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span> <span class="err">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nt">location</span> <span class="o">/</span><span class="nt">static</span><span class="o">/</span> <span class="p">{</span>
+            <span class="n">root</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">Django</span><span class="o">/</span><span class="p">;</span> 
+        <span class="p">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span class="hll"><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+</span>    <span class="c1"># ...</span>
+    <span class="s">&#39;gunicorn&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">1.111</span><span class="p">]</span>
+</pre></div>
+
+
+<p>gunicorn &ndash;chdir /home/pi/Django/ pi.wsgi:application</p>
+<p>sudo nano /etc/init.d/rc.local<br />
+nohup gunicorn &ndash;chdir /home/pi/Django/ pi.wsgi:application &amp;</p>
 <h2 id="45-python-flask-restful-api"><a name="user-content-45-python-flask-restful-api" href="#45-python-flask-restful-api" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.5 使用 Python 和 Flask 设计 RESTful API</h2>
 <p>什么是 REST？<br />
 六条设计规范定义了一个 REST 系统的特点:</p>

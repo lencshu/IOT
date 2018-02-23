@@ -7,6 +7,9 @@
 
 <script type="text/javascript">
 
+var data; // global
+
+
 function requestData() {
 $.ajax({
   type: "GET",
@@ -14,11 +17,20 @@ $.ajax({
   url: '/api',
   dataType: 'json',
   cache: false,
+  success: function(data){
+  setTimeout(requestData, 5000);
+  }
+})
 
-  success: function(data) {
+}
+
+$(document).ready(function() {
   Highcharts.chart('container', {
     chart: {
-        zoomType: 'xy'
+        zoomType: 'xy',
+        events: {
+          load: requestData
+                    }
     },
     title: {
         text: 'Home conditon'
@@ -99,7 +111,7 @@ $.ajax({
         align: 'left',
         x: 150,
         verticalAlign: 'top',
-        y: 0,
+        y: 55,
         floating: true,
         backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
     },
@@ -142,12 +154,9 @@ $.ajax({
         }
     }]
 });
-}
 })
-}
 
-requestData();
-setInterval(requestData, 36000);
+
 </script>
 
  <p>

@@ -1,33 +1,30 @@
-{% extends "base.html" %}
-{% block title %}My Blog{% endblock %}
-{% block content %}
-{# {{posts}} #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
+</head>
+<body>
 <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 
 <script type="text/javascript">
 
-function requestData() {
-$.ajax({
-  type: "GET",
-  contentType: "application/json",
-  url: '/api',
-  dataType: 'json',
-  cache: false,
-
-  success: function(data) {
-  Highcharts.chart('container', {
+Highcharts.chart('container', {
     chart: {
         zoomType: 'xy'
     },
     title: {
-        text: 'Home conditon'
+        text: 'Average Monthly Weather Data for Tokyo'
     },
     subtitle: {
-        text: 'Guoliang LI'
+        text: 'Source: WorldClimate.com'
     },
     xAxis: [{
-        categories: [data[12].title,data[11].title,data[10].title,data[9].title,data[8].title,data[7].title,data[6].title,data[5].title,data[4].title,data[3].title,data[2].title,data[1].title,data[0].title],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         crosshair: true
     }],
     yAxis: [{ // Primary yAxis
@@ -99,7 +96,7 @@ $.ajax({
         align: 'left',
         x: 150,
         verticalAlign: 'top',
-        y: 0,
+        y: 55,
         floating: true,
         backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
     },
@@ -107,16 +104,16 @@ $.ajax({
         name: 'Temperature',
         type: 'spline',
         yAxis: 1,
-        data: [data[12].temperature,data[11].temperature,data[10].temperature,data[9].temperature,data[8].temperature,data[7].temperature,data[6].temperature,data[5].temperature,data[4].temperature,data[3].temperature,data[2].temperature,data[1].temperature,data[0].temperature],
+        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
         tooltip: {
             valueSuffix: ' °C'
         }
 
     }, {
         name: 'Humity',
-        type: 'spline',//column
+        type: 'column',
         yAxis: 2,
-        data: [data[12].humity,data[11].humity,data[10].humity,data[9].humity,data[8].humity,data[7].humity,data[6].humity,data[5].humity,data[4].humity,data[3].humity,data[2].humity,data[1].humity,data[0].humity],
+        data: [10, 20, 22, 44, 11, 25, 24, 15, 13, 80, 10, 56],
         marker: {
             enabled: false
         },
@@ -129,28 +126,20 @@ $.ajax({
         name: 'Light',
         type: 'spline',
         yAxis: 3,
-        data: [data[12].light,data[11].light,data[10].light,data[9].light,data[8].light,data[7].light,data[6].light,data[5].light,data[4].light,data[3].light,data[2].light,data[1].light,data[0].light],
+        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
         tooltip: {
             valueSuffix: ' lum'
         }
     },{
         name: 'Distance',
         type: 'spline',
-        data: [data[12].distance,data[11].distance,data[10].distance,data[9].distance,data[8].distance,data[7].distance,data[6].distance,data[5].distance,data[4].distance,data[3].distance,data[2].distance,data[1].distance,data[0].distance],
+        data: [7.0, 8, 20, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 26, 13.9, 9.6],
         tooltip: {
             valueSuffix: ' mm'
         }
     }]
 });
-}
-})
-}
-
-requestData();
-setInterval(requestData, 36000);
 </script>
 
- <p>
-
-
-{% endblock %}
+</body>
+</html>

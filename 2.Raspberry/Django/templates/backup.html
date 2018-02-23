@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}My Blog{% endblock %}
+{% block content %}
+  <div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+  {% for post in posts %}
+  
+    <h4>{{ post.title }}</h4>
+    <p class="date">
+      Temperature: {{ post.temperature }} <p>
+      Humity: {{ post.humity }} <p>
+      Light: {{ post.light }} <p>
+      Distance: {{ post.distance }} <p>
+    </p>
+    {{ post.body|truncatewords:30|linebreaks }}
+  {% endfor %}
+{% endblock %}

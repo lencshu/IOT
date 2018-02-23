@@ -17,6 +17,7 @@ class Data(models.Model):
     class Meta:
         ordering = ('-title','-temperature')
 
+
     # def get_absolute_url(self):
     #     return reverse('blog:post_detail', 
     #                    args=[self.publish.year, 

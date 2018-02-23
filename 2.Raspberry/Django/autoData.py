@@ -5,18 +5,19 @@ import os,datetime,pytz
 import django
 import serial
 import json
-import requests
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pi.settings")
 django.setup()
 from sensors.models import Data
 
 timeDelay=0
-url = "http://127.0.0.1:8000/api/"
 
 def parisnow():
     return datetime.datetime.now(tz=pytz.timezone("Europe/Paris")).isoformat()
 
+'''
+import requests
+url = "http://127.0.0.1:8000/api/"
 def datasPost(url,payload):
     headers = {
       'Content-Type': "application/x-www-form-urlencoded",
@@ -25,6 +26,9 @@ def datasPost(url,payload):
     }
     response = requests.request("POST", url, data=payload, headers=headers)
     print(response.text)
+'''
+
+
 
 ser = serial.Serial('/dev/ttyACM0', 9600)
 while ser.isOpen():
@@ -37,10 +41,10 @@ while ser.isOpen():
       else:
         if (tempeData["Humity"] != 0):
             timeDelay+=1
-            if timeDelay>=10:
+            if timeDelay >= 20:
                 print 'Saved to database'
                 Data.objects.create(title=parisnow(), distance = tempeData["Distance"],temperature = tempeData["Temperature"],humity = tempeData["Humity"],light = tempeData["Light"])
-                datasPost(url,rawLigne)
+                # datasPost(url,rawLigne)
                 timeDelay=0
     except:
       # do nothing, not a valid JSON

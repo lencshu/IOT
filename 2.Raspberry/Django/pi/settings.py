@@ -25,6 +25,7 @@ SECRET_KEY = 's4o$s#oy7xedb1amt*1_+maxg&ft2n-%%ks_5=wez6i=$tqi5&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# ALLOWED_HOSTS = ['192.168.1.111']
 ALLOWED_HOSTS = []
 
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'sensors',
     'highcharts',
+    # 'gunicorn',
 ]
 
 MIDDLEWARE = [

@@ -2896,6 +2896,63 @@ response = requests.request("POST", url, data=payload, headers=headers)
 
 print(response.text)
 ~~~
+### 4.4.7 图表
+
+pip install django-highcharts
+
+
+### 4.4.8 部署
+
+sudo apt-get install nginx 
+pip install gunicorn  
+
+sudo nginx -t
+
+~~~css hl_lines="1"
+events {
+  worker_connections 1024; 
+  accept_mutex off; 
+}
+http {
+    server {
+        listen 80;
+        access_log  /etc/nginx/example.log;
+    
+        location / {
+            proxy_pass http://127.0.0.1:8000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+    
+        location /static/ {
+            root /home/pi/Django/; 
+        }
+    }
+}
+~~~
+
+
+~~~python hl_lines="1"
+INSTALLED_APPS = (
+    # ...
+    'gunicorn',
+)
+
+
+
+ALLOWED_HOSTS = [192.168.1.111]
+~~~
+
+
+
+gunicorn --chdir /home/pi/Django/ pi.wsgi:application
+
+
+sudo nano /etc/init.d/rc.local
+nohup gunicorn --chdir /home/pi/Django/ pi.wsgi:application &
+
+
 
 ## 4.5 使用 Python 和 Flask 设计 RESTful API
 

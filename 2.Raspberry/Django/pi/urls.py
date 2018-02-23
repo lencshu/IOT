@@ -20,7 +20,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     # url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^s/', include('sensors.urls',namespace='sensors',app_name='sensors')),
+    url(r'^', include('sensors.urls',namespace='sensors',app_name='sensors')),
     url(r'^', include('sensors.api.urls', namespace='api')),
     # url(r'^', include('sensors.graph.urls', namespace='graph')),
 ]

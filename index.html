@@ -1702,6 +1702,16 @@ For Level Colors
            4.4.6 与vps对接
           </a>
          </li>
+         <li>
+          <a href="#447">
+           4.4.7 图表
+          </a>
+         </li>
+         <li>
+          <a href="#448">
+           4.4.8 部署
+          </a>
+         </li>
         </ul>
        </li>
        <li>
@@ -5744,6 +5754,74 @@ sudo apt install mongodb
 <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </pre>
    </div>
+   <h3 id="447">
+    <a aria-hidden="true" class="headeranchor-link" href="#447" name="user-content-447">
+     <span class="headeranchor">
+     </span>
+    </a>
+    4.4.7 图表
+   </h3>
+   <p>
+    pip install django-highcharts
+   </p>
+   <h3 id="448">
+    <a aria-hidden="true" class="headeranchor-link" href="#448" name="user-content-448">
+     <span class="headeranchor">
+     </span>
+    </a>
+    4.4.8 部署
+   </h3>
+   <p>
+    sudo apt-get install nginx
+    <br/>
+    pip install gunicorn
+   </p>
+   <p>
+    sudo nginx -t
+   </p>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="nt">events</span> <span class="p">{</span>
+</span>  <span class="n">worker_connections</span> <span class="m">1024</span><span class="p">;</span> 
+  <span class="n">accept_mutex</span> <span class="n">off</span><span class="p">;</span> 
+<span class="p">}</span>
+<span class="nt">http</span> <span class="p">{</span>
+    <span class="n">server</span> <span class="err">{</span>
+        <span class="n">listen</span> <span class="m">80</span><span class="p">;</span>
+        <span class="n">access_log</span>  <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">example</span><span class="o">.</span><span class="n">log</span><span class="p">;</span>
+
+        <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
+            <span class="n">proxy_pass</span> <span class="n">http</span><span class="o">://</span><span class="m">127</span><span class="o">.</span><span class="m">0</span><span class="o">.</span><span class="m">0</span><span class="o">.</span><span class="m">1</span><span class="o">:</span><span class="m">8000</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">Host</span> <span class="err">$</span><span class="n">host</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Real</span><span class="o">-</span><span class="n">IP</span> <span class="err">$</span><span class="n">remote_addr</span><span class="p">;</span>
+            <span class="n">proxy_set_header</span> <span class="n">X</span><span class="o">-</span><span class="n">Forwarded</span><span class="o">-</span><span class="n">For</span> <span class="err">$</span><span class="n">proxy_add_x_forwarded_for</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nt">location</span> <span class="o">/</span><span class="nt">static</span><span class="o">/</span> <span class="p">{</span>
+            <span class="n">root</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">pi</span><span class="o">/</span><span class="n">Django</span><span class="o">/</span><span class="p">;</span> 
+        <span class="p">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</pre>
+   </div>
+   <div class="codehilite">
+    <pre><span class="hll"><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+</span>    <span class="c1"># ...</span>
+    <span class="s">'gunicorn'</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+
+<span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">192.168</span><span class="o">.</span><span class="mf">1.111</span><span class="p">]</span>
+</pre>
+   </div>
+   <p>
+    gunicorn –chdir /home/pi/Django/ pi.wsgi:application
+   </p>
+   <p>
+    sudo nano /etc/init.d/rc.local
+    <br/>
+    nohup gunicorn –chdir /home/pi/Django/ pi.wsgi:application &amp;
+   </p>
    <h2 id="45-python-flask-restful-api">
     <a aria-hidden="true" class="headeranchor-link" href="#45-python-flask-restful-api" name="user-content-45-python-flask-restful-api">
      <span class="headeranchor">
