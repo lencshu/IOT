@@ -5370,6 +5370,7 @@ sudo useradd ssuser
 <h2 id="74-nginx"><a name="user-content-74-nginx" href="#74-nginx" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7.4 nginx</h2>
 <div class="codehilite"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">nginx</span>
+<span class="n">service</span> <span class="n">nginx</span> <span class="n">restart</span>
 </pre></div>
 
 
@@ -5378,7 +5379,9 @@ sudo useradd ssuser
 </pre></div>
 
 
-<div class="codehilite"><pre><span class="nt">events</span> <span class="p">{</span>
+<div class="codehilite"><pre><span class="nt">user</span>  <span class="nt">root</span><span class="o">;</span>  
+<span class="nt">worker_processes</span>  <span class="nt">8</span><span class="o">;</span> 
+<span class="nt">events</span> <span class="p">{</span>
         <span class="n">worker_connections</span> <span class="m">51200</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -5404,7 +5407,7 @@ sudo useradd ssuser
 <span class="nb">export </span><span class="nv">DP_Id</span><span class="o">=</span><span class="s2">&quot;X*X*X*X*X*X&quot;</span>
 <span class="nb">export </span><span class="nv">DP_Key</span><span class="o">=</span><span class="s2">&quot;X*X*X*X*X*X&quot;</span>
 <span class="nb">echo</span> -e <span class="s2">&quot;GD_Key=\&quot;X*X*X*X*X*X\&quot;\nGD_Secret=\&quot;X*X*X*X*X*X\&quot;&quot;</span> &gt; ~/.acme.sh/account.conf
-sed -i <span class="s1">&#39;2s/^/GD_Key=&quot;X*X*X*X*X*X&quot;\nGD_Secret=&quot;X*X*X*X*X*X&quot;\n/&#39;</span> /root/.acme.sh/dnsapi/dns_gd.sh
+sed -i <span class="s1">&#39;2s/^/GD_Key=&quot;  &quot;\nGD_Secret=&quot;  &quot;\n/&#39;</span> /root/.acme.sh/dnsapi/dns_gd.sh
 acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
 </pre></div>
 
@@ -5456,6 +5459,10 @@ And the full chain certs is there:  /root/.acme.sh/X*X*X*X*X*X/fullchain.cer
 <h3 id="753-acmesh"><a name="user-content-753-acmesh" href="#753-acmesh" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7.5.3 更新证书 和 acme.sh</h3>
 <p>目前证书在 60 天以后会自动更新, 你无需任何操作. 今后有可能会缩短这个时间, 不过都是自动的, 你不用关心.</p>
 <p>目前由于 acme 协议和 letsencrypt CA 都在频繁的更新, 因此 acme.sh 也经常更新以保持同步.</p>
+<p>强制更新<br />
+<div class="codehilite"><pre><span class="hll"><span class="n">acme</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">renew</span> <span class="o">-</span><span class="n">d</span> <span class="n">gliang</span><span class="o">.</span><span class="n">eu</span> <span class="o">-</span><span class="n">d</span> <span class="n">www</span><span class="o">.</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span> <span class="o">--</span><span class="n">force</span>
+</span></pre></div>
+</p>
 <div class="codehilite"><pre><span class="c1"># 手动升级</span>
 acme.sh --upgrade
 sed -i <span class="s1">&#39;2s/^/GD_Key=&quot;X*X*X*X*X*X&quot;\n/&#39;</span> /root/.acme.sh/dnsapi/dns_gd.sh

@@ -4159,7 +4159,9 @@ openvpn --config /root/shu.ovpn --auth-user-pass /root/Pshu.conf
 ~~~python
 sudo apt-get update
 sudo apt-get install nginx
+service nginx restart
 ~~~
+
 
 配置nginx服务器 nginx -t
 
@@ -4168,7 +4170,8 @@ nano /etc/nginx/nginx.conf
 ~~~
 
 ~~~css
-
+user  root;  
+worker_processes  8; 
 events {
         worker_connections 51200;
 }
@@ -4201,7 +4204,7 @@ curl  https://get.acme.sh | sh
 export DP_Id="X*X*X*X*X*X"
 export DP_Key="X*X*X*X*X*X"
 echo -e "GD_Key=\"X*X*X*X*X*X\"\nGD_Secret=\"X*X*X*X*X*X\"" > ~/.acme.sh/account.conf
-sed -i '2s/^/GD_Key="X*X*X*X*X*X"\nGD_Secret="X*X*X*X*X*X"\n/' /root/.acme.sh/dnsapi/dns_gd.sh
+sed -i '2s/^/GD_Key="  "\nGD_Secret="  "\n/' /root/.acme.sh/dnsapi/dns_gd.sh
 acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
 ~~~
 
@@ -4262,6 +4265,10 @@ Nginx 的配置 ssl_certificate 使用 /etc/nginx/ssl/fullchain.cer ，而非 /e
 
 目前由于 acme 协议和 letsencrypt CA 都在频繁的更新, 因此 acme.sh 也经常更新以保持同步.
 
+强制更新
+~~~python hl_lines="1"
+acme.sh --renew -d gliang.eu -d www.gliang.eu --force
+~~~
 
 ~~~sh
 # 手动升级

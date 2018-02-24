@@ -32,7 +32,7 @@ $.ajax({
     }],
     yAxis: [{ // Primary yAxis
         labels: {
-            format: '{value}lum',
+            format: '{value} cm',
             style: {
                 color: Highcharts.getOptions().colors[2]
             }
@@ -54,7 +54,7 @@ $.ajax({
             }
         },
         labels: {
-            format: '{value} mm',
+            format: '{value} ℃',
             style: {
                 color: Highcharts.getOptions().colors[0]
             }
@@ -84,7 +84,7 @@ $.ajax({
             }
         },
         labels: {
-            format: '{value} ℃',
+            format: '{value} lx',
             style: {
                 color: Highcharts.getOptions().colors[3]
             }
@@ -131,14 +131,14 @@ $.ajax({
         yAxis: 3,
         data: [data[12].light,data[11].light,data[10].light,data[9].light,data[8].light,data[7].light,data[6].light,data[5].light,data[4].light,data[3].light,data[2].light,data[1].light,data[0].light],
         tooltip: {
-            valueSuffix: ' lum'
+            valueSuffix: ' lx'
         }
     },{
         name: 'Distance',
         type: 'spline',
         data: [data[12].distance,data[11].distance,data[10].distance,data[9].distance,data[8].distance,data[7].distance,data[6].distance,data[5].distance,data[4].distance,data[3].distance,data[2].distance,data[1].distance,data[0].distance],
         tooltip: {
-            valueSuffix: ' mm'
+            valueSuffix: ' cm'
         }
     }]
 });
@@ -147,7 +147,7 @@ $.ajax({
 }
 
 requestData();
-setInterval(requestData, 36000);
+setInterval(requestData, 50000);
 </script>
 
  <p>

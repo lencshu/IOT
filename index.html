@@ -7489,6 +7489,7 @@ sudo useradd ssuser
    <div class="codehilite">
     <pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
 <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">nginx</span>
+<span class="n">service</span> <span class="n">nginx</span> <span class="n">restart</span>
 </pre>
    </div>
    <p>
@@ -7499,7 +7500,9 @@ sudo useradd ssuser
 </pre>
    </div>
    <div class="codehilite">
-    <pre><span class="nt">events</span> <span class="p">{</span>
+    <pre><span class="nt">user</span>  <span class="nt">root</span><span class="o">;</span>  
+<span class="nt">worker_processes</span>  <span class="nt">8</span><span class="o">;</span> 
+<span class="nt">events</span> <span class="p">{</span>
         <span class="n">worker_connections</span> <span class="m">51200</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -7546,7 +7549,7 @@ sudo useradd ssuser
 <span class="nb">export </span><span class="nv">DP_Id</span><span class="o">=</span><span class="s2">"X*X*X*X*X*X"</span>
 <span class="nb">export </span><span class="nv">DP_Key</span><span class="o">=</span><span class="s2">"X*X*X*X*X*X"</span>
 <span class="nb">echo</span> -e <span class="s2">"GD_Key=\"X*X*X*X*X*X\"\nGD_Secret=\"X*X*X*X*X*X\""</span> &gt; ~/.acme.sh/account.conf
-sed -i <span class="s1">'2s/^/GD_Key="X*X*X*X*X*X"\nGD_Secret="X*X*X*X*X*X"\n/'</span> /root/.acme.sh/dnsapi/dns_gd.sh
+sed -i <span class="s1">'2s/^/GD_Key="  "\nGD_Secret="  "\n/'</span> /root/.acme.sh/dnsapi/dns_gd.sh
 acme.sh --issue --dns dns_gd -d gliang.eu -d www.gliang.eu
 </pre>
    </div>
@@ -7632,6 +7635,14 @@ And the full chain certs is there:  /root/.acme.sh/X*X*X*X*X*X/fullchain.cer
    </p>
    <p>
     目前由于 acme 协议和 letsencrypt CA 都在频繁的更新, 因此 acme.sh 也经常更新以保持同步.
+   </p>
+   <p>
+    强制更新
+    <br/>
+    <div class="codehilite">
+     <pre><span class="hll"><span class="n">acme</span><span class="o">.</span><span class="n">sh</span> <span class="o">--</span><span class="n">renew</span> <span class="o">-</span><span class="n">d</span> <span class="n">gliang</span><span class="o">.</span><span class="n">eu</span> <span class="o">-</span><span class="n">d</span> <span class="n">www</span><span class="o">.</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span> <span class="o">--</span><span class="n">force</span>
+</span></pre>
+    </div>
    </p>
    <div class="codehilite">
     <pre><span class="c1"># 手动升级</span>
