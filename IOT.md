@@ -4194,6 +4194,32 @@ nginx -s reopen
 
 ### 7.5.1 安装 acme.sh并生成证书
 
+---
+
+**dns pod**
+
+~~~shell
+curl  https://get.acme.sh | sh
+export DP_Id="----"
+export DP_Key="---------"
+echo -e "DP_Id=\"----\"\nDP_Key=\"---------\"" > ~/.acme.sh/account.conf
+sed -i '2s/^/DP_Id="----"\nDP_Key="---------"\n/' /root/.acme.sh/dnsapi/dns_dp.sh
+acme.sh --issue --dns dns_dp -d gliang.eu -d www.gliang.eu --force
+~~~
+
+~~~shell hl_lines="1"
+USER_PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games'
+AUTO_UPGRADE='1'
+SAVED_DP_Id="----"
+SAVED_DP_Key="---------"
+~~~
+
+~~~sh
+acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file /home/wwwroot/key.pem --fullchain-file /home/wwwroot/cert.pem --reloadcmd  "service nginx force-reload"
+~~~
+
+---
+
 http 方式需要在你的网站根目录下放置一个文件, 来验证你的域名所有权,完成验证. 然后就可以生成证书了.
 
 GoDaddy.com申请production API 

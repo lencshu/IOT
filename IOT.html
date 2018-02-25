@@ -5400,6 +5400,29 @@ sudo useradd ssuser
 
 <h2 id="75-https"><a name="user-content-75-https" href="#75-https" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7.5 https</h2>
 <h3 id="751-acmesh"><a name="user-content-751-acmesh" href="#751-acmesh" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>7.5.1 安装 acme.sh并生成证书</h3>
+<hr />
+<p><strong>dns pod</strong></p>
+<div class="codehilite"><pre>curl  https://get.acme.sh <span class="p">|</span> sh
+<span class="nb">export </span><span class="nv">DP_Id</span><span class="o">=</span><span class="s2">&quot;----&quot;</span>
+<span class="nb">export </span><span class="nv">DP_Key</span><span class="o">=</span><span class="s2">&quot;---------&quot;</span>
+<span class="nb">echo</span> -e <span class="s2">&quot;DP_Id=\&quot;----\&quot;\nDP_Key=\&quot;---------\&quot;&quot;</span> &gt; ~/.acme.sh/account.conf
+sed -i <span class="s1">&#39;2s/^/DP_Id=&quot;----&quot;\nDP_Key=&quot;---------&quot;\n/&#39;</span> /root/.acme.sh/dnsapi/dns_dp.sh
+acme.sh --issue --dns dns_dp -d gliang.eu -d www.gliang.eu --force
+</pre></div>
+
+
+<div class="codehilite"><pre><span class="hll"><span class="nv">USER_PATH</span><span class="o">=</span><span class="s1">&#39;/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games&#39;</span>
+</span><span class="nv">AUTO_UPGRADE</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>
+<span class="nv">SAVED_DP_Id</span><span class="o">=</span><span class="s2">&quot;----&quot;</span>
+<span class="nv">SAVED_DP_Key</span><span class="o">=</span><span class="s2">&quot;---------&quot;</span>
+</pre></div>
+
+
+<div class="codehilite"><pre>acme.sh --install-cert -d gliang.eu -d www.gliang.eu --key-file /home/wwwroot/key.pem --fullchain-file /home/wwwroot/cert.pem --reloadcmd  <span class="s2">&quot;service nginx force-reload&quot;</span>
+</pre></div>
+
+
+<hr />
 <p>http 方式需要在你的网站根目录下放置一个文件, 来验证你的域名所有权,完成验证. 然后就可以生成证书了.</p>
 <p>GoDaddy.com申请production API <br />
 <a href="https://developer.godaddy.com/keys/">https://developer.godaddy.com/keys/</a></p>
