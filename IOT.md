@@ -2953,6 +2953,74 @@ sudo nano /etc/init.d/rc.local
 nohup gunicorn --chdir /home/pi/Django/ pi.wsgi:application &
 
 
+### 4.4.9 开机自启动
+
+django
+
+sudo nano /etc/init.d/djangopros
+
+
+~~~shell hl_lines="1"
+#! /bin/sh
+# /etc/init.d/djangopros 
+
+### BEGIN INIT INFO
+# Provides:          lencshu
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Simple script to start a program at boot
+# Description:       A simple script which will start / stop a program a boot / shutdown.
+### END INIT INFO
+
+# If you want a command to always run, put it here
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    echo "Starting Djangopros"
+    # run application you want to start
+    nohup /home/pi/miniconda3/envs/py27/bin/gunicorn --chdir /home/pi/Django/ pi.wsgi:application & 
+    nohup /home/pi/miniconda3/envs/py27/bin/python  /home/pi/Django/autoData.py &
+    ;;
+  stop)
+    echo "Stopping Djangopros"
+    # kill application you want to stop
+    killall djangopros
+    ;;
+  *)
+    echo "Usage: /etc/init.d/dtunnel {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0
+~~~
+
+Make the script executable:
+
+~~~shell hl_lines="1"
+sudo chmod +755 /etc/init.d/djangopros
+~~~
+
+
+测试
+~~~shell hl_lines="1"
+sudo /etc/init.d/djangopros start
+sudo /etc/init.d/djangopros stop
+Register script to be run at startup:
+
+cd /etc/init.d/
+sudo update-rc.d djangopros defaults
+~~~
+
+清除 remove the script from start-up
+~~~shell hl_lines="1"
+sudo update-rc.d -f djangopros remove
+~~~
+
+
 
 ## 4.5 使用 Python 和 Flask 设计 RESTful API
 
@@ -4316,9 +4384,9 @@ acme.sh --upgrade  --auto-upgrade  0
 nano /etc/nginx/nginx.conf
 ~~~
 
-~~~python
-
-# 全站ssl
+~~~css
+user  root;
+worker_processes  1;
 
 events {
         worker_connections 51200;
@@ -4327,26 +4395,40 @@ http {
 	server{
 	listen 80;
 	server_name gliang.eu;
-	root  /home/wwwroot/gliang.eu/;
-	index         index.html index.htm;
 	rewrite ^/(.*) https://gliang.eu/$1 permanent;
+  location / {
+          index index.html index.htm;
+          root  /home/liang/wwwroot/;
+          access_log   on;
+          autoindex  on;
+       }
    }
 
 	server {
         listen        443;
         server_name   gliang.eu;
-        root          /home/wwwroot/gliang.eu/;
-        index         index.html index.htm;
 
         ssl           on;
-        ssl_certificate /home/wwwroot/gliang.eu/cert.pem;
-        ssl_certificate_key /home/wwwroot/gliang.eu/key.pem;
+        ssl_certificate /home/liang/wwwroot/cert.pem;
+        ssl_certificate_key /home/liang/wwwroot/key.pem;
+        location / {
+          index index.html index.htm;
+          root /home/liang/wwwroot/;
+          access_log   on;
+          autoindex  on;
+       }
+       location ~ ^/(images|javascript|js|css|flash|media|static)/  {
+          root        /home/liang/wwwroot/;
+          access_log  off;
+          expires     30d;
+        }
 	}
 }
-
-
 ~~~
 
+~~~shell hl_lines="1"
+service nginx restart
+~~~
 
 
 

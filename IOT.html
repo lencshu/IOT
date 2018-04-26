@@ -1402,6 +1402,7 @@ MathJax.Hub.Config({
 <li><a href="#446-vps">4.4.6 与vps对接</a></li>
 <li><a href="#447">4.4.7 图表</a></li>
 <li><a href="#448">4.4.8 部署</a></li>
+<li><a href="#449">4.4.9 开机自启动</a></li>
 </ul>
 </li>
 <li><a href="#45-python-flask-restful-api">4.5 使用 Python 和 Flask 设计 RESTful API</a></li>
@@ -4247,6 +4248,65 @@ pip install gunicorn  </p>
 <p>gunicorn &ndash;chdir /home/pi/Django/ pi.wsgi:application</p>
 <p>sudo nano /etc/init.d/rc.local<br />
 nohup gunicorn &ndash;chdir /home/pi/Django/ pi.wsgi:application &amp;</p>
+<h3 id="449"><a name="user-content-449" href="#449" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.4.9 开机自启动</h3>
+<p>django</p>
+<p>sudo nano /etc/init.d/djangopros</p>
+<div class="codehilite"><pre><span class="hll"><span class="ch">#! /bin/sh</span>
+</span><span class="c1"># /etc/init.d/djangopros </span>
+
+<span class="c1">### BEGIN INIT INFO</span>
+<span class="c1"># Provides:          lencshu</span>
+<span class="c1"># Required-Start:    $remote_fs $syslog</span>
+<span class="c1"># Required-Stop:     $remote_fs $syslog</span>
+<span class="c1"># Default-Start:     2 3 4 5</span>
+<span class="c1"># Default-Stop:      0 1 6</span>
+<span class="c1"># Short-Description: Simple script to start a program at boot</span>
+<span class="c1"># Description:       A simple script which will start / stop a program a boot / shutdown.</span>
+<span class="c1">### END INIT INFO</span>
+
+<span class="c1"># If you want a command to always run, put it here</span>
+
+<span class="c1"># Carry out specific functions when asked to by the system</span>
+<span class="k">case</span> <span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span> in
+  start<span class="o">)</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Starting Djangopros&quot;</span>
+    <span class="c1"># run application you want to start</span>
+    nohup /home/pi/miniconda3/envs/py27/bin/gunicorn --chdir /home/pi/Django/ pi.wsgi:application <span class="p">&amp;</span> 
+    nohup /home/pi/miniconda3/envs/py27/bin/python  /home/pi/Django/autoData.py <span class="p">&amp;</span>
+    <span class="p">;;</span>
+  stop<span class="o">)</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Stopping Djangopros&quot;</span>
+    <span class="c1"># kill application you want to stop</span>
+    killall djangopros
+    <span class="p">;;</span>
+  *<span class="o">)</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Usage: /etc/init.d/dtunnel {start|stop}&quot;</span>
+    <span class="nb">exit </span>1
+    <span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="nb">exit </span>0
+</pre></div>
+
+
+<p>Make the script executable:</p>
+<div class="codehilite"><pre><span class="hll">sudo chmod +755 /etc/init.d/djangopros
+</span></pre></div>
+
+
+<p>测试<br />
+<div class="codehilite"><pre><span class="hll">sudo /etc/init.d/djangopros start
+</span>sudo /etc/init.d/djangopros stop
+Register script to be run at startup:
+
+<span class="nb">cd</span> /etc/init.d/
+sudo update-rc.d djangopros defaults
+</pre></div>
+</p>
+<p>清除 remove the script from start-up<br />
+<div class="codehilite"><pre><span class="hll">sudo update-rc.d -f djangopros remove
+</span></pre></div>
+</p>
 <h2 id="45-python-flask-restful-api"><a name="user-content-45-python-flask-restful-api" href="#45-python-flask-restful-api" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>4.5 使用 Python 和 Flask 设计 RESTful API</h2>
 <p>什么是 REST？<br />
 六条设计规范定义了一个 REST 系统的特点:</p>
@@ -5504,32 +5564,50 @@ acme.sh --upgrade  --auto-upgrade  0
 </pre></div>
 
 
-<div class="codehilite"><pre><span class="c1"># 全站ssl</span>
+<div class="codehilite"><pre><span class="nt">user</span>  <span class="nt">root</span><span class="o">;</span>
+<span class="nt">worker_processes</span>  <span class="nt">1</span><span class="o">;</span>
 
-<span class="n">events</span> <span class="p">{</span>
-        <span class="n">worker_connections</span> <span class="mi">51200</span><span class="p">;</span>
+<span class="nt">events</span> <span class="p">{</span>
+        <span class="n">worker_connections</span> <span class="m">51200</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="n">http</span> <span class="p">{</span>
-    <span class="n">server</span><span class="p">{</span>
-    <span class="n">listen</span> <span class="mi">80</span><span class="p">;</span>
+<span class="nt">http</span> <span class="p">{</span>
+    <span class="n">server</span><span class="err">{</span>
+    <span class="n">listen</span> <span class="m">80</span><span class="p">;</span>
     <span class="n">server_name</span> <span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="p">;</span>
-    <span class="n">root</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="p">;</span>
-    <span class="n">index</span>         <span class="n">index</span><span class="o">.</span><span class="n">html</span> <span class="n">index</span><span class="o">.</span><span class="n">htm</span><span class="p">;</span>
-    <span class="n">rewrite</span> <span class="o">^/</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="err">$</span><span class="mi">1</span> <span class="n">permanent</span><span class="p">;</span>
-   <span class="p">}</span>
+    <span class="n">rewrite</span> <span class="o">^/</span><span class="p">(</span><span class="o">.*</span><span class="p">)</span> <span class="n">https</span><span class="o">://</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="err">$</span><span class="m">1</span> <span class="n">permanent</span><span class="p">;</span>
+  <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
+          <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span> <span class="n">index</span><span class="o">.</span><span class="n">htm</span><span class="p">;</span>
+          <span class="n">root</span>  <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">liang</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="p">;</span>
+          <span class="n">access_log</span>   <span class="n">on</span><span class="p">;</span>
+          <span class="n">autoindex</span>  <span class="n">on</span><span class="p">;</span>
+       <span class="p">}</span>
+   <span class="err">}</span>
 
-    <span class="n">server</span> <span class="p">{</span>
-        <span class="n">listen</span>        <span class="mi">443</span><span class="p">;</span>
+    <span class="nt">server</span> <span class="p">{</span>
+        <span class="n">listen</span>        <span class="m">443</span><span class="p">;</span>
         <span class="n">server_name</span>   <span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="p">;</span>
-        <span class="n">root</span>          <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="p">;</span>
-        <span class="n">index</span>         <span class="n">index</span><span class="o">.</span><span class="n">html</span> <span class="n">index</span><span class="o">.</span><span class="n">htm</span><span class="p">;</span>
 
         <span class="n">ssl</span>           <span class="n">on</span><span class="p">;</span>
-        <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-        <span class="n">ssl_certificate_key</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="n">gliang</span><span class="o">.</span><span class="n">eu</span><span class="o">/</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+        <span class="n">ssl_certificate</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">liang</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="n">cert</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+        <span class="n">ssl_certificate_key</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">liang</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span><span class="p">;</span>
+        <span class="n">location</span> <span class="o">/</span> <span class="err">{</span>
+          <span class="n">index</span> <span class="n">index</span><span class="o">.</span><span class="n">html</span> <span class="n">index</span><span class="o">.</span><span class="n">htm</span><span class="p">;</span>
+          <span class="n">root</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">liang</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="p">;</span>
+          <span class="n">access_log</span>   <span class="n">on</span><span class="p">;</span>
+          <span class="n">autoindex</span>  <span class="n">on</span><span class="p">;</span>
+       <span class="p">}</span>
+       <span class="nt">location</span> <span class="o">~</span> <span class="o">^/(</span><span class="nt">images</span><span class="o">|</span><span class="nt">javascript</span><span class="o">|</span><span class="nt">js</span><span class="o">|</span><span class="nt">css</span><span class="o">|</span><span class="nt">flash</span><span class="o">|</span><span class="nt">media</span><span class="o">|</span><span class="nt">static</span><span class="o">)/</span>  <span class="p">{</span>
+          <span class="n">root</span>        <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">liang</span><span class="o">/</span><span class="n">wwwroot</span><span class="o">/</span><span class="p">;</span>
+          <span class="n">access_log</span>  <span class="n">off</span><span class="p">;</span>
+          <span class="n">expires</span>     <span class="m">30</span><span class="n">d</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
 </pre></div>
+
+
+<div class="codehilite"><pre><span class="hll">service nginx restart
+</span></pre></div>
 
 
 <div class="codehilite"><pre>apt-get --yes --force-yes install <span class="nv">$something</span>

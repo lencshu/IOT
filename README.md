@@ -9,6 +9,9 @@ voici le structure du projet.
 
 ![](Medias/Structure.png)
 
+Les interfaces des mesures
+![](Medias/data.png)
+
 Le photo des modules intégrés
 
 ![](Medias/All.jpg)
@@ -16,3 +19,4 @@ Le photo des modules intégrés
 Le drone
 
 ![](Medias/Drone.jpg)
+
